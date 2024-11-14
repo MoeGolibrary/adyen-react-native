@@ -7,6 +7,7 @@
 
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventEmitter.h>
+#import <React/RCTViewManager.h>
 
 @interface RCT_EXTERN_MODULE(AdyenDropIn, NSObject)
 
@@ -98,3 +99,10 @@ RCT_EXTERN_METHOD(handle:(NSDictionary *)action
 @end
 
 
+@interface RCT_EXTERN_MODULE(AdyenCardView, RCTViewManager)
+
+RCT_EXPORT_VIEW_PROPERTY(config, NSDictionary)
+RCT_EXPORT_VIEW_PROPERTY(onHeightChange, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onDataChange, RCTBubblingEventBlock)
+
+@end
