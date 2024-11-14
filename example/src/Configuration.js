@@ -15,7 +15,7 @@ export const DEFAULT_CONFIGURATION = {
   countryCode: 'NL',
   currency: 'EUR',
   amount: 1000, // The amount value in minor units.
-  merchantAccount: '{YOUR_MERCHANT_ACCOUNT}',
+  merchantAccount: 'MoeGoAccountECOM',
   merchantName: 'MyStore',
   shopperLocale: DEVICE_LOCALE,
   shopperReference: 'Checkout Shopper',
@@ -25,10 +25,10 @@ export const DEFAULT_CONFIGURATION = {
 export const ENVIRONMENT = {
   /** @type {import('@adyen/react-native').Environment} */
   environment: 'test',
-  apiKey: '{YOUR_DEMO_SERVER_API_KEY}',
-  url: 'https://checkout-test.adyen.com/v70/',
+  apiKey: 'AQEuhmfxLo/LbxVAw0m/n3Q5qf3VZYRIKpxrW2ZZ03a/USoDi7vjtK8PhFRN7uVM7RDBXVsNvuR83LVYjEgiTGAH-8CQVRhmIucdhZDWWVAwx+XFjhLzxqU6VzDtE7mLVWYg=-i1iB7:s()H,ZZJ..x(j',
+  url: 'https://checkout-test.adyen.com/v71/',
   publicKey: '{YOUR_PUBLIC_KEY}',
-  clientKey: '{YOUR_CLIENT_KEY}',
+  clientKey: 'test_QDOO22PU5FA7LE76ASPQJNKWGAILVO4C',
   returnUrl: 'myapp://payment', // Only used for iOS
   applepayMerchantID: '{YOUR_APPLE_MERCHANT_ID}',
 };

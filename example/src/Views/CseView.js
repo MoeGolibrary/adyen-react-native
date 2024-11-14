@@ -7,6 +7,7 @@ import {
   View,
   Alert,
   useColorScheme,
+  requireNativeComponent,
 } from 'react-native';
 import {AdyenAction} from '@adyen/react-native';
 import Styles from '../Utilities/Styles';
@@ -14,8 +15,12 @@ import {useAppContext} from '../Utilities/AppContext';
 import {isSuccess} from '../Utilities/Helpers';
 import {payWithCard} from '../Utilities/payWithCard';
 
+const CardView = requireNativeComponent('AdyenCardView');
+
 const CseView = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
+
+  const [cardHeight, setCardHeight] = useState(0);
 
   const {configuration} = useAppContext();
 
@@ -23,6 +28,17 @@ const CseView = ({navigation}) => {
   const [expiryMonth, setExpiryMonth] = useState('');
   const [expiryYear, setExpiryYear] = useState('');
   const [cvv, setCvv] = useState('');
+
+  const handleHeightChange = (event) => {
+    const { height } = event.nativeEvent;
+    console.log("New card height: ", height);  // 输出新的高度值
+    setCardHeight(height);  // 更新状态
+  };
+
+  const handleDataChange = (event) => {
+    const { isValid, data } = event.nativeEvent;
+    console.log(`New card isValid: ${isValid}, data: ${JSON.stringify(data)}`, ); 
+  };
 
   const tryEncryptCard = useCallback(async () => {
     const unencryptedCard = {
@@ -86,6 +102,16 @@ const CseView = ({navigation}) => {
             onChangeText={setCvv}
           />
         </View>
+
+        <CardView style={{ width: '100%', height: cardHeight }} 
+          backgroundColor='white' 
+          config={ {
+            baseURL : 'https://checkoutshopper-test.adyen.com/',
+            clientKey : 'local_DUMMYKEYFORTESTING'
+          } }
+          onHeightChange={handleHeightChange} 
+          onDataChange={handleDataChange}
+        />
 
         <Button onPress={() => tryEncryptCard()} title="Pay" />
       </View>

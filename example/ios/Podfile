@@ -1,3 +1,4 @@
+source 'https://github.com/CocoaPods/Specs.git' 
 # Resolve react_native_pods.rb with node to allow for hoisting
 require Pod::Executable.execute_command('node', ['-p',
   'require.resolve(
@@ -16,6 +17,12 @@ end
 
 target 'AdyenExample' do
   config = use_native_modules!
+
+
+  pod "Adyen", :git => 'https://github.com/MoeGolibrary/adyen-ios.git', :branch => 'moego-5.13.0'
+
+  # pod "Adyen", :path => '/Users/wangcheng/Documents/GitHub/adyen-ios'
+  # pod "adyen-react-native", :path => '../../'
 
   use_react_native!(
     :path => config[:reactNativePath],
