@@ -16,8 +16,23 @@ Pod::Spec.new do |s|
 
 
   s.dependency "React-Core"
-  s.dependency "Adyen"
-  # s.dependency "Adyen", '5.11.0'
   s.resource_bundles = { 'adyen-react-native' => [ 'ios/PrivacyInfo.xcprivacy' ] }
+  
+  # s.dependency "Adyen", '5.11.0'
+  s.vendored_frameworks = [
+    'meogoPart/ios/Adyen/Adyen.framework',
+    'meogoPart/ios/AdyenPOS/$(CONFIGURATION)/AdyenPOS.framework', 
+    'meogoPart/ios/AdyenPOS/$(CONFIGURATION)/ADYPOS.framework'
+  ] 
+  
+
+  s.resource = [
+    "meogoPart/ios/Adyen/Adyen.bundle",
+    "meogoPart/ios/Adyen/AdyenActions.bundle",
+    "meogoPart/ios/Adyen/AdyenCard.bundle"
+  ]
+
+  s.dependency 'AdyenNetworking', '2.0.0'
+  s.dependency 'Adyen3DS2', '2.4.2'
 
 end
