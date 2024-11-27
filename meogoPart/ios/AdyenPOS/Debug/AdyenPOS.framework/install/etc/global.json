@@ -1,0 +1,905 @@
+{
+  "url": {
+    "europe": {
+      "sync": "https://pos-sync-dev.adyen.com",
+      "config": "https://pos-config-dev.adyen.com",
+      "payment": "https://pos-payment-dev.adyen.com",
+      "websockets": "wss://terminal-api-dev.adyen.com",
+      "managedengagement": "https://pos-managed-engagement-dev.adyen.com",
+      "pulse": "https://pos-pulse-eu.adyen.com",
+      "cdn": "https://8cec2c8183.is.adyen.com"
+    },
+    "us": {
+      "sync": "https://pos-sync-dev-us.adyen.com",
+      "config": "https://pos-config-dev-us.adyen.com",
+      "payment": "https://pos-payment-dev-us.adyen.com",
+      "websockets": "wss://terminal-api-dev.adyen.com",
+      "managedengagement": "https://pos-managed-engagement-dev-us.adyen.com",
+      "pulse":"https://pos-pulse-us.adyen.com",
+      "cdn": "https://cf892f0356.is.adyen.com"
+    },
+    "australia": {
+      "sync": "https://pos-sync-dev-au.adyen.com",
+      "config": "https://pos-config-dev-au.adyen.com",
+      "payment": "https://pos-payment-dev-au.adyen.com",
+      "websockets": "wss://terminal-api-dev.adyen.com",
+      "managedengagement": "https://pos-managed-engagement-dev-au.adyen.com",
+      "pulse": "https://pos-pulse-au.adyen.com",
+      "cdn": "https://99b36b2069.is.adyen.com"
+    },
+    "asia": {
+      "sync": "https://pos-sync-dev-apse.adyen.com",
+      "config": "https://pos-config-dev-apse.adyen.com",
+      "payment": "https://pos-payment-dev-apse.adyen.com",
+      "websockets": "wss://terminal-api-dev.adyen.com",
+      "managedengagement": "https://pos-managed-engagement-dev-apse.adyen.com",
+      "pulse": "https://pos-pulse-apse.adyen.com",
+      "cdn": "https://9fb505bc3f.is.adyen.com"
+    }
+  },
+  "pal": {
+    "nouser": "pos_config@Psp.AdyenPspService"
+  },
+  "terminal": {
+    "terminal_language": "en",
+    "terminal_locale": "en",
+    "timezone": "Europe/Amsterdam",
+    "datacenter_continent": "europe",
+    "restart_hour": 6,
+    "environment": "live",
+    "enable_standalone_merchant_reference": false,
+    "enable_single_tap": false,
+    "disable_lastlog": false,
+    "override_term_caps": [
+      {
+        "brand": "visa",
+        "amount": 0,
+        "cvm_mask": 184
+      }
+    ],
+    "magswipe_override_rules": [
+      {
+        "filter": {
+          "payment_method": "eftpos"
+        },
+        "action": {
+          "cvm": "online_pin",
+          "allow":true
+        }
+      },
+      {
+        "filter": {
+          "payment_method": "maestro",
+          "transaction_type": ["GOODS_SERVICES"]
+        },
+        "action": {
+          "cvm": "online_pin"
+        }
+      },
+      {
+        "filter": {
+          "payment_method": "cup"
+        },
+        "action": {
+          "cvm": "online_pin"
+        }
+      },
+      {
+        "filter": {
+          "payment_method": "cartao_de_todos_credit"
+        },
+        "action": {
+          "cvm": "online_pin",
+          "allow": true
+        }
+      }
+    ],
+    "additional_data_defaults": {"cardBin":"000000","cardSummary":"0000","expiryMonth":"00","expiryYear":"0000"},
+    "network_interface_priority": [
+      "Ethernet",
+      "Ethernet/USB",
+      "BT",
+      "WiFi",
+      "GPRS"
+    ],
+    "opi_enable":false,
+    "opi_enable_dcc":true,
+    "swipe_offline_prohibited_brands": [
+      "cup",
+      "jcb",
+      "vias",
+      "elo",
+      "hiper",
+      "hipercard",
+      "uatp",
+      "cabal",
+      "shopping",
+      "naranja",
+      "chequedejeneur",
+      "argencard",
+      "cencosud",
+      "cadocarte",
+      "solo",
+      "googlewallet",
+      "netplus"
+    ],
+    "stored_value_config": {
+      "brands": [
+        "valuelink"
+      ]
+    },
+    "multibrand_swipe_supported": true,
+    "enable_macing": true,
+    "alternative_luhn": [
+      {
+        "brand": "givex",
+        "bin": "603571",
+        "luhn": "default"
+      },
+      {
+        "brand": "givex",
+        "bin": "603628",
+        "luhn": "default"
+      },
+      {
+        "brand": "givex",
+        "bin": "984000073",
+        "luhn": "default"
+      }
+    ],
+    "receipt_font_size": "Small",
+    "capture_suppress_enabled": false,
+    "flood_control_enabled": false,
+    "ctls_modify_cand_list_force": true,
+    "parser_definitions": [
+      {
+        "parser_name": "parser_fis",
+        "track1": {
+          "pattern": "^N([0-9a-zA-Z]{1,9})\\s+(.*?)N$",
+          "insurance_number": "$1",
+          "cardholder_name": "$2"
+        },
+        "track2": {
+          "pattern": "^([0-9]+?)[\\=D]([0-9]{2})([0-9]{2})([^\\?]*)$",
+          "pan": "$1",
+          "expiry_date": "$3$2",
+          "service_code": "101"
+        }
+      },
+      {
+        "parser_name": "parser_ansi",
+        "track2": {
+          "pattern": "^([0-9]+?)[\\=D]([0-9]{4})([^\\?]{0,11})$",
+          "pan": "$1",
+          "expiry_date": "$2",
+          "service_code": "101",
+          "discretionary_data": "$3"
+        }
+      },
+      {
+        "parser_name": "parser_givex",
+        "track2": {
+          "pattern": "^([0-9]{16,22})$",
+          "pan": "$1",
+          "expiry_date": "4912",
+          "service_code": "101"
+        }
+      },
+      {
+        "parser_name": "parser_fashioncheque",
+        "track2": {
+          "pattern": "^;?([0-9]+?)F*[\\=D]\\={0,2}([^\\?]*)\\??$",
+          "pan": "$1",
+          "expiry_date": "4912",
+          "service_code": "101",
+          "discretionary_data": "$2"
+        }
+      },
+      {
+        "parser_name": "parser_iso",
+        "track1": {
+          "pattern": "^%?B([0-9]{1,19})\\^([^\\^]{2,26})\\^([0-9]{4}|\\^)([0-9]{3}|\\^)([^\\?]+)\\??$",
+          "pan": "$1",
+          "cardholder_name": "$2",
+          "expiry_date": "$3",
+          "service_code": "$4",
+          "discretionary_data": "$5"
+        },
+        "track2": {
+          "pattern": "^;?([0-9]+?)F*[\\=D]([0-9]{4}|\\=)([0-9]{3}|\\=?)([^\\?]*)\\??$",
+          "pan": "$1",
+          "expiry_date": "$2",
+          "service_code": "$3",
+          "discretionary_data": "$4"
+        }
+      },
+      {
+        "parser_name": "parser_valuelink",
+        "track2": {
+          "pattern": "^([0-9]{6})([0-9]{1})([0-9]{8})([0-9]{1})[\\=D]([0-9]{4})([0-9]{3}).{5}([0-9]{1}).{1}([0-9]{2})([0-9]{4})$",
+          "pan": "$1$2$3$4",
+          "expiry_date": "$5",
+          "service_code": "$6",
+          "discretionary_data": "$7$8$2$3$9"
+        }
+      },
+      {
+        "parser_name": "parser_breuninger",
+        "track2": {
+          "pattern": "^;?([0-9]{16})\\??$",
+          "pan": "$1",
+          "expiry_date": "4912",
+          "service_code": "101"
+        }
+      },
+      {
+        "parser_name": "parser_breuninger_platinum",
+        "track2": {
+          "pattern": "^;?([0-9]{16})=99\\??$",
+          "pan": "$1",
+          "expiry_date": "4912",
+          "service_code": "101"
+        }
+      },
+      {
+        "parser_name": "parser_none"
+      }
+    ],
+    "luhn_check_definitions" : [
+      {
+        "name": "default",
+        "multiplier":[1, 2],
+        "modulus": 10,
+        "use_parity":false
+      },
+      {
+        "name": "none"
+      },
+      {
+        "name": "weight",
+        "multiplier":[1, 2],
+        "modulus": 10,
+        "use_parity":true
+      }
+    ],
+    "giftcard_defaults" : [
+      {
+        "brands": ["eagleeye"],
+        "magswipe_parsers_name": ["parser_none"],
+        "card_digits_mask": "****-****-****-****-****",
+        "card_digit_range": [4,20],
+        "issuer_currency_code": 826,
+        "requires_brand_check": false,
+        "requires_expiration_date": false,
+        "requires_personal_security_code_on_mke": false,
+        "requires_personal_security_code_on_mke_from_cr": false,
+        "requires_personal_security_code_on_msd": false,
+        "requires_service_code_processing": false,
+        "after_parse_extra_actions": []
+      },
+      {
+        "brands": ["goldsmithscard","hallmarkcard","mappinwebbcard", "woscard",  "aurumb2bgc"],
+        "magswipe_parsers_name": ["parser_fis"],
+        "card_digits_mask": "****-****-****-****",
+        "card_digit_range": [16,16],
+        "issuer_currency_code": 826,
+        "requires_brand_check": true
+      },
+      {
+        "brands": ["givex"],
+        "magswipe_parsers_name": ["parser_givex", "parser_iso"],
+        "card_digits_mask": "******-*****-*********-*******",
+        "card_digit_range": [19,27],
+        "issuer_currency_code": 826
+      },
+      {
+        "brands": ["svs","subwaygiftcard"],
+        "magswipe_parsers_name": ["parser_iso"],
+        "card_digits_mask": "****-****-****-****-***",
+        "card_digit_range": [16,19],
+        "issuer_currency_code": 840,
+        "requires_personal_security_code_on_mke": true,
+        "requires_personal_security_code_on_mke_from_cr": true
+      },
+      {
+        "brands": ["dinerbon","vdvgiftcard"],
+        "magswipe_parsers_name": ["parser_iso"],
+        "card_digits_mask": "****-****-****-****-***",
+        "card_digit_range": [19,19],
+        "issuer_currency_code": 978
+      },
+      {
+        "brands": ["resursgiftcard"],
+        "magswipe_parsers_name": ["parser_iso"],
+        "card_digits_mask": "****-****-****-****",
+        "card_digit_range": [16,16],
+        "issuer_currency_code": 752,
+        "requires_brand_check": true,
+        "requires_expiration_date": true,
+        "requires_service_code_processing": true
+      },
+      {
+        "brands": ["cashcomgiftcard"],
+        "magswipe_parsers_name": ["parser_iso"],
+        "card_digits_mask": "****-****-****-****",
+        "card_digit_range": [16,16],
+        "issuer_currency_code": 752,
+        "requires_brand_check": true,
+        "requires_expiration_date": true
+      },
+      {
+        "brands": ["prosodie_illicado"],
+        "magswipe_parsers_name": ["parser_iso"],
+        "card_digits_mask": "****-****-****-****-***",
+        "card_digit_range": [19,19],
+        "issuer_currency_code": 978
+      },
+      {
+        "brands": ["oney_pos"],
+        "magswipe_parsers_name": ["parser_iso"],
+        "card_digits_mask": "****-****-****-****-***",
+        "card_digit_range": [19,19],
+        "issuer_currency_code": 978,
+        "requires_personal_security_code_on_msd": true
+      },
+      {
+        "brands": ["valuelink"],
+        "magswipe_parsers_name": ["parser_valuelink"],
+        "card_digits_mask": "****-****-****-****",
+        "card_digit_range": [16,16],
+        "issuer_currency_code": 978
+      },
+      {
+        "brands": ["love2shop"],
+        "magswipe_parsers_name": ["parser_iso"],
+        "card_digits_mask": "****-****-****-****-***",
+        "card_digit_range": [19,19],
+        "issuer_currency_code": 826,
+        "requires_expiration_date": true,
+        "requires_personal_security_code_on_mke": true,
+        "requires_personal_security_code_on_mke_from_cr": true,
+        "requires_personal_security_code_on_msd": true
+      },
+      {
+        "brands": ["netscard", "auriga", "payex", "sparnord", "lindex", "xponcard", "universalgiftcard", "igive", "entercard", "sparebank", "storkundekort"],
+        "magswipe_parsers_name": ["parser_iso"],
+        "card_digits_mask": "****-****-****-****-***",
+        "card_digit_range": [16,19],
+        "issuer_currency_code": 826
+      },
+      {
+        "brands": ["oberthur"],
+        "magswipe_parsers_name": ["parser_iso"],
+        "card_digits_mask": "****-****-****-****-***",
+        "card_digit_range": [16,19],
+        "issuer_currency_code": 826,
+        "requires_security_code_to_be_encrypted": true
+      },
+      {
+        "brands": ["ikano"],
+        "magswipe_parsers_name": ["parser_iso"],
+        "card_digits_mask": "****-****-****-****-***",
+        "card_digit_range": [16,19],
+        "issuer_currency_code": 826,
+        "requires_personal_security_code_on_mke": true,
+        "requires_personal_security_code_on_mke_from_cr": true,
+        "requires_personal_security_code_on_msd": true,
+        "requires_security_code_to_be_encrypted": true
+      },
+      {
+        "brands": ["fashioncheque"],
+        "magswipe_parsers_name": ["parser_fashioncheque"],
+        "card_digits_mask": "****-****-****-****-***",
+        "card_digit_range": [16,19],
+        "issuer_currency_code": 826,
+        "requires_expiration_date": true,
+        "requires_personal_security_code_on_mke": true,
+        "requires_personal_security_code_on_mke_from_cr": true
+      },
+      {
+        "brands": ["breuningercard"],
+        "magswipe_parsers_name": ["parser_breuninger", "parser_breuninger_platinum"],
+        "card_digits_mask": "****-****-****-****",
+        "card_digit_range": [16,16],
+        "issuer_currency_code": 826,
+        "requires_expiration_date": true,
+        "requires_personal_security_code_on_mke": true,
+        "requires_personal_security_code_on_mke_from_cr": true,
+        "requires_service_code_processing": true
+      },
+      {
+        "brands": ["genericgiftcard", "babygiftcard", "fijncadeau", "gallgall",
+          "fleuropbloemenbon", "rivieramaisongiftcard", "pathegiftcard", "fonqgiftcard", "expertgiftcard",
+          "nationalebioscoopbon", "bloemengiftcard", "albelligiftcard", "costesgiftcard", "webshopgiftcard",
+          "wefashiongiftcard", "leisurecard", "kadowereld", "rituals", "podiumcard", "winkelcheque",
+          "vvvgiftcard", "kidscadeau", "loods5giftcard", "robpeetoomgiftcard", "rotterdampas",
+          "schoolspullenpas", "winterkledingpas", "kindpas", "yourgiftgiftcard"
+        ],
+        "magswipe_parsers_name": ["parser_iso"],
+        "card_digits_mask": "****-****-****-****-***",
+        "card_digit_range": [16,19],
+        "issuer_currency_code": 826,
+        "requires_expiration_date": true,
+        "requires_personal_security_code_on_mke": true,
+        "requires_personal_security_code_on_mke_from_cr": true
+      },
+      {
+        "brands": ["epay"],
+        "magswipe_parsers_name": ["parser_none"],
+        "card_digits_mask": "****-****-****-****-****-******",
+        "card_digit_range": [16,26],
+        "issuer_currency_code": 986,
+        "requires_personal_security_code_on_mke": true,
+        "requires_personal_security_code_on_mke_from_cr": true
+      },
+      {
+        "brands": ["todo_giftcard"],
+        "magswipe_parsers_name": ["parser_none"],
+        "card_digits_mask": "****-****-****-****",
+        "card_digit_range": [16,16],
+        "issuer_currency_code": 986,
+        "requires_personal_security_code_on_mke": true,
+        "requires_personal_security_code_on_mke_from_cr": true
+      }
+    ],
+    "parser_identification_rules" : [
+      {
+        "match" : "parser_breuninger_platinum",
+        "filter" : {
+          "field_range" : {
+            "pan": [16,16]
+          }
+        }
+      },
+      {
+        "match" : "parser_ansi",
+        "filter" : {
+          "luhn_check": "default",
+          "pan_starts_with": ["3"]
+        }
+      },
+      {
+        "match": "parser_givex",
+        "filter": {
+          "field_range" : {
+            "pan": [19,22]
+          }
+        }
+      }
+    ],
+    "giftcardSettings" : {
+      "givex" : {
+        "transaction_types":["invalid_ignored_tx_type", "REDEEM"],
+        "MKE_Pin":false,
+        "MSR_Pin":false,
+        "MKE_ExpirationDate":false,
+        "Encrypt_Pin": false
+      }
+    },
+    "amount_format" : {
+      "thousand_separator": ",",
+      "decimal_separator": ".",
+      "currency_location": "front"
+    },
+    "oney_chip_params" : {
+      "aid": "A0000000421010",
+      "bic": "BACCFRP1",
+      "df2f": ["CBSVC", "CBSVP"]
+    },
+    "cellular_provider_lookup" : [
+      {"name": "ARQIA", "provider": "TIM" },
+      {"name": "ROAMING 1", "provider": "VIVO" },
+      {"name": "ROAMING 2", "provider": "CLARO" }
+    ],
+    "payment_flow_exceptions": {
+      "bankaxept": {
+        "ICC": [
+          "dual_message_on_refund",
+          "show_app_label_during_pin_entry",
+          "prevent_cancel_during_auth",
+          "prevent_signature_cvm_on_refund"
+        ],
+        "CLESS_SWIPE": [
+          "show_app_label_during_pin_entry",
+          "prevent_cancel_during_auth"
+        ],
+        "CLESS_CHIP": [
+          "show_app_label_during_pin_entry",
+          "prevent_cancel_during_auth"
+        ]
+      },
+      "cartebancaire": {
+        "ICC": [
+          "force_decline_atm_only_cards",
+          "show_app_label_during_pin_entry",
+          "partial_auth_during_2nd_gen_ac",
+          "force_signature_cvm_over_no_cvm"
+        ],
+        "CLESS_SWIPE": [
+          "show_app_label_during_pin_entry",
+          "partial_auth_during_2nd_gen_ac"
+        ],
+        "CLESS_CHIP": [
+          "show_app_label_during_pin_entry",
+          "partial_auth_during_2nd_gen_ac"
+        ]
+      },
+      "dankort": {
+        "ICC": [
+          "show_app_label_during_pin_entry"
+        ],
+        "CLESS_SWIPE": [
+          "show_app_label_during_pin_entry"
+        ],
+        "CLESS_CHIP": [
+          "show_app_label_during_pin_entry"
+        ],
+        "MSR": [
+          "show_app_label_during_pin_entry"
+        ]
+      },
+      "eftpos_australia": {
+        "ICC": [
+          "force_aac_on_refunds"
+        ],
+        "CLESS_CHIP": [
+          "force_aac_on_cda_fail"
+        ]
+      },
+      "girocard": {
+        "ICC": [
+          "prevent_cancel_during_auth",
+          "use_iso1_pin_format",
+          "add_configured_emv_tags_to_receipt",
+          "output_terminal_dedicated_file_name_instead_of_terminal_aid",
+          "output_terminal_transaction_count_when_stan_is_missing"
+        ],
+        "CLESS_SWIPE": [
+          "prevent_cancel_during_auth",
+          "use_iso1_pin_format",
+          "add_configured_emv_tags_to_receipt",
+          "output_terminal_transaction_count_when_stan_is_missing"
+        ],
+        "CLESS_CHIP": [
+          "prevent_cancel_during_auth",
+          "use_iso1_pin_format",
+          "add_configured_emv_tags_to_receipt",
+          "ctls_increment_tx_counter_when_online_pin_is_triggered_by_backend",
+          "ctls_decline_invalid_issuer_code_after_online_pin_is_triggered_by_backend",
+          "output_terminal_transaction_count_when_stan_is_missing"
+        ]
+      },
+      "interac_card": {
+        "ICC": [
+          "dual_message_on_refund",
+          "reset_account_type_at_auth_retry",
+          "prevent_cancel_during_auth"
+        ],
+        "CLESS_SWIPE": [
+          "reset_account_type_at_auth_retry",
+          "prevent_cancel_during_auth"
+        ],
+        "CLESS_CHIP": [
+          "reset_account_type_at_auth_retry",
+          "prevent_cancel_during_auth"
+        ]
+      },
+      "synchrony_plcc": {
+        "MKE": [
+          "skip_luhn_check"
+        ]
+      },
+      "amex": {
+        "ICC": [
+          "should_skip_retry_online_pin"
+        ],
+        "CLESS_SWIPE": [
+          "should_skip_retry_online_pin"
+        ],
+        "CLESS_CHIP": [
+          "should_skip_retry_online_pin"
+        ]
+      },
+      "diners": {
+        "ICC": [
+          "should_skip_retry_online_pin"
+        ],
+        "CLESS_SWIPE": [
+          "should_skip_retry_online_pin"
+        ],
+        "CLESS_CHIP": [
+          "should_skip_retry_online_pin"
+        ]
+      },
+      "discover": {
+        "ICC": [
+          "should_skip_retry_online_pin"
+        ],
+        "CLESS_SWIPE": [
+          "should_skip_retry_online_pin"
+        ],
+        "CLESS_CHIP": [
+          "should_skip_retry_online_pin"
+        ]
+      },
+      "bcmc": {
+        "CLESS_CHIP": [
+          "should_skip_cvm_results_overwrite"
+        ]
+      }
+    },
+    "cashback_rules": {
+      "visa": {
+        "AT": {
+          "EUR": {
+            "max_amount": 20000
+          }
+        },
+        "BG": {
+          "BGN": {
+            "max_amount": 5000
+          }
+        },
+        "CZ": {
+          "CZK": {
+            "max_amount": 300000
+          }
+        },
+        "FI": {
+          "EUR": {
+            "max_amount": 40000
+          }
+        },
+        "DE": {
+          "EUR": {
+            "max_amount": 20000
+          }
+        },
+        "GR": {
+          "EUR": {
+            "max_amount": 5000
+          }
+        },
+        "IT": {
+          "EUR": {
+            "max_amount": 10000
+          }
+        },
+        "IE": {
+          "EUR": {
+            "max_amount": 10000
+          }
+        },
+        "PL": {
+          "PLN": {
+            "max_amount": 30000
+          }
+        },
+        "RO": {
+          "RON": {
+            "max_amount": 20000
+          }
+        },
+        "SK": {
+          "EUR": {
+            "max_amount": 5000
+          }
+        },
+        "SE": {
+          "SEK": {
+            "max_amount": 200000
+          }
+        },
+        "CH": {
+          "CHF": {
+            "max_amount": 30000
+          }
+        },
+        "GB": {
+          "GBP": {
+            "max_amount": 10000
+          }
+        },
+        "BE": {
+          "EUR": {}
+        },
+        "HR": {
+          "HRK": {}
+        },
+        "CY": {
+          "EUR": {}
+        },
+        "EE": {
+          "EUR": {}
+        },
+        "FR": {
+          "EUR": {}
+        },
+        "GI": {
+          "GIP": {}
+        },
+        "HU": {
+          "HUF": {}
+        },
+        "LV": {
+          "EUR": {}
+        },
+        "LT": {
+          "EUR": {}
+        },
+        "LU": {
+          "EUR": {}
+        },
+        "MT": {
+          "EUR": {}
+        },
+        "NL": {
+          "EUR": {}
+        },
+        "PT": {
+          "EUR": {}
+        },
+        "ES": {
+          "EUR": {}
+        }
+      },
+      "mc": {
+        "DE": {
+          "EUR": {
+            "max_amount": 20000
+          }
+        },
+        "PL": {
+          "PLN": {
+            "max_amount": 100000
+          }
+        },
+        "CH": {
+          "CHF": {
+            "min_amount": 1000,
+            "max_amount": 30000
+          }
+        },
+        "AT":{
+          "EUR": {
+            "max_amount": 10000
+          }
+        },
+        "FI": {
+          "EUR": {
+            "max_amount": 10000
+          }
+        },
+        "GR": {
+          "EUR": {
+            "max_amount": 10000
+          }
+        },
+        "IT": {
+          "EUR": {
+            "max_amount": 10000
+          }
+        },
+        "IE": {
+          "EUR": {
+            "max_amount": 10000
+          }
+        },
+        "SK": {
+          "EUR": {
+            "max_amount": 10000
+          }
+        },
+        "GB": {
+          "GBP": {
+            "max_amount": 10000
+          }
+        },
+        "BE": {
+          "EUR": {
+            "max_amount": 10000
+          }
+        },
+        "CY": {
+          "EUR": {
+            "max_amount": 10000
+          }
+        },
+        "EE": {
+          "EUR": {
+            "max_amount": 10000
+          }
+        },
+        "FR": {
+          "EUR": {
+            "max_amount": 10000
+          }
+        },
+        "LV": {
+          "EUR": {
+            "max_amount": 10000
+          }
+        },
+        "LT": {
+          "EUR": {
+            "max_amount": 10000
+          }
+        },
+        "LU": {
+          "EUR": {
+            "max_amount": 10000
+          }
+        },
+        "MT": {
+          "EUR": {
+            "max_amount": 10000
+          }
+        },
+        "NL": {
+          "EUR": {
+            "max_amount": 10000
+          }
+        },
+        "PT": {
+          "EUR": {
+            "max_amount": 10000
+          }
+        },
+        "ES": {
+          "EUR": {
+            "max_amount": 10000
+          }
+        },
+        "SE": {
+          "SEK": {
+            "max_amount": 100000
+          }
+        }
+      }
+    },
+    "allowed_brands_installments_before_auth": {
+      "jp": {
+        "enabled": true,
+        "brands" :["mc", "visa", "jcb"]
+      },
+      "mx": {
+        "enabled": true
+      },
+      "br" : {
+        "enabled":true
+      }
+    },
+    "rename_us_pin_debit_labels": {
+      "aids": [
+        "A0000000980840",
+        "A0000000042203",
+        "A0000001524010",
+        "A000000333010108",
+        "A000000004101005"
+      ],
+      "strategy": "match_any_prefix"
+    },
+    "analytics_configuration": {
+      "max_batch_size_in_bytes": 256000,
+      "max_output_queue_size_in_bytes": 20971520,
+      "rotation_period_in_min": 30,
+      "muted_events": [
+        "communication.InterfaceEnabled",
+        "installer.MaintenanceInstallerPackageDownloadEnd",
+        "installer.MaintenanceInstallerPackageDownloadStart",
+        "installer.MaintenanceInstallerPackageInstallImmediate",
+        "installer.MaintenanceInstallerPackageInstallingEnd",
+        "installer.MaintenanceInstallerPackageInstallingPending",
+        "installer.MaintenanceInstallerPackageInstallingStart",
+        "installer.MaintenanceInstallerReleaseDownloadEnd",
+        "installer.MaintenanceInstallerReleaseDownloadStart",
+        "installer.MaintenanceInstallerReleaseInstallingEnd",
+        "installer.MaintenanceInstallerReleaseInstallingImmediate",
+        "installer.MaintenanceInstallerReleaseInstallingStart",
+        "system.Bootup",
+        "system.Restart",
+        "system.Shutdown"
+      ]
+    }
+  }
+}

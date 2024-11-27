@@ -1,0 +1,288 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.13 clang-1500.3.9.4)
+// swift-module-flags: -target x86_64-apple-ios13.0-simulator -enable-objc-interop -cxx-interoperability-mode=default -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name AdyenPOS
+import Combine
+import DeveloperToolsSupport
+import Foundation
+import Swift
+import SwiftUI
+import UIKit.UIImage
+import UIKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@available(iOS 17.0, *)
+extension Foundation.URLQueryItem : Swift.Codable {
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+@_hasMissingDesignatedInitializers @available(iOS 17.0, *)
+final public class PaymentService {
+  final public var deviceManager: any AdyenPOS.DeviceManager & AdyenPOS.FirmwareManager {
+    get
+  }
+  final public let sdkVersion: Swift.String
+  convenience public init(delegate: any AdyenPOS.PaymentServiceDelegate)
+  #if compiler(>=5.3) && $EffectfulProp
+  final public var installationId: Swift.String {
+    get throws
+  }
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  final public func getPaymentInterface(with type: AdyenPOS.PaymentInterfaceType) async throws -> AdyenPOS.PaymentInterface
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  @_Concurrency.MainActor final public func resetSession() async throws
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  @_Concurrency.MainActor final public func warmUp() async throws
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  final public func performTransaction(with request: AdyenPOS.Payment.Request, paymentInterface: AdyenPOS.PaymentInterface, presentationMode: AdyenPOS.TransactionPresentationMode) async -> AdyenPOS.Payment.Response
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  final public func performCardAcquisition(with request: AdyenPOS.CardAcquisition.Request, paymentInterface: AdyenPOS.PaymentInterface, presentationMode: AdyenPOS.TransactionPresentationMode) async -> AdyenPOS.Payment.Response
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  final public func performReversal(with request: AdyenPOS.Reversal.Request) async -> AdyenPOS.Reversal.Response
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  final public func performDiagnosis(with request: AdyenPOS.Diagnosis.Request) async -> AdyenPOS.Diagnosis.Response
+  #endif
+  @objc deinit
+}
+@available(iOS 17.0, *)
+public protocol DeviceManagerDelegate : AnyObject {
+  func onDeviceDiscovered(device: AdyenPOS.Device, by manager: any AdyenPOS.DeviceManager)
+  func onDeviceDiscoveryFailed(with error: any Swift.Error, by manager: any AdyenPOS.DeviceManager)
+  func onDeviceConnected(with error: (any Swift.Error)?, to manager: any AdyenPOS.DeviceManager)
+  func onDeviceDisconnected(from manager: any AdyenPOS.DeviceManager)
+}
+@available(iOS 17.0, *)
+public protocol DeviceManager : AnyObject {
+  var connectedDevice: AdyenPOS.ConnectedDevice? { get }
+  var discoveredDevices: [AdyenPOS.Device] { get }
+  var knownDevices: [AdyenPOS.Device] { get }
+  var delegate: (any AdyenPOS.DeviceManagerDelegate)? { get set }
+  func startDiscovery()
+  func stopDiscovery()
+  func connect(to device: AdyenPOS.Device)
+  func disconnect()
+}
+@available(iOS 17.0, *)
+public struct Device : Swift.Codable, Swift.Equatable {
+  public enum DeviceType : Swift.String, Swift.Codable, Swift.Equatable {
+    case nyc1
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public let serialNumber: Swift.String
+  public let type: AdyenPOS.Device.DeviceType
+  public static func == (a: AdyenPOS.Device, b: AdyenPOS.Device) -> Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@available(iOS 17.0, *)
+public protocol FirmwareManager : AnyObject {
+  var firmwareDelegate: (any AdyenPOS.FirmwareManagerDelegate)? { get set }
+  #if compiler(>=5.3) && $EffectfulProp
+  var firmwareUpdateSummary: AdyenPOS.AvailableFirmwareUpdate? { get async throws }
+  #endif
+  #if compiler(>=5.3) && $EffectfulProp
+  @available(*, deprecated, renamed: "firmwareUpdateSummary")
+  var firmwareUpdateAvailable: Swift.Bool { get async throws }
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  func startFirmwareUpdate() async throws
+  #endif
+}
+@available(iOS 17.0, *)
+public struct AvailableFirmwareUpdate {
+  public let requiredDate: Foundation.Date?
+  public let requiresBluetoothConnection: Swift.Bool
+}
+@available(iOS 17.0, *)
+public protocol FirmwareManagerDelegate : AnyObject {
+  func firmwareUpdateProgress(percent: Swift.Double)
+  func firmwareDownloadProgress(percent: Swift.Double)
+  func applyingFirmwareUpdate()
+  func firmwareUpdateComplete()
+  func firmwareUpdateFailure(error: AdyenPOS.AdyenPOSError)
+}
+@available(iOS 17.0, *)
+public enum PaymentInterfaceType : Swift.Codable, Swift.CaseIterable, Swift.Equatable {
+  case cardReader
+  case tapToPay
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: AdyenPOS.PaymentInterfaceType, b: AdyenPOS.PaymentInterfaceType) -> Swift.Bool
+  public typealias AllCases = [AdyenPOS.PaymentInterfaceType]
+  public static var allCases: [AdyenPOS.PaymentInterfaceType] {
+    get
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public var hashValue: Swift.Int {
+    get
+  }
+  public init(from decoder: any Swift.Decoder) throws
+}
+@available(iOS 17.0, *)
+public struct PaymentInterface {
+  public let type: AdyenPOS.PaymentInterfaceType
+}
+@available(iOS 17.0, *)
+@_Concurrency.MainActor(unsafe) public struct DeviceManagementView : SwiftUI.View {
+  @_Concurrency.MainActor(unsafe) public init(paymentService: AdyenPOS.PaymentService)
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s8AdyenPOS20DeviceManagementViewV4bodyQrvp", 0) __
+}
+@available(iOS 17.0, *)
+extension AdyenPOS.PaymentService {
+  public struct Parameters {
+    public let successScreenTimeout: Foundation.TimeInterval
+    public init(successScreenTimeout: Foundation.TimeInterval) throws
+  }
+}
+@available(iOS 17.0, *)
+public enum Diagnosis {
+  public typealias Response = Foundation.Data
+  public struct Request : Swift.Equatable {
+    public let data: Foundation.Data
+    public init(data: Foundation.Data) throws
+    public static func == (a: AdyenPOS.Diagnosis.Request, b: AdyenPOS.Diagnosis.Request) -> Swift.Bool
+  }
+}
+@available(iOS 17.0, *)
+public enum Payment {
+}
+@available(iOS 17.0, *)
+extension AdyenPOS.Payment {
+  public typealias Response = Foundation.Data
+  public struct Request : Swift.Equatable {
+    public let data: Foundation.Data
+    public init(data: Foundation.Data) throws
+    public static func == (a: AdyenPOS.Payment.Request, b: AdyenPOS.Payment.Request) -> Swift.Bool
+  }
+}
+@_hasMissingDesignatedInitializers @available(iOS 17.0, *)
+@_Concurrency.MainActor(unsafe) final public class DeviceManagementViewController : SwiftUI.UIHostingController<AdyenPOS.DeviceManagementView> {
+  @_Concurrency.MainActor(unsafe) public init(paymentService: AdyenPOS.PaymentService)
+  @available(*, unavailable)
+  @_Concurrency.MainActor(unsafe) override public init(rootView: AdyenPOS.DeviceManagementView)
+  @objc deinit
+}
+@available(iOS 17.0, *)
+extension SwiftUI.View {
+  public func transactionModal(with pos: AdyenPOS.PaymentService, logo: UIKit.UIImage? = nil, parameters: AdyenPOS.PaymentService.Parameters? = nil) -> some SwiftUI.View
+  
+}
+@available(iOS 17.0, *)
+public enum TransactionPresentationMode {
+  case presentingViewController(UIKit.UIViewController, logo: UIKit.UIImage? = nil, parameters: AdyenPOS.PaymentService.Parameters? = nil)
+  case viewModifier
+}
+@available(iOS 17.0, *)
+public protocol PaymentServiceDelegate : AnyObject {
+  #if compiler(>=5.3) && $AsyncAwait
+  func register(with setupToken: Swift.String) async throws -> Swift.String
+  #endif
+}
+@available(iOS 17.0, *)
+public enum CardAcquisition {
+  public typealias Response = Foundation.Data
+  public struct Request : Swift.Equatable {
+    public let data: Foundation.Data
+    public init(data: Foundation.Data) throws
+    public static func == (a: AdyenPOS.CardAcquisition.Request, b: AdyenPOS.CardAcquisition.Request) -> Swift.Bool
+  }
+}
+@available(iOS 17.0, *)
+public struct ConnectedDevice {
+  public let uuid: Foundation.UUID
+  public let type: AdyenPOS.Device.DeviceType
+  public let serialNumber: Swift.String
+  public let name: Swift.String?
+  public let model: Swift.String?
+  public let serialNumberCPU: Swift.String?
+  public let batteryCapacity: Swift.UInt
+  public let isCharging: Swift.Bool
+  public var systemVersion: Swift.String {
+    get
+  }
+  public var firmwareVersion: Swift.String {
+    get
+  }
+  public var bluetoothFirmwareVersion: Swift.String? {
+    get
+  }
+  #if compiler(>=5.3) && $AsyncAwait
+  public func reloadBatteryInfo() async throws -> AdyenPOS.ConnectedDevice
+  #endif
+}
+@available(iOS 17.0, *)
+public enum AdyenPOSError : Foundation.LocalizedError, Swift.CustomStringConvertible {
+  case malformedTransactionRequest(parsingError: any Swift.Error)
+  case deviceConnectionFailure(reason: Swift.String, serialNumber: Swift.String)
+  case noPairedReaders
+  @available(*, deprecated, message: "This error case will be removed in a later version.")
+  case paymentInterfaceNotSupported
+  case tapToPayNotSupported
+  case tapToPayNotAllowed
+  case transactionInProgress
+  case unableToObtainInstallationId
+  case backgroundWarmupNotAllowed
+  case invalidSuccessScreenTimeout
+  case tapToPayPaymentInterfaceFailure(reason: Swift.String)
+  case unableToFetchCardReaderBatteryInfo
+  @available(*, deprecated, renamed: "firmwareError(reason:)")
+  case firmwareUpdateError(message: Swift.String)
+  @available(*, deprecated, renamed: "firmwareError(reason:)")
+  case bluetoothFirmwareUpdateError
+  @available(*, deprecated, renamed: "firmwareError(reason:)")
+  case firmwareDownloadError
+  case firmwareError(reason: AdyenPOS.FirmwareErrorReason)
+  case passcodeDisabled
+  public var description: Swift.String {
+    get
+  }
+}
+@available(iOS 17.0, *)
+public enum FirmwareErrorReason : Swift.CustomStringConvertible {
+  case generalError
+  case noConnectedDevices
+  case firmwareDelegateNotSet
+  case noUpdateAvailable
+  case bluetoothFirmwareUpdateError
+  case firmwareRetrievalError
+  public var description: Swift.String {
+    get
+  }
+  public static func == (a: AdyenPOS.FirmwareErrorReason, b: AdyenPOS.FirmwareErrorReason) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@available(iOS 17.0, *)
+public enum Reversal {
+  public typealias Response = Foundation.Data
+  public struct Request : Swift.Equatable {
+    public let data: Foundation.Data
+    public init(data: Foundation.Data) throws
+    public static func == (a: AdyenPOS.Reversal.Request, b: AdyenPOS.Reversal.Request) -> Swift.Bool
+  }
+}
+@available(iOS 17.0, *)
+extension AdyenPOS.Device.DeviceType : Swift.Hashable {}
+@available(iOS 17.0, *)
+extension AdyenPOS.Device.DeviceType : Swift.RawRepresentable {}
+@available(iOS 17.0, *)
+extension AdyenPOS.PaymentInterfaceType : Swift.Hashable {}
+@available(iOS 17.0, *)
+extension AdyenPOS.FirmwareErrorReason : Swift.Equatable {}
+@available(iOS 17.0, *)
+extension AdyenPOS.FirmwareErrorReason : Swift.Hashable {}

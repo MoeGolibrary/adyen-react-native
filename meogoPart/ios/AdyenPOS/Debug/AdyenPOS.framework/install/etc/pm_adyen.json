@@ -1,0 +1,46 @@
+{
+  "battery": {
+    "shutdown_on_critical": false,
+    "low_level": 10,
+    "active_while_charging": true
+  },
+  "display": {
+    "min_backlight": 1,
+    "max_backlight": 50,
+    "active_during_transition": false,
+    "check_values": false
+  },
+  "powermngt_battery": {
+    "off": -1,
+    "hibernate": -1,
+    "deep_sleep": -1,
+    "sleep": -1,
+    "standby": 120,
+    "boot": 180,
+    "auto": true
+  },
+  "x_key": {
+    "hibernate": false,
+    "hibernate_delay": 0,
+    "powerdown_delay": 10
+  },
+  "pci_reboot": {
+    "reboot": true,
+    "pci_wakeup_to_alert": true
+  },
+  "powermngt_line_powered": {
+    "off": -1,
+    "hibernate": -1,
+    "deep_sleep": -1,
+    "sleep": -1,
+    "standby": -1,
+    "auto": true,
+    "boot": 180
+  },
+  "wakeup_sources":{
+    "wifi":true,
+    "bt":true,
+    "mobile_data":true,
+    "usb_host":false
+  }
+}

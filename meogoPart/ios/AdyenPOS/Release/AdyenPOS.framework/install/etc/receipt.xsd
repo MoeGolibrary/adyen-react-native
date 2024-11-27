@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:element name="screen">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="receipt" type="ReceiptType" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="name" type="xs:string" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="ReceiptType" mixed="true">
+        <xs:all>
+            <xs:element name="qrcodeblock" type = "QrBlockType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="list-header" type = "xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="lines" type = "LinesType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="tax" type = "TaxType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="total" type="LineItemType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="subtotal" type="LineItemType" minOccurs="0" maxOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="QrBlockType">
+        <xs:all>
+            <xs:element name = "qrheader" type = "LineItemType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name = "qrcodedata" type="QrcodeDataType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name = "qrfooter" type = "LineItemType" minOccurs="0" maxOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+    <xs:complexType name="QrcodeDataType">
+        <xs:all>
+            <xs:element name = "call-to-action" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name = "data" type="xs:string" minOccurs="0" maxOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+    <xs:complexType name="TaxType" mixed="true">
+        <xs:sequence>
+            <xs:element name="taxtotal" type="LineItemType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="totaldiscount" type="LineItemType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="taxitem" type="LineItemType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+
+    </xs:complexType>
+    <xs:complexType name="LinesType">
+        <xs:sequence>
+            <xs:element name = "lineitem" type = "LineItemType" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="LineItemType" mixed="true">
+        <xs:all>
+            <xs:element name = "description" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name = "amount" type="AmountType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name = "count" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+    <xs:complexType name="AmountType" mixed="true">
+        <xs:all>
+            <xs:element name="currency" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="value" type="xs:float" minOccurs="1" maxOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+</xs:schema>

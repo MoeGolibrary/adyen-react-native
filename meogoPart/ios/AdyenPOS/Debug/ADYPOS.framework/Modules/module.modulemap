@@ -1,0 +1,11 @@
+framework module ADYPOS {
+  umbrella header "ADYPOS.h"
+  export *
+
+  module * { export * }
+}
+
+module ADYPOS.Swift {
+  header "ADYPOS-Swift.h"
+  requires objc
+}
