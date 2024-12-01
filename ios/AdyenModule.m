@@ -107,7 +107,7 @@ RCT_EXPORT_VIEW_PROPERTY(onDataChange, RCTBubblingEventBlock)
 
 @end
 
-@interface RCT_EXTERN_MODULE(AdyenTerminalManager, NSObject)
+@interface RCT_EXTERN_MODULE(AdyenTerminal, NSObject)
 
 RCT_EXTERN_METHOD(startDiscovery)
 RCT_EXTERN_METHOD(stopDiscovery)
@@ -120,6 +120,6 @@ RCT_EXTERN_METHOD(startFirmwareUpdate)
 RCT_EXTERN_METHOD(payWithType:(NSNumber *)type
                   requestData:(NSString *)requestData)
 
-RCT_EXTERN_METHOD(setSdkData:(NSString *)value)
+RCT_EXTERN_METHOD(setSdkData:(NSString *)callbackId value:(NSString *)value)
 
 @end

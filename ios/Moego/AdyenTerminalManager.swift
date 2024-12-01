@@ -42,7 +42,7 @@ class Errors {
 }
 
 @available(iOS 17.0, *)
-@objc(AdyenTerminalManager)
+@objc(AdyenTerminal)
 final class AdyenTerminalManager: BaseModule {
 //    @objc func setup() async-> Void {
 //        do {
@@ -53,6 +53,12 @@ final class AdyenTerminalManager: BaseModule {
 //            sendEvent(withName: ReactNativeConstants.SDK_SETUP_FAILED.rawValue, body: Errors.createError(nsError: error as NSError))
 //        }
 //    }
+    // 必须将events都抛出去，RN才能正确addListener，否则报错：”is not a supported event type“
+    override func supportedEvents() -> [String]! {
+        return PaymentEvent.allCases.map {
+            $0.rawValue
+        }
+    }
     
     lazy var paymentService = {
         let paymentService = PaymentService(delegate: self)
@@ -68,7 +74,6 @@ final class AdyenTerminalManager: BaseModule {
         return paymentService.deviceManager
     }
     
-    private var fetchSdkDataCcallbackId = ""
 }
 
 @available(iOS 17.0, *)
@@ -76,13 +81,12 @@ extension AdyenTerminalManager: PaymentServiceDelegate, DeviceManagerDelegate, F
     
     // MARK: PaymentServiceDelegate
     func register(with setupToken: String) async throws -> String {
-        resetCallback(fetchSdkDataCcallbackId)
-        fetchSdkDataCcallbackId = UUID().uuidString
+        let callbackId = UUID().uuidString
 
         return try await withCheckedThrowingContinuation { continuation in
-            self.callbackMap[fetchSdkDataCcallbackId] = continuation
+            self.callbackMap[callbackId] = continuation
             self.sendEvent(withName: PaymentEvent.fetchSdkData.rawValue,
-                           body: ["token": setupToken])
+                           body: ["token": setupToken, "callbackId": callbackId])
         }
     }
     
@@ -212,16 +216,16 @@ extension AdyenTerminalManager {
     }
     
     
-    @objc(setSdkData:)
-    func setSdkData(value: NSString?) {
-        guard let continuation = callbackMap[fetchSdkDataCcallbackId] else {
-            print("No continuation found for callbackId \(fetchSdkDataCcallbackId)")
+    @objc(setSdkData:value:)
+    func setSdkData(callbackId: NSString, value: NSString?) {
+        let callbackId = callbackId as String
+        guard let continuation = callbackMap[callbackId as String] else {
+            print("No continuation found for callbackId \(callbackId)")
             return
         }
 
         // 从字典中移除回调
-        callbackMap.removeValue(forKey: fetchSdkDataCcallbackId)
-        fetchSdkDataCcallbackId = ""
+        callbackMap.removeValue(forKey: callbackId)
 
         // 根据返回值决定是否恢复 continuation
         if let value = value as? String {
@@ -253,21 +257,6 @@ extension AdyenTerminalManager {
         default:
             .tapToPay
         }
-    }
-    
-    func resetCallback(_ callbackId: String) {
-        guard let continuation = callbackMap[callbackId] else {
-            print("No continuation found for callbackId \(callbackId)")
-            return
-        }
-
-        // 从字典中移除回调
-        callbackMap.removeValue(forKey: callbackId)
-
-        let errorInfo: [String: Any] = [
-            NSLocalizedDescriptionKey: "remove callback"
-        ]
-        continuation.resume(throwing: NSError(domain: MyErrorDomain, code: -1, userInfo: errorInfo))
     }
     
     func connectedDeviceInfo() async -> [String: Any] {
