@@ -1,0 +1,3732 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "TopLevel",
+    "printedName": "TopLevel",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "AnyAPIContext",
+        "printedName": "AnyAPIContext",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "environment",
+            "printedName": "environment",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "AnyAPIEnvironment",
+                "printedName": "any AdyenNetworking.AnyAPIEnvironment",
+                "usr": "s:15AdyenNetworking17AnyAPIEnvironmentP"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15AdyenNetworking13AnyAPIContextP11environmentAA0C14APIEnvironment_pvp",
+            "mangledName": "$s15AdyenNetworking13AnyAPIContextP11environmentAA0C14APIEnvironment_pvp",
+            "moduleName": "AdyenNetworking",
+            "protocolReq": true,
+            "declAttributes": [
+              "RawDocComment"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "AnyAPIEnvironment",
+                    "printedName": "any AdyenNetworking.AnyAPIEnvironment",
+                    "usr": "s:15AdyenNetworking17AnyAPIEnvironmentP"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15AdyenNetworking13AnyAPIContextP11environmentAA0C14APIEnvironment_pvg",
+                "mangledName": "$s15AdyenNetworking13AnyAPIContextP11environmentAA0C14APIEnvironment_pvg",
+                "moduleName": "AdyenNetworking",
+                "genericSig": "<τ_0_0 where τ_0_0 : AdyenNetworking.AnyAPIContext>",
+                "sugared_genericSig": "<Self where Self : AdyenNetworking.AnyAPIContext>",
+                "protocolReq": true,
+                "reqNewWitnessTableEntry": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "headers",
+            "printedName": "headers",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Dictionary",
+                "printedName": "[Swift.String : Swift.String]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:SD"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15AdyenNetworking13AnyAPIContextP7headersSDyS2SGvp",
+            "mangledName": "$s15AdyenNetworking13AnyAPIContextP7headersSDyS2SGvp",
+            "moduleName": "AdyenNetworking",
+            "protocolReq": true,
+            "declAttributes": [
+              "RawDocComment"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Dictionary",
+                    "printedName": "[Swift.String : Swift.String]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:SD"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15AdyenNetworking13AnyAPIContextP7headersSDyS2SGvg",
+                "mangledName": "$s15AdyenNetworking13AnyAPIContextP7headersSDyS2SGvg",
+                "moduleName": "AdyenNetworking",
+                "genericSig": "<τ_0_0 where τ_0_0 : AdyenNetworking.AnyAPIContext>",
+                "sugared_genericSig": "<Self where Self : AdyenNetworking.AnyAPIContext>",
+                "protocolReq": true,
+                "reqNewWitnessTableEntry": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "queryParameters",
+            "printedName": "queryParameters",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[Foundation.URLQueryItem]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "URLQueryItem",
+                    "printedName": "Foundation.URLQueryItem",
+                    "usr": "s:10Foundation12URLQueryItemV"
+                  }
+                ],
+                "usr": "s:Sa"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15AdyenNetworking13AnyAPIContextP15queryParametersSay10Foundation12URLQueryItemVGvp",
+            "mangledName": "$s15AdyenNetworking13AnyAPIContextP15queryParametersSay10Foundation12URLQueryItemVGvp",
+            "moduleName": "AdyenNetworking",
+            "protocolReq": true,
+            "declAttributes": [
+              "RawDocComment"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Array",
+                    "printedName": "[Foundation.URLQueryItem]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "URLQueryItem",
+                        "printedName": "Foundation.URLQueryItem",
+                        "usr": "s:10Foundation12URLQueryItemV"
+                      }
+                    ],
+                    "usr": "s:Sa"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15AdyenNetworking13AnyAPIContextP15queryParametersSay10Foundation12URLQueryItemVGvg",
+                "mangledName": "$s15AdyenNetworking13AnyAPIContextP15queryParametersSay10Foundation12URLQueryItemVGvg",
+                "moduleName": "AdyenNetworking",
+                "genericSig": "<τ_0_0 where τ_0_0 : AdyenNetworking.AnyAPIContext>",
+                "sugared_genericSig": "<Self where Self : AdyenNetworking.AnyAPIContext>",
+                "protocolReq": true,
+                "reqNewWitnessTableEntry": true,
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Protocol",
+        "usr": "s:15AdyenNetworking13AnyAPIContextP",
+        "mangledName": "$s15AdyenNetworking13AnyAPIContextP",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "AnyAPIEnvironment",
+        "printedName": "AnyAPIEnvironment",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "baseURL",
+            "printedName": "baseURL",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "URL",
+                "printedName": "Foundation.URL",
+                "usr": "s:10Foundation3URLV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15AdyenNetworking17AnyAPIEnvironmentP7baseURL10Foundation0F0Vvp",
+            "mangledName": "$s15AdyenNetworking17AnyAPIEnvironmentP7baseURL10Foundation0F0Vvp",
+            "moduleName": "AdyenNetworking",
+            "protocolReq": true,
+            "declAttributes": [
+              "RawDocComment"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "URL",
+                    "printedName": "Foundation.URL",
+                    "usr": "s:10Foundation3URLV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15AdyenNetworking17AnyAPIEnvironmentP7baseURL10Foundation0F0Vvg",
+                "mangledName": "$s15AdyenNetworking17AnyAPIEnvironmentP7baseURL10Foundation0F0Vvg",
+                "moduleName": "AdyenNetworking",
+                "genericSig": "<τ_0_0 where τ_0_0 : AdyenNetworking.AnyAPIEnvironment>",
+                "sugared_genericSig": "<Self where Self : AdyenNetworking.AnyAPIEnvironment>",
+                "protocolReq": true,
+                "reqNewWitnessTableEntry": true,
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Protocol",
+        "usr": "s:15AdyenNetworking17AnyAPIEnvironmentP",
+        "mangledName": "$s15AdyenNetworking17AnyAPIEnvironmentP",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "AnyCoder",
+        "printedName": "AnyCoder",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "decode",
+            "printedName": "decode(_:from:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "GenericTypeParam",
+                "printedName": "τ_1_0"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Metatype",
+                "printedName": "τ_1_0.Type",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "GenericTypeParam",
+                    "printedName": "τ_1_0"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15AdyenNetworking8AnyCoderP6decode_4fromqd__qd__m_10Foundation4DataVtKSeRd__lF",
+            "mangledName": "$s15AdyenNetworking8AnyCoderP6decode_4fromqd__qd__m_10Foundation4DataVtKSeRd__lF",
+            "moduleName": "AdyenNetworking",
+            "genericSig": "<τ_0_0, τ_1_0 where τ_0_0 : AdyenNetworking.AnyCoder, τ_1_0 : Swift.Decodable>",
+            "sugared_genericSig": "<Self, T where Self : AdyenNetworking.AnyCoder, T : Swift.Decodable>",
+            "protocolReq": true,
+            "throwing": true,
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "encode",
+            "printedName": "encode(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "GenericTypeParam",
+                "printedName": "τ_1_0"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15AdyenNetworking8AnyCoderP6encodey10Foundation4DataVqd__KSERd__lF",
+            "mangledName": "$s15AdyenNetworking8AnyCoderP6encodey10Foundation4DataVqd__KSERd__lF",
+            "moduleName": "AdyenNetworking",
+            "genericSig": "<τ_0_0, τ_1_0 where τ_0_0 : AdyenNetworking.AnyCoder, τ_1_0 : Swift.Encodable>",
+            "sugared_genericSig": "<Self, T where Self : AdyenNetworking.AnyCoder, T : Swift.Encodable>",
+            "protocolReq": true,
+            "throwing": true,
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Protocol",
+        "usr": "s:15AdyenNetworking8AnyCoderP",
+        "mangledName": "$s15AdyenNetworking8AnyCoderP",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "AccessControl"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "AdyenNetworking"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "APIClientProtocol",
+        "printedName": "APIClientProtocol",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "perform",
+            "printedName": "perform(_:completionHandler:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "GenericTypeParam",
+                "printedName": "τ_1_0"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Result<τ_1_0.ResponseType, any Swift.Error>) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Result",
+                    "printedName": "Swift.Result<τ_1_0.ResponseType, any Swift.Error>",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "DependentMember",
+                        "printedName": "τ_1_0.ResponseType"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Error",
+                        "printedName": "any Swift.Error",
+                        "usr": "s:s5ErrorP"
+                      }
+                    ],
+                    "usr": "s:s6ResultO"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15AdyenNetworking17APIClientProtocolP7perform_17completionHandleryqd___ys6ResultOy12ResponseTypeQyd__s5Error_pGctAA7RequestRd__lF",
+            "mangledName": "$s15AdyenNetworking17APIClientProtocolP7perform_17completionHandleryqd___ys6ResultOy12ResponseTypeQyd__s5Error_pGctAA7RequestRd__lF",
+            "moduleName": "AdyenNetworking",
+            "genericSig": "<τ_0_0, τ_1_0 where τ_0_0 : AdyenNetworking.APIClientProtocol, τ_1_0 : AdyenNetworking.Request>",
+            "sugared_genericSig": "<Self, R where Self : AdyenNetworking.APIClientProtocol, R : AdyenNetworking.Request>",
+            "protocolReq": true,
+            "declAttributes": [
+              "RawDocComment"
+            ],
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "retryAPIClient",
+            "printedName": "retryAPIClient(with:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "AnyRetryAPIClient",
+                "printedName": "any AdyenNetworking.AnyRetryAPIClient",
+                "usr": "s:15AdyenNetworking17AnyRetryAPIClientP"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Scheduler",
+                "printedName": "any AdyenNetworking.Scheduler",
+                "usr": "s:15AdyenNetworking9SchedulerP"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15AdyenNetworking17APIClientProtocolPAAE05retryC04withAA08AnyRetryC0_pAA9Scheduler_p_tF",
+            "mangledName": "$s15AdyenNetworking17APIClientProtocolPAAE05retryC04withAA08AnyRetryC0_pAA9Scheduler_p_tF",
+            "moduleName": "AdyenNetworking",
+            "genericSig": "<τ_0_0 where τ_0_0 : AdyenNetworking.APIClientProtocol>",
+            "sugared_genericSig": "<Self where Self : AdyenNetworking.APIClientProtocol>",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Protocol",
+        "usr": "s:15AdyenNetworking17APIClientProtocolP",
+        "mangledName": "$s15AdyenNetworking17APIClientProtocolP",
+        "moduleName": "AdyenNetworking",
+        "genericSig": "<τ_0_0 : AnyObject>",
+        "sugared_genericSig": "<Self : AnyObject>",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "AsyncAPIClientProtocol",
+        "printedName": "AsyncAPIClientProtocol",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "perform",
+            "printedName": "perform(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "HTTPResponse",
+                "printedName": "AdyenNetworking.HTTPResponse<τ_1_0.ResponseType>",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "DependentMember",
+                    "printedName": "τ_1_0.ResponseType"
+                  }
+                ],
+                "usr": "s:15AdyenNetworking12HTTPResponseV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "GenericTypeParam",
+                "printedName": "τ_1_0"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15AdyenNetworking22AsyncAPIClientProtocolP7performyAA12HTTPResponseVy12ResponseTypeQyd__Gqd__YaKAA7RequestRd__lF",
+            "mangledName": "$s15AdyenNetworking22AsyncAPIClientProtocolP7performyAA12HTTPResponseVy12ResponseTypeQyd__Gqd__YaKAA7RequestRd__lF",
+            "moduleName": "AdyenNetworking",
+            "genericSig": "<τ_0_0, τ_1_0 where τ_0_0 : AdyenNetworking.AsyncAPIClientProtocol, τ_1_0 : AdyenNetworking.Request>",
+            "sugared_genericSig": "<Self, R where Self : AdyenNetworking.AsyncAPIClientProtocol, R : AdyenNetworking.Request>",
+            "protocolReq": true,
+            "declAttributes": [
+              "RawDocComment"
+            ],
+            "throwing": true,
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Protocol",
+        "usr": "s:15AdyenNetworking22AsyncAPIClientProtocolP",
+        "mangledName": "$s15AdyenNetworking22AsyncAPIClientProtocolP",
+        "moduleName": "AdyenNetworking",
+        "genericSig": "<τ_0_0 : AnyObject>",
+        "sugared_genericSig": "<Self : AnyObject>",
+        "intro_iOS": "15.0.0",
+        "declAttributes": [
+          "AccessControl",
+          "Available",
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "APIClient",
+        "printedName": "APIClient",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "apiContext",
+            "printedName": "apiContext",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "AnyAPIContext",
+                "printedName": "any AdyenNetworking.AnyAPIContext",
+                "usr": "s:15AdyenNetworking13AnyAPIContextP"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15AdyenNetworking9APIClientC10apiContextAA13AnyAPIContext_pvp",
+            "mangledName": "$s15AdyenNetworking9APIClientC10apiContextAA13AnyAPIContext_pvp",
+            "moduleName": "AdyenNetworking",
+            "declAttributes": [
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "AnyAPIContext",
+                    "printedName": "any AdyenNetworking.AnyAPIContext",
+                    "usr": "s:15AdyenNetworking13AnyAPIContextP"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15AdyenNetworking9APIClientC10apiContextAA13AnyAPIContext_pvg",
+                "mangledName": "$s15AdyenNetworking9APIClientC10apiContextAA13AnyAPIContext_pvg",
+                "moduleName": "AdyenNetworking",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(apiContext:configuration:coder:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "APIClient",
+                "printedName": "AdyenNetworking.APIClient",
+                "usr": "s:15AdyenNetworking9APIClientC"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "AnyAPIContext",
+                "printedName": "any AdyenNetworking.AnyAPIContext",
+                "usr": "s:15AdyenNetworking13AnyAPIContextP"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Foundation.URLSessionConfiguration?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "URLSessionConfiguration",
+                    "printedName": "Foundation.URLSessionConfiguration",
+                    "usr": "c:objc(cs)NSURLSessionConfiguration"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "AnyCoder",
+                "printedName": "any AdyenNetworking.AnyCoder",
+                "hasDefaultArg": true,
+                "usr": "s:15AdyenNetworking8AnyCoderP"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:15AdyenNetworking9APIClientC10apiContext13configuration5coderAcA13AnyAPIContext_p_So25NSURLSessionConfigurationCSgAA0H5Coder_ptcfc",
+            "mangledName": "$s15AdyenNetworking9APIClientC10apiContext13configuration5coderAcA13AnyAPIContext_p_So25NSURLSessionConfigurationCSgAA0H5Coder_ptcfc",
+            "moduleName": "AdyenNetworking",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "perform",
+            "printedName": "perform(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "HTTPResponse",
+                "printedName": "AdyenNetworking.HTTPResponse<τ_0_0.ResponseType>",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "DependentMember",
+                    "printedName": "τ_0_0.ResponseType"
+                  }
+                ],
+                "usr": "s:15AdyenNetworking12HTTPResponseV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "GenericTypeParam",
+                "printedName": "τ_0_0"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15AdyenNetworking9APIClientC7performyAA12HTTPResponseVy12ResponseTypeQzGxYaKAA7RequestRzlF",
+            "mangledName": "$s15AdyenNetworking9APIClientC7performyAA12HTTPResponseVy12ResponseTypeQzGxYaKAA7RequestRzlF",
+            "moduleName": "AdyenNetworking",
+            "genericSig": "<τ_0_0 where τ_0_0 : AdyenNetworking.Request>",
+            "sugared_genericSig": "<R where R : AdyenNetworking.Request>",
+            "intro_iOS": "15.0.0",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "Available",
+              "RawDocComment"
+            ],
+            "throwing": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "perform",
+            "printedName": "perform(_:completionHandler:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "GenericTypeParam",
+                "printedName": "τ_0_0"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Result<τ_0_0.ResponseType, any Swift.Error>) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Result",
+                    "printedName": "Swift.Result<τ_0_0.ResponseType, any Swift.Error>",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "DependentMember",
+                        "printedName": "τ_0_0.ResponseType"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Error",
+                        "printedName": "any Swift.Error",
+                        "usr": "s:s5ErrorP"
+                      }
+                    ],
+                    "usr": "s:s6ResultO"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15AdyenNetworking9APIClientC7perform_17completionHandleryx_ys6ResultOy12ResponseTypeQzs5Error_pGctAA7RequestRzlF",
+            "mangledName": "$s15AdyenNetworking9APIClientC7perform_17completionHandleryx_ys6ResultOy12ResponseTypeQzs5Error_pGctAA7RequestRzlF",
+            "moduleName": "AdyenNetworking",
+            "genericSig": "<τ_0_0 where τ_0_0 : AdyenNetworking.Request>",
+            "sugared_genericSig": "<R where R : AdyenNetworking.Request>",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:15AdyenNetworking9APIClientC",
+        "mangledName": "$s15AdyenNetworking9APIClientC",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "Final",
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "APIClientProtocol",
+            "printedName": "APIClientProtocol",
+            "usr": "s:15AdyenNetworking17APIClientProtocolP",
+            "mangledName": "$s15AdyenNetworking17APIClientProtocolP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "AsyncAPIClientProtocol",
+            "printedName": "AsyncAPIClientProtocol",
+            "usr": "s:15AdyenNetworking22AsyncAPIClientProtocolP",
+            "mangledName": "$s15AdyenNetworking22AsyncAPIClientProtocolP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "BackoffScheduler",
+        "printedName": "BackoffScheduler",
+        "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(queue:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "BackoffScheduler",
+                "printedName": "AdyenNetworking.BackoffScheduler",
+                "usr": "s:15AdyenNetworking16BackoffSchedulerV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "DispatchQueue",
+                "printedName": "Dispatch.DispatchQueue",
+                "usr": "c:objc(cs)OS_dispatch_queue"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:15AdyenNetworking16BackoffSchedulerV5queueACSo012OS_dispatch_E0C_tcfc",
+            "mangledName": "$s15AdyenNetworking16BackoffSchedulerV5queueACSo012OS_dispatch_E0C_tcfc",
+            "moduleName": "AdyenNetworking",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "schedule",
+            "printedName": "schedule(_:closure:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UInt",
+                "printedName": "Swift.UInt",
+                "usr": "s:Su"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "() -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15AdyenNetworking16BackoffSchedulerV8schedule_7closureSbSu_yyctF",
+            "mangledName": "$s15AdyenNetworking16BackoffSchedulerV8schedule_7closureSbSu_yyctF",
+            "moduleName": "AdyenNetworking",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:15AdyenNetworking16BackoffSchedulerV",
+        "mangledName": "$s15AdyenNetworking16BackoffSchedulerV",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Scheduler",
+            "printedName": "Scheduler",
+            "usr": "s:15AdyenNetworking9SchedulerP",
+            "mangledName": "$s15AdyenNetworking9SchedulerP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "Coder",
+        "printedName": "Coder",
+        "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Coder",
+                "printedName": "AdyenNetworking.Coder",
+                "usr": "s:15AdyenNetworking5CoderC"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:15AdyenNetworking5CoderCACycfc",
+            "mangledName": "$s15AdyenNetworking5CoderCACycfc",
+            "moduleName": "AdyenNetworking",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "decode",
+            "printedName": "decode(_:from:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "GenericTypeParam",
+                "printedName": "τ_0_0"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Metatype",
+                "printedName": "τ_0_0.Type",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "GenericTypeParam",
+                    "printedName": "τ_0_0"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15AdyenNetworking5CoderC6decode_4fromxxm_10Foundation4DataVtKSeRzlF",
+            "mangledName": "$s15AdyenNetworking5CoderC6decode_4fromxxm_10Foundation4DataVtKSeRzlF",
+            "moduleName": "AdyenNetworking",
+            "genericSig": "<τ_0_0 where τ_0_0 : Swift.Decodable>",
+            "sugared_genericSig": "<T where T : Swift.Decodable>",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "throwing": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "encode",
+            "printedName": "encode(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "GenericTypeParam",
+                "printedName": "τ_0_0"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15AdyenNetworking5CoderC6encodey10Foundation4DataVxKSERzlF",
+            "mangledName": "$s15AdyenNetworking5CoderC6encodey10Foundation4DataVxKSERzlF",
+            "moduleName": "AdyenNetworking",
+            "genericSig": "<τ_0_0 where τ_0_0 : Swift.Encodable>",
+            "sugared_genericSig": "<T where T : Swift.Encodable>",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "throwing": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:15AdyenNetworking5CoderC",
+        "mangledName": "$s15AdyenNetworking5CoderC",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "AnyCoder",
+            "printedName": "AnyCoder",
+            "usr": "s:15AdyenNetworking8AnyCoderP",
+            "mangledName": "$s15AdyenNetworking8AnyCoderP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "APIClientError",
+        "printedName": "APIClientError",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "invalidResponse",
+            "printedName": "invalidResponse",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(AdyenNetworking.APIClientError.Type) -> AdyenNetworking.APIClientError",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "APIClientError",
+                    "printedName": "AdyenNetworking.APIClientError",
+                    "usr": "s:15AdyenNetworking14APIClientErrorO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "AdyenNetworking.APIClientError.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "APIClientError",
+                        "printedName": "AdyenNetworking.APIClientError",
+                        "usr": "s:15AdyenNetworking14APIClientErrorO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:15AdyenNetworking14APIClientErrorO15invalidResponseyA2CmF",
+            "mangledName": "$s15AdyenNetworking14APIClientErrorO15invalidResponseyA2CmF",
+            "moduleName": "AdyenNetworking"
+          },
+          {
+            "kind": "Function",
+            "name": "==",
+            "printedName": "==(_:_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "APIClientError",
+                "printedName": "AdyenNetworking.APIClientError",
+                "usr": "s:15AdyenNetworking14APIClientErrorO"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "APIClientError",
+                "printedName": "AdyenNetworking.APIClientError",
+                "usr": "s:15AdyenNetworking14APIClientErrorO"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15AdyenNetworking14APIClientErrorO2eeoiySbAC_ACtFZ",
+            "mangledName": "$s15AdyenNetworking14APIClientErrorO2eeoiySbAC_ACtFZ",
+            "moduleName": "AdyenNetworking",
+            "static": true,
+            "implicit": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Var",
+            "name": "hashValue",
+            "printedName": "hashValue",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15AdyenNetworking14APIClientErrorO9hashValueSivp",
+            "mangledName": "$s15AdyenNetworking14APIClientErrorO9hashValueSivp",
+            "moduleName": "AdyenNetworking",
+            "implicit": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15AdyenNetworking14APIClientErrorO9hashValueSivg",
+                "mangledName": "$s15AdyenNetworking14APIClientErrorO9hashValueSivg",
+                "moduleName": "AdyenNetworking",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "hash",
+            "printedName": "hash(into:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Hasher",
+                "printedName": "Swift.Hasher",
+                "paramValueOwnership": "InOut",
+                "usr": "s:s6HasherV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15AdyenNetworking14APIClientErrorO4hash4intoys6HasherVz_tF",
+            "mangledName": "$s15AdyenNetworking14APIClientErrorO4hash4intoys6HasherVz_tF",
+            "moduleName": "AdyenNetworking",
+            "implicit": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Enum",
+        "usr": "s:15AdyenNetworking14APIClientErrorO",
+        "mangledName": "$s15AdyenNetworking14APIClientErrorO",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "LocalizedError",
+            "printedName": "LocalizedError",
+            "usr": "s:10Foundation14LocalizedErrorP",
+            "mangledName": "$s10Foundation14LocalizedErrorP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Error",
+            "printedName": "Error",
+            "usr": "s:s5ErrorP",
+            "mangledName": "$ss5ErrorP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "ParsingError",
+        "printedName": "ParsingError",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "headers",
+            "printedName": "headers",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Dictionary",
+                "printedName": "[Swift.String : Swift.String]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:SD"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15AdyenNetworking12ParsingErrorV7headersSDyS2SGvp",
+            "mangledName": "$s15AdyenNetworking12ParsingErrorV7headersSDyS2SGvp",
+            "moduleName": "AdyenNetworking",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Dictionary",
+                    "printedName": "[Swift.String : Swift.String]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:SD"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15AdyenNetworking12ParsingErrorV7headersSDyS2SGvg",
+                "mangledName": "$s15AdyenNetworking12ParsingErrorV7headersSDyS2SGvg",
+                "moduleName": "AdyenNetworking",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "statusCode",
+            "printedName": "statusCode",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15AdyenNetworking12ParsingErrorV10statusCodeSivp",
+            "mangledName": "$s15AdyenNetworking12ParsingErrorV10statusCodeSivp",
+            "moduleName": "AdyenNetworking",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15AdyenNetworking12ParsingErrorV10statusCodeSivg",
+                "mangledName": "$s15AdyenNetworking12ParsingErrorV10statusCodeSivg",
+                "moduleName": "AdyenNetworking",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "underlyingError",
+            "printedName": "underlyingError",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "DecodingError",
+                "printedName": "Swift.DecodingError",
+                "usr": "s:s13DecodingErrorO"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15AdyenNetworking12ParsingErrorV010underlyingD0s08DecodingD0Ovp",
+            "mangledName": "$s15AdyenNetworking12ParsingErrorV010underlyingD0s08DecodingD0Ovp",
+            "moduleName": "AdyenNetworking",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "DecodingError",
+                    "printedName": "Swift.DecodingError",
+                    "usr": "s:s13DecodingErrorO"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15AdyenNetworking12ParsingErrorV010underlyingD0s08DecodingD0Ovg",
+                "mangledName": "$s15AdyenNetworking12ParsingErrorV010underlyingD0s08DecodingD0Ovg",
+                "moduleName": "AdyenNetworking",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:15AdyenNetworking12ParsingErrorV",
+        "mangledName": "$s15AdyenNetworking12ParsingErrorV",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "LocalizedError",
+            "printedName": "LocalizedError",
+            "usr": "s:10Foundation14LocalizedErrorP",
+            "mangledName": "$s10Foundation14LocalizedErrorP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Error",
+            "printedName": "Error",
+            "usr": "s:s5ErrorP",
+            "mangledName": "$ss5ErrorP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "HTTPResponse",
+        "printedName": "HTTPResponse",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "headers",
+            "printedName": "headers",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Dictionary",
+                "printedName": "[Swift.String : Swift.String]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:SD"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15AdyenNetworking12HTTPResponseV7headersSDyS2SGvp",
+            "mangledName": "$s15AdyenNetworking12HTTPResponseV7headersSDyS2SGvp",
+            "moduleName": "AdyenNetworking",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Dictionary",
+                    "printedName": "[Swift.String : Swift.String]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:SD"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15AdyenNetworking12HTTPResponseV7headersSDyS2SGvg",
+                "mangledName": "$s15AdyenNetworking12HTTPResponseV7headersSDyS2SGvg",
+                "moduleName": "AdyenNetworking",
+                "genericSig": "<τ_0_0 where τ_0_0 : AdyenNetworking.Response>",
+                "sugared_genericSig": "<R where R : AdyenNetworking.Response>",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "statusCode",
+            "printedName": "statusCode",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15AdyenNetworking12HTTPResponseV10statusCodeSivp",
+            "mangledName": "$s15AdyenNetworking12HTTPResponseV10statusCodeSivp",
+            "moduleName": "AdyenNetworking",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15AdyenNetworking12HTTPResponseV10statusCodeSivg",
+                "mangledName": "$s15AdyenNetworking12HTTPResponseV10statusCodeSivg",
+                "moduleName": "AdyenNetworking",
+                "genericSig": "<τ_0_0 where τ_0_0 : AdyenNetworking.Response>",
+                "sugared_genericSig": "<R where R : AdyenNetworking.Response>",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "responseBody",
+            "printedName": "responseBody",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "GenericTypeParam",
+                "printedName": "τ_0_0"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15AdyenNetworking12HTTPResponseV12responseBodyxvp",
+            "mangledName": "$s15AdyenNetworking12HTTPResponseV12responseBodyxvp",
+            "moduleName": "AdyenNetworking",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "GenericTypeParam",
+                    "printedName": "τ_0_0"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15AdyenNetworking12HTTPResponseV12responseBodyxvg",
+                "mangledName": "$s15AdyenNetworking12HTTPResponseV12responseBodyxvg",
+                "moduleName": "AdyenNetworking",
+                "genericSig": "<τ_0_0 where τ_0_0 : AdyenNetworking.Response>",
+                "sugared_genericSig": "<R where R : AdyenNetworking.Response>",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:15AdyenNetworking12HTTPResponseV",
+        "mangledName": "$s15AdyenNetworking12HTTPResponseV",
+        "moduleName": "AdyenNetworking",
+        "genericSig": "<τ_0_0 where τ_0_0 : AdyenNetworking.Response>",
+        "sugared_genericSig": "<R where R : AdyenNetworking.Response>",
+        "declAttributes": [
+          "AccessControl"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Error",
+            "printedName": "Error",
+            "usr": "s:s5ErrorP",
+            "mangledName": "$ss5ErrorP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Darwin",
+        "printedName": "Darwin",
+        "declKind": "Import",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "AdyenNetworking"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "Logging",
+        "printedName": "Logging",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "isEnabled",
+            "printedName": "isEnabled",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15AdyenNetworking7LoggingO9isEnabledSbvpZ",
+            "mangledName": "$s15AdyenNetworking7LoggingO9isEnabledSbvpZ",
+            "moduleName": "AdyenNetworking",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15AdyenNetworking7LoggingO9isEnabledSbvgZ",
+                "mangledName": "$s15AdyenNetworking7LoggingO9isEnabledSbvgZ",
+                "moduleName": "AdyenNetworking",
+                "static": true,
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15AdyenNetworking7LoggingO9isEnabledSbvsZ",
+                "mangledName": "$s15AdyenNetworking7LoggingO9isEnabledSbvsZ",
+                "moduleName": "AdyenNetworking",
+                "static": true,
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15AdyenNetworking7LoggingO9isEnabledSbvMZ",
+                "mangledName": "$s15AdyenNetworking7LoggingO9isEnabledSbvMZ",
+                "moduleName": "AdyenNetworking",
+                "static": true,
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          }
+        ],
+        "declKind": "Enum",
+        "usr": "s:15AdyenNetworking7LoggingO",
+        "mangledName": "$s15AdyenNetworking7LoggingO",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Function",
+        "name": "adyenPrint",
+        "printedName": "adyenPrint(_:separator:terminator:fileId:)",
+        "children": [
+          {
+            "kind": "TypeNominal",
+            "name": "Void",
+            "printedName": "()"
+          },
+          {
+            "kind": "TypeNominal",
+            "name": "Array",
+            "printedName": "[Any]",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ProtocolComposition",
+                "printedName": "Any"
+              }
+            ],
+            "usr": "s:Sa"
+          },
+          {
+            "kind": "TypeNominal",
+            "name": "String",
+            "printedName": "Swift.String",
+            "hasDefaultArg": true,
+            "usr": "s:SS"
+          },
+          {
+            "kind": "TypeNominal",
+            "name": "String",
+            "printedName": "Swift.String",
+            "hasDefaultArg": true,
+            "usr": "s:SS"
+          },
+          {
+            "kind": "TypeNominal",
+            "name": "String",
+            "printedName": "Swift.String",
+            "hasDefaultArg": true,
+            "usr": "s:SS"
+          }
+        ],
+        "declKind": "Func",
+        "usr": "s:15AdyenNetworking10adyenPrint_9separator10terminator6fileIdyypd_S3StF",
+        "mangledName": "$s15AdyenNetworking10adyenPrint_9separator10terminator6fileIdyypd_S3StF",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "AccessControl",
+          "SPIAccessControl"
+        ],
+        "spi_group_names": [
+          "AdyenInternal"
+        ],
+        "funcSelfKind": "NonMutating"
+      },
+      {
+        "kind": "Function",
+        "name": "adyenPrintAsJSON",
+        "printedName": "adyenPrintAsJSON(_:)",
+        "children": [
+          {
+            "kind": "TypeNominal",
+            "name": "Void",
+            "printedName": "()"
+          },
+          {
+            "kind": "TypeNominal",
+            "name": "Dictionary",
+            "printedName": "[Swift.String : Any]",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "ProtocolComposition",
+                "printedName": "Any"
+              }
+            ],
+            "usr": "s:SD"
+          }
+        ],
+        "declKind": "Func",
+        "usr": "s:15AdyenNetworking16adyenPrintAsJSONyySDySSypGF",
+        "mangledName": "$s15AdyenNetworking16adyenPrintAsJSONyySDySSypGF",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "AccessControl",
+          "SPIAccessControl"
+        ],
+        "spi_group_names": [
+          "AdyenInternal"
+        ],
+        "funcSelfKind": "NonMutating"
+      },
+      {
+        "kind": "Function",
+        "name": "adyenPrintAsJSON",
+        "printedName": "adyenPrintAsJSON(_:)",
+        "children": [
+          {
+            "kind": "TypeNominal",
+            "name": "Void",
+            "printedName": "()"
+          },
+          {
+            "kind": "TypeNominal",
+            "name": "Data",
+            "printedName": "Foundation.Data",
+            "usr": "s:10Foundation4DataV"
+          }
+        ],
+        "declKind": "Func",
+        "usr": "s:15AdyenNetworking16adyenPrintAsJSONyy10Foundation4DataVF",
+        "mangledName": "$s15AdyenNetworking16adyenPrintAsJSONyy10Foundation4DataVF",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "AccessControl",
+          "SPIAccessControl"
+        ],
+        "spi_group_names": [
+          "AdyenInternal"
+        ],
+        "funcSelfKind": "NonMutating"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "HTTPMethod",
+        "printedName": "HTTPMethod",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "post",
+            "printedName": "post",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(AdyenNetworking.HTTPMethod.Type) -> AdyenNetworking.HTTPMethod",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "HTTPMethod",
+                    "printedName": "AdyenNetworking.HTTPMethod",
+                    "usr": "s:15AdyenNetworking10HTTPMethodO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "AdyenNetworking.HTTPMethod.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "HTTPMethod",
+                        "printedName": "AdyenNetworking.HTTPMethod",
+                        "usr": "s:15AdyenNetworking10HTTPMethodO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:15AdyenNetworking10HTTPMethodO4postyA2CmF",
+            "mangledName": "$s15AdyenNetworking10HTTPMethodO4postyA2CmF",
+            "moduleName": "AdyenNetworking"
+          },
+          {
+            "kind": "Var",
+            "name": "get",
+            "printedName": "get",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(AdyenNetworking.HTTPMethod.Type) -> AdyenNetworking.HTTPMethod",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "HTTPMethod",
+                    "printedName": "AdyenNetworking.HTTPMethod",
+                    "usr": "s:15AdyenNetworking10HTTPMethodO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "AdyenNetworking.HTTPMethod.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "HTTPMethod",
+                        "printedName": "AdyenNetworking.HTTPMethod",
+                        "usr": "s:15AdyenNetworking10HTTPMethodO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:15AdyenNetworking10HTTPMethodO3getyA2CmF",
+            "mangledName": "$s15AdyenNetworking10HTTPMethodO3getyA2CmF",
+            "moduleName": "AdyenNetworking"
+          },
+          {
+            "kind": "Var",
+            "name": "patch",
+            "printedName": "patch",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(AdyenNetworking.HTTPMethod.Type) -> AdyenNetworking.HTTPMethod",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "HTTPMethod",
+                    "printedName": "AdyenNetworking.HTTPMethod",
+                    "usr": "s:15AdyenNetworking10HTTPMethodO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "AdyenNetworking.HTTPMethod.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "HTTPMethod",
+                        "printedName": "AdyenNetworking.HTTPMethod",
+                        "usr": "s:15AdyenNetworking10HTTPMethodO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:15AdyenNetworking10HTTPMethodO5patchyA2CmF",
+            "mangledName": "$s15AdyenNetworking10HTTPMethodO5patchyA2CmF",
+            "moduleName": "AdyenNetworking"
+          },
+          {
+            "kind": "Var",
+            "name": "put",
+            "printedName": "put",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(AdyenNetworking.HTTPMethod.Type) -> AdyenNetworking.HTTPMethod",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "HTTPMethod",
+                    "printedName": "AdyenNetworking.HTTPMethod",
+                    "usr": "s:15AdyenNetworking10HTTPMethodO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "AdyenNetworking.HTTPMethod.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "HTTPMethod",
+                        "printedName": "AdyenNetworking.HTTPMethod",
+                        "usr": "s:15AdyenNetworking10HTTPMethodO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:15AdyenNetworking10HTTPMethodO3putyA2CmF",
+            "mangledName": "$s15AdyenNetworking10HTTPMethodO3putyA2CmF",
+            "moduleName": "AdyenNetworking"
+          },
+          {
+            "kind": "Var",
+            "name": "delete",
+            "printedName": "delete",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(AdyenNetworking.HTTPMethod.Type) -> AdyenNetworking.HTTPMethod",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "HTTPMethod",
+                    "printedName": "AdyenNetworking.HTTPMethod",
+                    "usr": "s:15AdyenNetworking10HTTPMethodO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "AdyenNetworking.HTTPMethod.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "HTTPMethod",
+                        "printedName": "AdyenNetworking.HTTPMethod",
+                        "usr": "s:15AdyenNetworking10HTTPMethodO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:15AdyenNetworking10HTTPMethodO6deleteyA2CmF",
+            "mangledName": "$s15AdyenNetworking10HTTPMethodO6deleteyA2CmF",
+            "moduleName": "AdyenNetworking"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(rawValue:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "AdyenNetworking.HTTPMethod?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "HTTPMethod",
+                    "printedName": "AdyenNetworking.HTTPMethod",
+                    "usr": "s:15AdyenNetworking10HTTPMethodO"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:15AdyenNetworking10HTTPMethodO8rawValueACSgSS_tcfc",
+            "mangledName": "$s15AdyenNetworking10HTTPMethodO8rawValueACSgSS_tcfc",
+            "moduleName": "AdyenNetworking",
+            "implicit": true,
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Var",
+            "name": "rawValue",
+            "printedName": "rawValue",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15AdyenNetworking10HTTPMethodO8rawValueSSvp",
+            "mangledName": "$s15AdyenNetworking10HTTPMethodO8rawValueSSvp",
+            "moduleName": "AdyenNetworking",
+            "implicit": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15AdyenNetworking10HTTPMethodO8rawValueSSvg",
+                "mangledName": "$s15AdyenNetworking10HTTPMethodO8rawValueSSvg",
+                "moduleName": "AdyenNetworking",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Enum",
+        "usr": "s:15AdyenNetworking10HTTPMethodO",
+        "mangledName": "$s15AdyenNetworking10HTTPMethodO",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "enumRawTypeName": "String",
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "RawRepresentable",
+            "printedName": "RawRepresentable",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "RawValue",
+                "printedName": "RawValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:SY",
+            "mangledName": "$sSY"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "Request",
+        "printedName": "Request",
+        "children": [
+          {
+            "kind": "AssociatedType",
+            "name": "ResponseType",
+            "printedName": "ResponseType",
+            "declKind": "AssociatedType",
+            "usr": "s:15AdyenNetworking7RequestP12ResponseTypeQa",
+            "mangledName": "$s15AdyenNetworking7RequestP12ResponseTypeQa",
+            "moduleName": "AdyenNetworking",
+            "protocolReq": true,
+            "declAttributes": [
+              "RawDocComment"
+            ]
+          },
+          {
+            "kind": "AssociatedType",
+            "name": "ErrorResponseType",
+            "printedName": "ErrorResponseType",
+            "declKind": "AssociatedType",
+            "usr": "s:15AdyenNetworking7RequestP17ErrorResponseTypeQa",
+            "mangledName": "$s15AdyenNetworking7RequestP17ErrorResponseTypeQa",
+            "moduleName": "AdyenNetworking",
+            "protocolReq": true,
+            "declAttributes": [
+              "RawDocComment"
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "path",
+            "printedName": "path",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15AdyenNetworking7RequestP4pathSSvp",
+            "mangledName": "$s15AdyenNetworking7RequestP4pathSSvp",
+            "moduleName": "AdyenNetworking",
+            "protocolReq": true,
+            "declAttributes": [
+              "RawDocComment"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15AdyenNetworking7RequestP4pathSSvg",
+                "mangledName": "$s15AdyenNetworking7RequestP4pathSSvg",
+                "moduleName": "AdyenNetworking",
+                "genericSig": "<τ_0_0 where τ_0_0 : AdyenNetworking.Request>",
+                "sugared_genericSig": "<Self where Self : AdyenNetworking.Request>",
+                "protocolReq": true,
+                "reqNewWitnessTableEntry": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "counter",
+            "printedName": "counter",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "UInt",
+                "printedName": "Swift.UInt",
+                "usr": "s:Su"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15AdyenNetworking7RequestP7counterSuvp",
+            "mangledName": "$s15AdyenNetworking7RequestP7counterSuvp",
+            "moduleName": "AdyenNetworking",
+            "protocolReq": true,
+            "declAttributes": [
+              "RawDocComment"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UInt",
+                    "printedName": "Swift.UInt",
+                    "usr": "s:Su"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15AdyenNetworking7RequestP7counterSuvg",
+                "mangledName": "$s15AdyenNetworking7RequestP7counterSuvg",
+                "moduleName": "AdyenNetworking",
+                "genericSig": "<τ_0_0 where τ_0_0 : AdyenNetworking.Request>",
+                "sugared_genericSig": "<Self where Self : AdyenNetworking.Request>",
+                "protocolReq": true,
+                "reqNewWitnessTableEntry": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UInt",
+                    "printedName": "Swift.UInt",
+                    "usr": "s:Su"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15AdyenNetworking7RequestP7counterSuvs",
+                "mangledName": "$s15AdyenNetworking7RequestP7counterSuvs",
+                "moduleName": "AdyenNetworking",
+                "genericSig": "<τ_0_0 where τ_0_0 : AdyenNetworking.Request>",
+                "sugared_genericSig": "<Self where Self : AdyenNetworking.Request>",
+                "protocolReq": true,
+                "reqNewWitnessTableEntry": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15AdyenNetworking7RequestP7counterSuvM",
+                "mangledName": "$s15AdyenNetworking7RequestP7counterSuvM",
+                "moduleName": "AdyenNetworking",
+                "genericSig": "<τ_0_0 where τ_0_0 : AdyenNetworking.Request>",
+                "sugared_genericSig": "<Self where Self : AdyenNetworking.Request>",
+                "protocolReq": true,
+                "implicit": true,
+                "reqNewWitnessTableEntry": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "headers",
+            "printedName": "headers",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Dictionary",
+                "printedName": "[Swift.String : Swift.String]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:SD"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15AdyenNetworking7RequestP7headersSDyS2SGvp",
+            "mangledName": "$s15AdyenNetworking7RequestP7headersSDyS2SGvp",
+            "moduleName": "AdyenNetworking",
+            "protocolReq": true,
+            "declAttributes": [
+              "RawDocComment"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Dictionary",
+                    "printedName": "[Swift.String : Swift.String]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:SD"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15AdyenNetworking7RequestP7headersSDyS2SGvg",
+                "mangledName": "$s15AdyenNetworking7RequestP7headersSDyS2SGvg",
+                "moduleName": "AdyenNetworking",
+                "genericSig": "<τ_0_0 where τ_0_0 : AdyenNetworking.Request>",
+                "sugared_genericSig": "<Self where Self : AdyenNetworking.Request>",
+                "protocolReq": true,
+                "reqNewWitnessTableEntry": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "queryParameters",
+            "printedName": "queryParameters",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[Foundation.URLQueryItem]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "URLQueryItem",
+                    "printedName": "Foundation.URLQueryItem",
+                    "usr": "s:10Foundation12URLQueryItemV"
+                  }
+                ],
+                "usr": "s:Sa"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15AdyenNetworking7RequestP15queryParametersSay10Foundation12URLQueryItemVGvp",
+            "mangledName": "$s15AdyenNetworking7RequestP15queryParametersSay10Foundation12URLQueryItemVGvp",
+            "moduleName": "AdyenNetworking",
+            "protocolReq": true,
+            "declAttributes": [
+              "RawDocComment"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Array",
+                    "printedName": "[Foundation.URLQueryItem]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "URLQueryItem",
+                        "printedName": "Foundation.URLQueryItem",
+                        "usr": "s:10Foundation12URLQueryItemV"
+                      }
+                    ],
+                    "usr": "s:Sa"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15AdyenNetworking7RequestP15queryParametersSay10Foundation12URLQueryItemVGvg",
+                "mangledName": "$s15AdyenNetworking7RequestP15queryParametersSay10Foundation12URLQueryItemVGvg",
+                "moduleName": "AdyenNetworking",
+                "genericSig": "<τ_0_0 where τ_0_0 : AdyenNetworking.Request>",
+                "sugared_genericSig": "<Self where Self : AdyenNetworking.Request>",
+                "protocolReq": true,
+                "reqNewWitnessTableEntry": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "method",
+            "printedName": "method",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "HTTPMethod",
+                "printedName": "AdyenNetworking.HTTPMethod",
+                "usr": "s:15AdyenNetworking10HTTPMethodO"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15AdyenNetworking7RequestP6methodAA10HTTPMethodOvp",
+            "mangledName": "$s15AdyenNetworking7RequestP6methodAA10HTTPMethodOvp",
+            "moduleName": "AdyenNetworking",
+            "protocolReq": true,
+            "declAttributes": [
+              "RawDocComment"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "HTTPMethod",
+                    "printedName": "AdyenNetworking.HTTPMethod",
+                    "usr": "s:15AdyenNetworking10HTTPMethodO"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15AdyenNetworking7RequestP6methodAA10HTTPMethodOvg",
+                "mangledName": "$s15AdyenNetworking7RequestP6methodAA10HTTPMethodOvg",
+                "moduleName": "AdyenNetworking",
+                "genericSig": "<τ_0_0 where τ_0_0 : AdyenNetworking.Request>",
+                "sugared_genericSig": "<Self where Self : AdyenNetworking.Request>",
+                "protocolReq": true,
+                "reqNewWitnessTableEntry": true,
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Protocol",
+        "usr": "s:15AdyenNetworking7RequestP",
+        "mangledName": "$s15AdyenNetworking7RequestP",
+        "moduleName": "AdyenNetworking",
+        "genericSig": "<τ_0_0 : Swift.Encodable, τ_0_0.ErrorResponseType : AdyenNetworking.ErrorResponse, τ_0_0.ResponseType : AdyenNetworking.Response>",
+        "sugared_genericSig": "<Self : Swift.Encodable, Self.ErrorResponseType : AdyenNetworking.ErrorResponse, Self.ResponseType : AdyenNetworking.Response>",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Encodable",
+            "printedName": "Encodable",
+            "usr": "s:SE",
+            "mangledName": "$sSE"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "Response",
+        "printedName": "Response",
+        "declKind": "Protocol",
+        "usr": "s:15AdyenNetworking8ResponseP",
+        "mangledName": "$s15AdyenNetworking8ResponseP",
+        "moduleName": "AdyenNetworking",
+        "genericSig": "<τ_0_0 : Swift.Decodable>",
+        "sugared_genericSig": "<Self : Swift.Decodable>",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Decodable",
+            "printedName": "Decodable",
+            "usr": "s:Se",
+            "mangledName": "$sSe"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "EmptyResponse",
+        "printedName": "EmptyResponse",
+        "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "EmptyResponse",
+                "printedName": "AdyenNetworking.EmptyResponse",
+                "usr": "s:15AdyenNetworking13EmptyResponseV"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:15AdyenNetworking13EmptyResponseVACycfc",
+            "mangledName": "$s15AdyenNetworking13EmptyResponseVACycfc",
+            "moduleName": "AdyenNetworking",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(from:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "EmptyResponse",
+                "printedName": "AdyenNetworking.EmptyResponse",
+                "usr": "s:15AdyenNetworking13EmptyResponseV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Decoder",
+                "printedName": "any Swift.Decoder",
+                "usr": "s:s7DecoderP"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:15AdyenNetworking13EmptyResponseV4fromACs7Decoder_p_tKcfc",
+            "mangledName": "$s15AdyenNetworking13EmptyResponseV4fromACs7Decoder_p_tKcfc",
+            "moduleName": "AdyenNetworking",
+            "implicit": true,
+            "throwing": true,
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:15AdyenNetworking13EmptyResponseV",
+        "mangledName": "$s15AdyenNetworking13EmptyResponseV",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Response",
+            "printedName": "Response",
+            "usr": "s:15AdyenNetworking8ResponseP",
+            "mangledName": "$s15AdyenNetworking8ResponseP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Decodable",
+            "printedName": "Decodable",
+            "usr": "s:Se",
+            "mangledName": "$sSe"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "ErrorResponse",
+        "printedName": "ErrorResponse",
+        "declKind": "Protocol",
+        "usr": "s:15AdyenNetworking13ErrorResponseP",
+        "mangledName": "$s15AdyenNetworking13ErrorResponseP",
+        "moduleName": "AdyenNetworking",
+        "genericSig": "<τ_0_0 : AdyenNetworking.Response, τ_0_0 : Swift.Error>",
+        "sugared_genericSig": "<Self : AdyenNetworking.Response, Self : Swift.Error>",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Error",
+            "printedName": "Error",
+            "usr": "s:s5ErrorP",
+            "mangledName": "$ss5ErrorP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Response",
+            "printedName": "Response",
+            "usr": "s:15AdyenNetworking8ResponseP",
+            "mangledName": "$s15AdyenNetworking8ResponseP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Decodable",
+            "printedName": "Decodable",
+            "usr": "s:Se",
+            "mangledName": "$sSe"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "EmptyErrorResponse",
+        "printedName": "EmptyErrorResponse",
+        "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(from:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "EmptyErrorResponse",
+                "printedName": "AdyenNetworking.EmptyErrorResponse",
+                "usr": "s:15AdyenNetworking18EmptyErrorResponseV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Decoder",
+                "printedName": "any Swift.Decoder",
+                "usr": "s:s7DecoderP"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:15AdyenNetworking18EmptyErrorResponseV4fromACs7Decoder_p_tKcfc",
+            "mangledName": "$s15AdyenNetworking18EmptyErrorResponseV4fromACs7Decoder_p_tKcfc",
+            "moduleName": "AdyenNetworking",
+            "implicit": true,
+            "throwing": true,
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:15AdyenNetworking18EmptyErrorResponseV",
+        "mangledName": "$s15AdyenNetworking18EmptyErrorResponseV",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "AccessControl"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "ErrorResponse",
+            "printedName": "ErrorResponse",
+            "usr": "s:15AdyenNetworking13ErrorResponseP",
+            "mangledName": "$s15AdyenNetworking13ErrorResponseP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Response",
+            "printedName": "Response",
+            "usr": "s:15AdyenNetworking8ResponseP",
+            "mangledName": "$s15AdyenNetworking8ResponseP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Error",
+            "printedName": "Error",
+            "usr": "s:s5ErrorP",
+            "mangledName": "$ss5ErrorP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Decodable",
+            "printedName": "Decodable",
+            "usr": "s:Se",
+            "mangledName": "$sSe"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "AnyRetryAPIClient",
+        "printedName": "AnyRetryAPIClient",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "perform",
+            "printedName": "perform(_:shouldRetry:completionHandler:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "GenericTypeParam",
+                "printedName": "τ_1_0"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "((Swift.Result<τ_1_0.ResponseType, any Swift.Error>) -> Swift.Bool)?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(Swift.Result<τ_1_0.ResponseType, any Swift.Error>) -> Swift.Bool",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Bool",
+                        "printedName": "Swift.Bool",
+                        "usr": "s:Sb"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Result",
+                        "printedName": "Swift.Result<τ_1_0.ResponseType, any Swift.Error>",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "DependentMember",
+                            "printedName": "τ_1_0.ResponseType"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Error",
+                            "printedName": "any Swift.Error",
+                            "usr": "s:s5ErrorP"
+                          }
+                        ],
+                        "usr": "s:s6ResultO"
+                      }
+                    ]
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Result<τ_1_0.ResponseType, any Swift.Error>) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Result",
+                    "printedName": "Swift.Result<τ_1_0.ResponseType, any Swift.Error>",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "DependentMember",
+                        "printedName": "τ_1_0.ResponseType"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Error",
+                        "printedName": "any Swift.Error",
+                        "usr": "s:s5ErrorP"
+                      }
+                    ],
+                    "usr": "s:s6ResultO"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15AdyenNetworking17AnyRetryAPIClientP7perform_06shouldD017completionHandleryqd___Sbs6ResultOy12ResponseTypeQyd__s5Error_pGcSgyALctAA7RequestRd__lF",
+            "mangledName": "$s15AdyenNetworking17AnyRetryAPIClientP7perform_06shouldD017completionHandleryqd___Sbs6ResultOy12ResponseTypeQyd__s5Error_pGcSgyALctAA7RequestRd__lF",
+            "moduleName": "AdyenNetworking",
+            "genericSig": "<τ_0_0, τ_1_0 where τ_0_0 : AdyenNetworking.AnyRetryAPIClient, τ_1_0 : AdyenNetworking.Request>",
+            "sugared_genericSig": "<Self, R where Self : AdyenNetworking.AnyRetryAPIClient, R : AdyenNetworking.Request>",
+            "protocolReq": true,
+            "declAttributes": [
+              "RawDocComment"
+            ],
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "retryOnErrorAPIClient",
+            "printedName": "retryOnErrorAPIClient()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "APIClientProtocol",
+                "printedName": "any AdyenNetworking.APIClientProtocol",
+                "usr": "s:15AdyenNetworking17APIClientProtocolP"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15AdyenNetworking17AnyRetryAPIClientPAAE012retryOnErrorE0AA0E8Protocol_pyF",
+            "mangledName": "$s15AdyenNetworking17AnyRetryAPIClientPAAE012retryOnErrorE0AA0E8Protocol_pyF",
+            "moduleName": "AdyenNetworking",
+            "genericSig": "<τ_0_0 where τ_0_0 : AdyenNetworking.AnyRetryAPIClient>",
+            "sugared_genericSig": "<Self where Self : AdyenNetworking.AnyRetryAPIClient>",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Protocol",
+        "usr": "s:15AdyenNetworking17AnyRetryAPIClientP",
+        "mangledName": "$s15AdyenNetworking17AnyRetryAPIClientP",
+        "moduleName": "AdyenNetworking",
+        "genericSig": "<τ_0_0 : AdyenNetworking.APIClientProtocol>",
+        "sugared_genericSig": "<Self : AdyenNetworking.APIClientProtocol>",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "APIClientProtocol",
+            "printedName": "APIClientProtocol",
+            "usr": "s:15AdyenNetworking17APIClientProtocolP",
+            "mangledName": "$s15AdyenNetworking17APIClientProtocolP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "RetryAPIClient",
+        "printedName": "RetryAPIClient",
+        "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(apiClient:scheduler:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "RetryAPIClient",
+                "printedName": "AdyenNetworking.RetryAPIClient",
+                "usr": "s:15AdyenNetworking14RetryAPIClientC"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "APIClientProtocol",
+                "printedName": "any AdyenNetworking.APIClientProtocol",
+                "usr": "s:15AdyenNetworking17APIClientProtocolP"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Scheduler",
+                "printedName": "any AdyenNetworking.Scheduler",
+                "usr": "s:15AdyenNetworking9SchedulerP"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:15AdyenNetworking14RetryAPIClientC9apiClient9schedulerAcA0D8Protocol_p_AA9Scheduler_ptcfc",
+            "mangledName": "$s15AdyenNetworking14RetryAPIClientC9apiClient9schedulerAcA0D8Protocol_p_AA9Scheduler_ptcfc",
+            "moduleName": "AdyenNetworking",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "perform",
+            "printedName": "perform(_:completionHandler:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "GenericTypeParam",
+                "printedName": "τ_0_0"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Result<τ_0_0.ResponseType, any Swift.Error>) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Result",
+                    "printedName": "Swift.Result<τ_0_0.ResponseType, any Swift.Error>",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "DependentMember",
+                        "printedName": "τ_0_0.ResponseType"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Error",
+                        "printedName": "any Swift.Error",
+                        "usr": "s:s5ErrorP"
+                      }
+                    ],
+                    "usr": "s:s6ResultO"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15AdyenNetworking14RetryAPIClientC7perform_17completionHandleryx_ys6ResultOy12ResponseTypeQzs5Error_pGctAA7RequestRzlF",
+            "mangledName": "$s15AdyenNetworking14RetryAPIClientC7perform_17completionHandleryx_ys6ResultOy12ResponseTypeQzs5Error_pGctAA7RequestRzlF",
+            "moduleName": "AdyenNetworking",
+            "genericSig": "<τ_0_0 where τ_0_0 : AdyenNetworking.Request>",
+            "sugared_genericSig": "<R where R : AdyenNetworking.Request>",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "perform",
+            "printedName": "perform(_:shouldRetry:completionHandler:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "GenericTypeParam",
+                "printedName": "τ_0_0"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "((Swift.Result<τ_0_0.ResponseType, any Swift.Error>) -> Swift.Bool)?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(Swift.Result<τ_0_0.ResponseType, any Swift.Error>) -> Swift.Bool",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Bool",
+                        "printedName": "Swift.Bool",
+                        "usr": "s:Sb"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Result",
+                        "printedName": "Swift.Result<τ_0_0.ResponseType, any Swift.Error>",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "DependentMember",
+                            "printedName": "τ_0_0.ResponseType"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Error",
+                            "printedName": "any Swift.Error",
+                            "usr": "s:s5ErrorP"
+                          }
+                        ],
+                        "usr": "s:s6ResultO"
+                      }
+                    ]
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Result<τ_0_0.ResponseType, any Swift.Error>) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Result",
+                    "printedName": "Swift.Result<τ_0_0.ResponseType, any Swift.Error>",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "DependentMember",
+                        "printedName": "τ_0_0.ResponseType"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Error",
+                        "printedName": "any Swift.Error",
+                        "usr": "s:s5ErrorP"
+                      }
+                    ],
+                    "usr": "s:s6ResultO"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15AdyenNetworking14RetryAPIClientC7perform_06shouldC017completionHandleryx_Sbs6ResultOy12ResponseTypeQzs5Error_pGcSgyALctAA7RequestRzlF",
+            "mangledName": "$s15AdyenNetworking14RetryAPIClientC7perform_06shouldC017completionHandleryx_Sbs6ResultOy12ResponseTypeQzs5Error_pGcSgyALctAA7RequestRzlF",
+            "moduleName": "AdyenNetworking",
+            "genericSig": "<τ_0_0 where τ_0_0 : AdyenNetworking.Request>",
+            "sugared_genericSig": "<R where R : AdyenNetworking.Request>",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:15AdyenNetworking14RetryAPIClientC",
+        "mangledName": "$s15AdyenNetworking14RetryAPIClientC",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "Final",
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "AnyRetryAPIClient",
+            "printedName": "AnyRetryAPIClient",
+            "usr": "s:15AdyenNetworking17AnyRetryAPIClientP",
+            "mangledName": "$s15AdyenNetworking17AnyRetryAPIClientP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "APIClientProtocol",
+            "printedName": "APIClientProtocol",
+            "usr": "s:15AdyenNetworking17APIClientProtocolP",
+            "mangledName": "$s15AdyenNetworking17APIClientProtocolP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "RetryOnErrorAPIClient",
+        "printedName": "RetryOnErrorAPIClient",
+        "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(apiClient:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "RetryOnErrorAPIClient",
+                "printedName": "AdyenNetworking.RetryOnErrorAPIClient",
+                "usr": "s:15AdyenNetworking21RetryOnErrorAPIClientC"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "AnyRetryAPIClient",
+                "printedName": "any AdyenNetworking.AnyRetryAPIClient",
+                "usr": "s:15AdyenNetworking17AnyRetryAPIClientP"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:15AdyenNetworking21RetryOnErrorAPIClientC9apiClientAcA03AnycF0_p_tcfc",
+            "mangledName": "$s15AdyenNetworking21RetryOnErrorAPIClientC9apiClientAcA03AnycF0_p_tcfc",
+            "moduleName": "AdyenNetworking",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "perform",
+            "printedName": "perform(_:completionHandler:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "GenericTypeParam",
+                "printedName": "τ_0_0"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Result<τ_0_0.ResponseType, any Swift.Error>) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Result",
+                    "printedName": "Swift.Result<τ_0_0.ResponseType, any Swift.Error>",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "DependentMember",
+                        "printedName": "τ_0_0.ResponseType"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Error",
+                        "printedName": "any Swift.Error",
+                        "usr": "s:s5ErrorP"
+                      }
+                    ],
+                    "usr": "s:s6ResultO"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15AdyenNetworking21RetryOnErrorAPIClientC7perform_17completionHandleryx_ys6ResultOy12ResponseTypeQzs0E0_pGctAA7RequestRzlF",
+            "mangledName": "$s15AdyenNetworking21RetryOnErrorAPIClientC7perform_17completionHandleryx_ys6ResultOy12ResponseTypeQzs0E0_pGctAA7RequestRzlF",
+            "moduleName": "AdyenNetworking",
+            "genericSig": "<τ_0_0 where τ_0_0 : AdyenNetworking.Request>",
+            "sugared_genericSig": "<R where R : AdyenNetworking.Request>",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:15AdyenNetworking21RetryOnErrorAPIClientC",
+        "mangledName": "$s15AdyenNetworking21RetryOnErrorAPIClientC",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "Final",
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "APIClientProtocol",
+            "printedName": "APIClientProtocol",
+            "usr": "s:15AdyenNetworking17APIClientProtocolP",
+            "mangledName": "$s15AdyenNetworking17APIClientProtocolP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "Scheduler",
+        "printedName": "Scheduler",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "schedule",
+            "printedName": "schedule(_:closure:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UInt",
+                "printedName": "Swift.UInt",
+                "usr": "s:Su"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "() -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15AdyenNetworking9SchedulerP8schedule_7closureSbSu_yyctF",
+            "mangledName": "$s15AdyenNetworking9SchedulerP8schedule_7closureSbSu_yyctF",
+            "moduleName": "AdyenNetworking",
+            "genericSig": "<τ_0_0 where τ_0_0 : AdyenNetworking.Scheduler>",
+            "sugared_genericSig": "<Self where Self : AdyenNetworking.Scheduler>",
+            "protocolReq": true,
+            "declAttributes": [
+              "RawDocComment"
+            ],
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Protocol",
+        "usr": "s:15AdyenNetworking9SchedulerP",
+        "mangledName": "$s15AdyenNetworking9SchedulerP",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "SimpleScheduler",
+        "printedName": "SimpleScheduler",
+        "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(maximumCount:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "SimpleScheduler",
+                "printedName": "AdyenNetworking.SimpleScheduler",
+                "usr": "s:15AdyenNetworking15SimpleSchedulerV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:15AdyenNetworking15SimpleSchedulerV12maximumCountACSi_tcfc",
+            "mangledName": "$s15AdyenNetworking15SimpleSchedulerV12maximumCountACSi_tcfc",
+            "moduleName": "AdyenNetworking",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "schedule",
+            "printedName": "schedule(_:closure:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UInt",
+                "printedName": "Swift.UInt",
+                "usr": "s:Su"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "() -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15AdyenNetworking15SimpleSchedulerV8schedule_7closureSbSu_yyctF",
+            "mangledName": "$s15AdyenNetworking15SimpleSchedulerV8schedule_7closureSbSu_yyctF",
+            "moduleName": "AdyenNetworking",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:15AdyenNetworking15SimpleSchedulerV",
+        "mangledName": "$s15AdyenNetworking15SimpleSchedulerV",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Scheduler",
+            "printedName": "Scheduler",
+            "usr": "s:15AdyenNetworking9SchedulerP",
+            "mangledName": "$s15AdyenNetworking9SchedulerP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "UniqueAssetAPIClient",
+        "printedName": "UniqueAssetAPIClient",
+        "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(apiClient:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "UniqueAssetAPIClient",
+                "printedName": "AdyenNetworking.UniqueAssetAPIClient<τ_0_0>",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "GenericTypeParam",
+                    "printedName": "τ_0_0"
+                  }
+                ],
+                "usr": "s:15AdyenNetworking20UniqueAssetAPIClientC"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "APIClientProtocol",
+                "printedName": "any AdyenNetworking.APIClientProtocol",
+                "usr": "s:15AdyenNetworking17APIClientProtocolP"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:15AdyenNetworking20UniqueAssetAPIClientC9apiClientACyxGAA0E8Protocol_p_tcfc",
+            "mangledName": "$s15AdyenNetworking20UniqueAssetAPIClientC9apiClientACyxGAA0E8Protocol_p_tcfc",
+            "moduleName": "AdyenNetworking",
+            "genericSig": "<τ_0_0 where τ_0_0 : AdyenNetworking.Response>",
+            "sugared_genericSig": "<ResponseType where ResponseType : AdyenNetworking.Response>",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "perform",
+            "printedName": "perform(_:completionHandler:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "GenericTypeParam",
+                "printedName": "τ_1_0"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Result<τ_0_0, any Swift.Error>) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Result",
+                    "printedName": "Swift.Result<τ_0_0, any Swift.Error>",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "GenericTypeParam",
+                        "printedName": "τ_0_0"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Error",
+                        "printedName": "any Swift.Error",
+                        "usr": "s:s5ErrorP"
+                      }
+                    ],
+                    "usr": "s:s6ResultO"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15AdyenNetworking20UniqueAssetAPIClientC7perform_17completionHandleryqd___ys6ResultOyxs5Error_pGct12ResponseTypeQyd__RszAA7RequestRd__lF",
+            "mangledName": "$s15AdyenNetworking20UniqueAssetAPIClientC7perform_17completionHandleryqd___ys6ResultOyxs5Error_pGct12ResponseTypeQyd__RszAA7RequestRd__lF",
+            "moduleName": "AdyenNetworking",
+            "genericSig": "<τ_0_0, τ_1_0 where τ_0_0 == τ_1_0.ResponseType, τ_1_0 : AdyenNetworking.Request>",
+            "sugared_genericSig": "<ResponseType, R where ResponseType == R.ResponseType, R : AdyenNetworking.Request>",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:15AdyenNetworking20UniqueAssetAPIClientC",
+        "mangledName": "$s15AdyenNetworking20UniqueAssetAPIClientC",
+        "moduleName": "AdyenNetworking",
+        "genericSig": "<τ_0_0 where τ_0_0 : AdyenNetworking.Response>",
+        "sugared_genericSig": "<ResponseType where ResponseType : AdyenNetworking.Response>",
+        "declAttributes": [
+          "Final",
+          "AccessControl",
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "AdyenNetworking",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": [
+    {
+      "filePath": "\/Users\/wangcheng\/Documents\/adyenTools\/AdyenExample\/Pods\/AdyenNetworking\/AdyenNetworking\/Helpers\/Logging.swift",
+      "kind": "BooleanLiteral",
+      "offset": 350,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/wangcheng\/Documents\/adyenTools\/AdyenExample\/Pods\/AdyenNetworking\/AdyenNetworking\/Helpers\/Logging.swift",
+      "kind": "StringLiteral",
+      "offset": 440,
+      "length": 3,
+      "value": "\" \""
+    },
+    {
+      "filePath": "\/Users\/wangcheng\/Documents\/adyenTools\/AdyenExample\/Pods\/AdyenNetworking\/AdyenNetworking\/Helpers\/Logging.swift",
+      "kind": "StringLiteral",
+      "offset": 466,
+      "length": 4,
+      "value": "\"\n\""
+    },
+    {
+      "filePath": "\/Users\/wangcheng\/Documents\/adyenTools\/AdyenExample\/Pods\/AdyenNetworking\/AdyenNetworking\/APIClient\/Request.swift",
+      "kind": "StringLiteral",
+      "offset": 224,
+      "length": 6,
+      "value": "\"POST\""
+    },
+    {
+      "filePath": "\/Users\/wangcheng\/Documents\/adyenTools\/AdyenExample\/Pods\/AdyenNetworking\/AdyenNetworking\/APIClient\/Request.swift",
+      "kind": "StringLiteral",
+      "offset": 246,
+      "length": 5,
+      "value": "\"GET\""
+    },
+    {
+      "filePath": "\/Users\/wangcheng\/Documents\/adyenTools\/AdyenExample\/Pods\/AdyenNetworking\/AdyenNetworking\/APIClient\/Request.swift",
+      "kind": "StringLiteral",
+      "offset": 269,
+      "length": 7,
+      "value": "\"PATCH\""
+    },
+    {
+      "filePath": "\/Users\/wangcheng\/Documents\/adyenTools\/AdyenExample\/Pods\/AdyenNetworking\/AdyenNetworking\/APIClient\/Request.swift",
+      "kind": "StringLiteral",
+      "offset": 292,
+      "length": 5,
+      "value": "\"PUT\""
+    },
+    {
+      "filePath": "\/Users\/wangcheng\/Documents\/adyenTools\/AdyenExample\/Pods\/AdyenNetworking\/AdyenNetworking\/APIClient\/Request.swift",
+      "kind": "StringLiteral",
+      "offset": 316,
+      "length": 8,
+      "value": "\"DELETE\""
+    },
+    {
+      "filePath": "\/Users\/wangcheng\/Documents\/adyenTools\/AdyenExample\/Pods\/AdyenNetworking\/AdyenNetworking\/APIClient\/Request.swift",
+      "kind": "StringLiteral",
+      "offset": 224,
+      "length": 6,
+      "value": "\"POST\""
+    },
+    {
+      "filePath": "\/Users\/wangcheng\/Documents\/adyenTools\/AdyenExample\/Pods\/AdyenNetworking\/AdyenNetworking\/APIClient\/Request.swift",
+      "kind": "StringLiteral",
+      "offset": 246,
+      "length": 5,
+      "value": "\"GET\""
+    },
+    {
+      "filePath": "\/Users\/wangcheng\/Documents\/adyenTools\/AdyenExample\/Pods\/AdyenNetworking\/AdyenNetworking\/APIClient\/Request.swift",
+      "kind": "StringLiteral",
+      "offset": 269,
+      "length": 7,
+      "value": "\"PATCH\""
+    },
+    {
+      "filePath": "\/Users\/wangcheng\/Documents\/adyenTools\/AdyenExample\/Pods\/AdyenNetworking\/AdyenNetworking\/APIClient\/Request.swift",
+      "kind": "StringLiteral",
+      "offset": 292,
+      "length": 5,
+      "value": "\"PUT\""
+    },
+    {
+      "filePath": "\/Users\/wangcheng\/Documents\/adyenTools\/AdyenExample\/Pods\/AdyenNetworking\/AdyenNetworking\/APIClient\/Request.swift",
+      "kind": "StringLiteral",
+      "offset": 316,
+      "length": 8,
+      "value": "\"DELETE\""
+    },
+    {
+      "filePath": "\/Users\/wangcheng\/Documents\/adyenTools\/AdyenExample\/Pods\/AdyenNetworking\/AdyenNetworking\/APIClient\/UniqueAssetAPIClient.swift",
+      "kind": "Array",
+      "offset": 518,
+      "length": 2,
+      "value": "[]"
+    }
+  ]
+}

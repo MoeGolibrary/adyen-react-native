@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:element name="DisconnectRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="UserID"/>
+                <xs:element ref="DeviceNo"/>
+                <xs:element ref="SessionID"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DisconnectResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="RespCode"/>
+                <xs:element ref="RespText"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetCheckInfoRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="TableNo"/>
+                <xs:element ref="SessionID"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetCheckInfoResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="RespCode"/>
+                <xs:element ref="RespText"/>
+                <xs:element maxOccurs="unbounded" ref="CheckInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CheckInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="CheckNum"/>
+                <xs:element ref="PaymentDue"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="LoginRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="UserID"/>
+                <xs:element ref="DeviceNo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="LoginResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="RespCode"/>
+                <xs:element ref="RespText"/>
+                <xs:element ref="SessionID"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="PostPaymentRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="TableNo"/>
+                <xs:element ref="CheckNum"/>
+                <xs:element ref="TransType"/>
+                <xs:element ref="TransAmount"/>
+                <xs:element ref="OtherAmount"/>
+                <xs:element ref="TransCurrency"/>
+                <xs:element ref="TransToken"/>
+                <xs:element ref="IssuerId"/>
+                <xs:element ref="PAN"/>
+                <xs:element ref="ExpiryDate"/>
+                <xs:element ref="EntryMode"/>
+                <xs:element ref="RRN"/>
+                <xs:element ref="AuthCode"/>
+                <xs:element ref="TransDateTime"/>
+                <xs:element ref="MerchantId"/>
+                <xs:element ref="TerminalId"/>
+                <xs:element ref="SessionID"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="PostPaymentResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="RespCode"/>
+                <xs:element ref="RespText"/>
+                <xs:element ref="PaymentDue"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="TokenRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="SequenceNo"/>
+                <xs:element ref="TransType"/>
+                <xs:element ref="TransDateTime"/>
+                <xs:element ref="SiteId"/>
+                <xs:element ref="IndustryCode"/>
+                <xs:element ref="ProxyInfo"/>
+                <xs:element ref="POSInfo"/>
+                <xs:element ref="CardInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="TokenResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="SequenceNo"/>
+                <xs:element ref="TransType"/>
+                <xs:element ref="RespCode"/>
+                <xs:element ref="RespText"/>
+                <xs:element maxOccurs="unbounded" ref="CardInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="TransactionRequest">
+        <xs:complexType mixed="true">
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="SequenceNo"/>
+                <xs:element ref="TransType"/>
+                <xs:element ref="NewIncrementalAuth"/>
+                <xs:element ref="PaymentMethod"/>
+                <xs:element ref="TransAmount"/>
+                <xs:element ref="OtherAmount"/>
+                <xs:element ref="TransCurrency"/>
+                <xs:element ref="TransToken"/>
+                <xs:element ref="MITIndicator"/>
+                <xs:element ref="CITIndicator"/>
+                <xs:element ref="IssuerId"/>
+                <xs:element ref="PAN"/>
+                <xs:element ref="ExpiryDate"/>
+                <xs:element ref="GiftCardNo"/>
+                <xs:element ref="ProviderID"/>
+                <xs:element ref="AuthCode"/>
+                <xs:element ref="TaxAmount"/>
+                <xs:element ref="TransDateTime"/>
+                <xs:element ref="CardPresent"/>
+                <xs:element ref="PartialAuthFlag"/>
+                <xs:element ref="SiteId"/>
+                <xs:element ref="TransRVCId"/>
+                <xs:element ref="WSNo"/>
+                <xs:element ref="Operator"/>
+                <xs:element ref="GuestNo"/>
+                <xs:element ref="ChargeInfo"/>
+                <xs:element ref="IndustryCode"/>
+                <xs:element ref="LodgingCode"/>
+                <xs:element ref="RoomRate"/>
+                <xs:element ref="GuestName"/>
+                <xs:element ref="CheckInDate"/>
+                <xs:element ref="CheckOutDate"/>
+                <xs:element ref="ProxyInfo"/>
+                <xs:element ref="POSInfo"/>
+                <xs:element ref="DebitPreferredFlag"/>
+                <xs:element ref="NoOfInstallments"/>
+                <xs:element ref="OriginalRRN"/>
+                <xs:element ref="OrigAltTransRef"/>
+                <xs:element ref="AlternateTransRef"/>
+                <xs:element ref="OriginalType"/>
+                <xs:element ref="OriginalTransType"/>
+                <xs:element ref="OriginalTime"/>
+                <xs:element ref="TotalDue"/>
+                <xs:element ref="DsctAmount"/>
+                <xs:element ref="SvcAmount"/>
+                <xs:element ref="PrepaidAmount"/>
+                <xs:element ref="LineItem"/>
+                <xs:element ref="TenderItem"/>
+                <xs:element ref="OriginalTransAmount"/>
+                <xs:element ref="PromptText"/>
+                <xs:element ref="QRCodeData"/>
+                <xs:element ref="ButtonLabel"/>
+                <xs:element ref="Timeout"/>
+                <xs:element ref="AcceptLabel"/>
+                <xs:element ref="DeclineLabel"/>
+                <xs:element ref="Title"/>
+                <xs:element ref="DataName"/>
+                <xs:element ref="GuidanceText"/>
+                <xs:element ref="MaxLength"/>
+                <xs:element ref="Regex"/>
+                <xs:element ref="SelectionName"/>
+                <xs:element ref="ButtonLabel1"/>
+                <xs:element ref="ButtonLabel2"/>
+                <xs:element ref="ButtonLabel3"/>
+                <xs:element ref="ButtonLabel4"/>
+                <xs:element ref="ButtonLabel5"/>
+                <xs:element ref="ButtonLabel6"/>
+                <xs:element ref="ButtonLabel7"/>
+                <xs:element ref="ButtonLabel8"/>
+                <xs:element ref="ButtonLabel9"/>
+                <xs:element ref="ButtonLabel10"/>
+                <xs:element ref="CustomerId"/>
+                <xs:element ref="MiscellaneousData"/>
+                <xs:element ref="TokenizeCardFlag"/>
+                <xs:element ref = "ServiceChargeTtl"/>
+                <xs:element ref = "AutoServiceChargeTtl"/>
+                <xs:element ref = "NonRevenueServiceChargeTtl"/>
+                <xs:element ref = "DiscountTtl"/>
+                <xs:element ref = "CheckEmployeeCheckName"/>
+                <xs:element ref = "Covers"/>
+                <xs:element ref = "CheckName"/>
+                <xs:element ref = "OrderType"/>
+                <xs:element ref = "TableTextAndGroup"/>
+                <xs:element ref = "TaxFreeFlag"/>
+                <xs:element ref = "TaxFreeDiscount"/>
+                <xs:element ref = "SuggestedTipPercent1"/>
+                <xs:element ref = "SuggestedTipPercent2"/>
+                <xs:element ref = "SuggestedTipPercent3"/>
+                <xs:element ref="SuggestedTipAmount1"/>
+                <xs:element ref="SuggestedTipAmount2"/>
+                <xs:element ref="SuggestedTipAmount3"/>
+                <xs:element ref="SuggestedTipCustom"/>
+                <xs:element ref="SuggestedTipNoTip"/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CardPresent" type="xs:integer"/>
+    <xs:element name="ChargeInfo" type="xs:string"/>
+    <xs:element name="GuestNo" type="xs:integer"/>
+    <xs:element name="ItemName" type="xs:string"/>
+    <xs:element name="LineItem">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="SKU" minOccurs="1" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:maxLength value="32" />
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="Quantity" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="SubTotal" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="ItemName" minOccurs="1" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:maxLength value="64" />
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="TaxCode" minOccurs="0" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:maxLength value="5" />
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="Category" minOccurs="0" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:maxLength value="5" />
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="AltNo" minOccurs="0" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:maxLength value="64" />
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="UnitOfMeasure" minOccurs="0" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:maxLength value="24" />
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="LineTaxAmount" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="TenderItem">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="TenderSeqId" minOccurs="1" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:maxLength value="2" />
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="TenderName" minOccurs="1" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:maxLength value="60" />
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="TenderAmount" minOccurs="1" maxOccurs="1">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:maxLength value="12" />
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Operator" type="xs:string"/>
+    <xs:element name="OriginalRRN" type="xs:string"/>
+    <xs:element name="OrigAltTransRef">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="64" />
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="AlternateTransRef">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="64" />
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="OriginalTime" type="xs:string"/>
+    <xs:element name="OriginalTransAmount" type="xs:integer"/>
+    <xs:element name="OriginalType" type="xs:integer"/>
+    <xs:element name="OriginalTransType" type="xs:integer"/>
+    <xs:element name="PartialAuthFlag" type="xs:integer"/>
+    <xs:element name="TaxAmount" type="xs:integer"/>
+    <xs:element name="DsctAmount" type="xs:integer"/>
+    <xs:element name="TotalDue" type="xs:integer"/>
+    <xs:element name="SvcAmount" type="xs:integer"/>
+    <xs:element name="PrepaidAmount" type="xs:integer"/>
+    <xs:element name="WSNo" type="xs:string"/>
+    <xs:element name="LodgingCode" type="xs:integer"/>
+    <xs:element name="RoomRate" type="xs:decimal"/>
+    <xs:element name="GuestName" type="xs:string"/>
+    <xs:element name="CheckInDate" type="xs:integer"/>
+    <xs:element name="CheckOutDate" type="xs:integer"/>
+    <xs:element name="DebitPreferredFlag" type="xs:string"/>
+    <xs:element name="NoOfInstallments" type="xs:integer"/>
+    <xs:element name="TransactionResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="SequenceNo"/>
+                <xs:element ref="TransType"/>
+                <xs:choice maxOccurs="unbounded">
+                    <xs:element ref="AuthCode"/>
+                    <xs:element ref="EntryMode"/>
+                    <xs:element ref="ExpiryDate"/>
+                    <xs:element ref="IssuerId"/>
+                    <xs:element ref="OtherAmount"/>
+                    <xs:element ref="PAN"/>
+                    <xs:element ref="RRN"/>
+                    <xs:element ref="RespCode"/>
+                    <xs:element ref="RespText"/>
+                    <xs:element ref="TransAmount"/>
+                    <xs:element ref="TransToken"/>
+                    <xs:element ref="Balance"/>
+                    <xs:element ref="OfflineFlag"/>
+                </xs:choice>
+                <xs:element minOccurs="0" ref="MerchantId"/>
+                <xs:element minOccurs="0" ref="TerminalId"/>
+                <xs:element minOccurs="0" ref="PrintData"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Balance" type="xs:integer"/>
+    <xs:element name="OfflineFlag" type="xs:string"/>
+    <xs:element name="PrintData" type="xs:string"/>
+    <xs:element name="UserID" type="xs:integer"/>
+    <xs:element name="DeviceNo" type="xs:integer"/>
+    <xs:element name="SessionID" type="xs:integer"/>
+    <xs:element name="RespCode" type="xs:string"/>
+    <xs:element name="RespText" type="xs:string"/>
+    <xs:element name="CheckNum" type="xs:integer"/>
+    <xs:element name="PaymentDue" type="xs:integer"/>
+    <xs:element name="SequenceNo" type="xs:integer"/>
+    <xs:element name="TransType" type="xs:integer"/>
+    <xs:element name="NewIncrementalAuth" type="xs:integer"/>
+    <xs:element name="PaymentMethod" type="xs:string"/>
+    <xs:element name="RRN" type="xs:string"/>
+    <xs:element name="AuthCode" type="xs:string"/>
+    <xs:element name="TransToken" type="xs:string"/>
+    <xs:element name="MITIndicator">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="4"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="CITIndicator">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="16"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="EntryMode" type="xs:integer"/>
+    <xs:element name="OtherAmount" type="xs:integer"/>
+    <xs:element name="PAN" type="xs:string"/>
+    <xs:element name="ExpiryDate" type="xs:integer"/>
+    <xs:element name="GiftCardNo" type="xs:string"/>
+    <xs:element name="ProviderID" type="xs:string"/>
+    <xs:element name="IssuerId" type="xs:integer"/>
+    <xs:element name="TransAmount" type="xs:integer"/>
+    <xs:element name="MerchantId" type="xs:integer"/>
+    <xs:element name="TerminalId" type="xs:integer"/>
+    <xs:element name="TableNo" type="xs:integer"/>
+    <xs:element name="TransCurrency" type="xs:integer"/>
+    <xs:element name="TransDateTime" type="xs:string"/>
+    <xs:element name="CardInfo">
+        <xs:complexType>
+            <xs:choice maxOccurs="unbounded">
+                <xs:element ref="TransToken"/>
+                <xs:element ref="Record"/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Record" type="xs:integer"/>
+    <xs:element name="SiteId" type="xs:string"/>
+    <xs:element name="TransRVCId" type="xs:string"/>
+    <xs:element name="IndustryCode" type="xs:integer"/>
+    <xs:element name="ProxyInfo" type="xs:string"/>
+    <xs:element name="POSInfo" type="xs:string"/>
+    <xs:element name="PromptText">
+        <xs:simpleType>
+            <xs:restriction base="xs:string" />
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="QRCodeData">
+        <xs:simpleType>
+            <xs:restriction base="xs:string" />
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="ButtonLabel">
+        <xs:simpleType>
+            <xs:restriction base="xs:string" />
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="Timeout" type="xs:integer"/>
+    <xs:element name="AcceptLabel" type="xs:string"/>
+    <xs:element name="DeclineLabel" type="xs:string"/>
+    <xs:element name="Title" type="xs:string"/>
+    <xs:element name="DataName" type="xs:string"/>
+    <xs:element name="GuidanceText" type="xs:string"/>
+    <xs:element name="MaxLength" type="xs:integer"/>
+    <xs:element name="Regex" type="xs:string"/>
+    <xs:element name="SelectionName" type="xs:string"/>
+    <xs:element name="ButtonLabel1" type="xs:string"/>
+    <xs:element name="ButtonLabel2" type="xs:string"/>
+    <xs:element name="ButtonLabel3" type="xs:string"/>
+    <xs:element name="ButtonLabel4" type="xs:string"/>
+    <xs:element name="ButtonLabel5" type="xs:string"/>
+    <xs:element name="ButtonLabel6" type="xs:string"/>
+    <xs:element name="ButtonLabel7" type="xs:string"/>
+    <xs:element name="ButtonLabel8" type="xs:string"/>
+    <xs:element name="ButtonLabel9" type="xs:string"/>
+    <xs:element name="ButtonLabel10" type="xs:string"/>
+    <xs:element name="CustomerId" type="xs:string"/>
+    <xs:element name="MiscellaneousData" type="xs:string"/>
+    <xs:element name="TokenizeCardFlag" type="xs:string"/>
+    <xs:element name="ServiceChargeTtl" type="xs:string"/>
+    <xs:element name="AutoServiceChargeTtl" type="xs:string"/>
+    <xs:element name="NonRevenueServiceChargeTtl" type="xs:string"/>
+    <xs:element name="DiscountTtl" type="xs:string"/>
+    <xs:element name="CheckEmployeeCheckName" type="xs:string"/>
+    <xs:element name="Covers" type="xs:string"/>
+    <xs:element name="CheckName" type="xs:string"/>
+    <xs:element name="OrderType" type="xs:string"/>
+    <xs:element name="TableTextAndGroup" type="xs:string"/>
+    <xs:element name="TaxFreeFlag" type="xs:string"/>
+    <xs:element name="TaxFreeDiscount" type="xs:integer"/>
+    <xs:element name="SuggestedTipPercent1" type="xs:integer"/>
+    <xs:element name="SuggestedTipPercent2" type="xs:integer"/>
+    <xs:element name="SuggestedTipPercent3" type="xs:integer"/>
+    <xs:element name="SuggestedTipAmount1" type="xs:integer"/>
+    <xs:element name="SuggestedTipAmount2" type="xs:integer"/>
+    <xs:element name="SuggestedTipAmount3" type="xs:integer"/>
+    <xs:element name="SuggestedTipCustom" type="xs:integer"/>
+    <xs:element name="SuggestedTipNoTip" type="xs:integer"/>
+</xs:schema>

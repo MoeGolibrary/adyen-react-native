@@ -8,14 +8,28 @@ import {
   Alert,
   useColorScheme,
   requireNativeComponent,
+  NativeModules,
+  NativeEventEmitter,
 } from 'react-native';
-import {AdyenAction} from '@adyen/react-native';
+import {AdyenAction } from '@adyen/react-native';
 import Styles from '../Utilities/Styles';
 import {useAppContext} from '../Utilities/AppContext';
 import {isSuccess} from '../Utilities/Helpers';
 import {payWithCard} from '../Utilities/payWithCard';
 
 const CardView = requireNativeComponent('AdyenCardView');
+const AdyenTerminal = NativeModules.AdyenTerminal;
+
+const eventEmitter = new NativeEventEmitter(AdyenTerminal);
+
+eventEmitter.addListener('onPayFetchSdkData', (body) => {
+  // 在这里处理接收到的事件数据，body就是iOS端发送事件时携带的 ["token": setupToken] 数据
+  const { token, callbackId } = body;
+  console.log('接收到onPayFetchSdkData事件，token:', token);
+
+  // 可以在这里进行后续的业务逻辑处理，比如根据token进行相关操作等
+  AdyenTerminal.setSdkData(callbackId, "onPayFetchSdkData")
+});
 
 const CseView = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -60,6 +74,14 @@ const CseView = ({navigation}) => {
     AdyenAction.hide(isSuccess(result.resultCode));
     navigation.popToTop();
     navigation.push('Result', {result: result.resultCode});
+  }
+
+  function testSDK() {
+    AdyenTerminal.startDiscovery()
+
+    setTimeout(() => {
+      AdyenTerminal.stopDiscovery()
+    }, 3000);
   }
 
   return (
@@ -114,6 +136,7 @@ const CseView = ({navigation}) => {
         />
 
         <Button onPress={() => tryEncryptCard()} title="Pay" />
+        <Button onPress={() => testSDK()} title="Test" />
       </View>
     </SafeAreaView>
   );

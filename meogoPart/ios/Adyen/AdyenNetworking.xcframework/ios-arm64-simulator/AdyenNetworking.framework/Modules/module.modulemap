@@ -1,0 +1,11 @@
+framework module AdyenNetworking {
+  umbrella header "AdyenNetworking-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module AdyenNetworking.Swift {
+  header "AdyenNetworking-Swift.h"
+  requires objc
+}

@@ -1,0 +1,149 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.13 clang-1500.3.9.4)
+// swift-module-flags: -target arm64-apple-ios13.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name AdyenNetworking
+@_exported import AdyenNetworking
+import Darwin/*.fputs*/
+import Foundation
+import Swift
+import UIKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+public protocol AnyAPIContext {
+  var environment: any AdyenNetworking.AnyAPIEnvironment { get }
+  var headers: [Swift.String : Swift.String] { get }
+  var queryParameters: [Foundation.URLQueryItem] { get }
+}
+public protocol AnyAPIEnvironment {
+  var baseURL: Foundation.URL { get }
+}
+public protocol AnyCoder {
+  func decode<T>(_ type: T.Type, from data: Foundation.Data) throws -> T where T : Swift.Decodable
+  func encode<T>(_ value: T) throws -> Foundation.Data where T : Swift.Encodable
+}
+public protocol APIClientProtocol : AnyObject {
+  typealias CompletionHandler<T> = (Swift.Result<T, any Swift.Error>) -> Swift.Void
+  func perform<R>(_ request: R, completionHandler: @escaping Self.CompletionHandler<R.ResponseType>) where R : AdyenNetworking.Request
+}
+@available(iOS 15.0.0, *)
+public protocol AsyncAPIClientProtocol : AnyObject {
+  #if compiler(>=5.3) && $AsyncAwait
+  func perform<R>(_ request: R) async throws -> AdyenNetworking.HTTPResponse<R.ResponseType> where R : AdyenNetworking.Request
+  #endif
+}
+extension AdyenNetworking.APIClientProtocol {
+  public func retryAPIClient(with scheduler: any AdyenNetworking.Scheduler) -> any AdyenNetworking.AnyRetryAPIClient
+}
+final public class APIClient : AdyenNetworking.APIClientProtocol, AdyenNetworking.AsyncAPIClientProtocol {
+  public typealias CompletionHandler<T> = (Swift.Result<T, any Swift.Error>) -> Swift.Void
+  final public let apiContext: any AdyenNetworking.AnyAPIContext
+  public init(apiContext: any AdyenNetworking.AnyAPIContext, configuration: Foundation.URLSessionConfiguration? = nil, coder: any AdyenNetworking.AnyCoder = Coder())
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(iOS 15.0.0, *)
+  final public func perform<R>(_ request: R) async throws -> AdyenNetworking.HTTPResponse<R.ResponseType> where R : AdyenNetworking.Request
+  #endif
+  final public func perform<R>(_ request: R, completionHandler: @escaping AdyenNetworking.APIClient.CompletionHandler<R.ResponseType>) where R : AdyenNetworking.Request
+  @objc deinit
+}
+public struct BackoffScheduler : AdyenNetworking.Scheduler {
+  public init(queue: Dispatch.DispatchQueue)
+  public func schedule(_ currentCount: Swift.UInt, closure: @escaping () -> Swift.Void) -> Swift.Bool
+}
+public class Coder : AdyenNetworking.AnyCoder {
+  public init()
+  public func decode<T>(_ type: T.Type, from data: Foundation.Data) throws -> T where T : Swift.Decodable
+  public func encode<T>(_ value: T) throws -> Foundation.Data where T : Swift.Encodable
+  @objc deinit
+}
+public enum APIClientError : Foundation.LocalizedError {
+  case invalidResponse
+  public static func == (a: AdyenNetworking.APIClientError, b: AdyenNetworking.APIClientError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public struct ParsingError : Foundation.LocalizedError {
+  public let headers: [Swift.String : Swift.String]
+  public let statusCode: Swift.Int
+  public let underlyingError: Swift.DecodingError
+}
+public struct HTTPResponse<R> where R : AdyenNetworking.Response {
+  public let headers: [Swift.String : Swift.String]
+  public let statusCode: Swift.Int
+  public let responseBody: R
+}
+public typealias HTTPErrorResponse<E> = AdyenNetworking.HTTPResponse<E> where E : AdyenNetworking.ErrorResponse
+extension AdyenNetworking.HTTPResponse : Swift.Error where R : Swift.Error {
+}
+public enum Logging {
+  public static var isEnabled: Swift.Bool
+}
+public enum HTTPMethod : Swift.String {
+  case post
+  case get
+  case patch
+  case put
+  case delete
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public protocol Request : Swift.Encodable {
+  associatedtype ResponseType : AdyenNetworking.Response
+  associatedtype ErrorResponseType : AdyenNetworking.ErrorResponse
+  var path: Swift.String { get }
+  var counter: Swift.UInt { get set }
+  var headers: [Swift.String : Swift.String] { get }
+  var queryParameters: [Foundation.URLQueryItem] { get }
+  var method: AdyenNetworking.HTTPMethod { get }
+}
+public protocol Response : Swift.Decodable {
+}
+public struct EmptyResponse : AdyenNetworking.Response {
+  public init()
+  public init(from decoder: any Swift.Decoder) throws
+}
+public protocol ErrorResponse : AdyenNetworking.Response, Swift.Error {
+}
+public struct EmptyErrorResponse : AdyenNetworking.ErrorResponse {
+  public init(from decoder: any Swift.Decoder) throws
+}
+public protocol AnyRetryAPIClient : AdyenNetworking.APIClientProtocol {
+  typealias ShouldRetryHandler<T> = (_ result: Swift.Result<T, any Swift.Error>) -> Swift.Bool
+  func perform<R>(_ request: R, shouldRetry: Self.ShouldRetryHandler<R.ResponseType>?, completionHandler: @escaping Self.CompletionHandler<R.ResponseType>) where R : AdyenNetworking.Request
+}
+extension AdyenNetworking.AnyRetryAPIClient {
+  public func retryOnErrorAPIClient() -> any AdyenNetworking.APIClientProtocol
+}
+final public class RetryAPIClient : AdyenNetworking.AnyRetryAPIClient {
+  public init(apiClient: any AdyenNetworking.APIClientProtocol, scheduler: any AdyenNetworking.Scheduler)
+  final public func perform<R>(_ request: R, completionHandler: @escaping AdyenNetworking.RetryAPIClient.CompletionHandler<R.ResponseType>) where R : AdyenNetworking.Request
+  final public func perform<R>(_ request: R, shouldRetry: AdyenNetworking.RetryAPIClient.ShouldRetryHandler<R.ResponseType>?, completionHandler: @escaping AdyenNetworking.RetryAPIClient.CompletionHandler<R.ResponseType>) where R : AdyenNetworking.Request
+  @objc deinit
+}
+final public class RetryOnErrorAPIClient : AdyenNetworking.APIClientProtocol {
+  public init(apiClient: any AdyenNetworking.AnyRetryAPIClient)
+  final public func perform<R>(_ request: R, completionHandler: @escaping AdyenNetworking.RetryOnErrorAPIClient.CompletionHandler<R.ResponseType>) where R : AdyenNetworking.Request
+  @objc deinit
+}
+public protocol Scheduler {
+  func schedule(_ currentCount: Swift.UInt, closure: @escaping () -> Swift.Void) -> Swift.Bool
+}
+public struct SimpleScheduler : AdyenNetworking.Scheduler {
+  public init(maximumCount: Swift.Int)
+  public func schedule(_ currentCount: Swift.UInt, closure: @escaping () -> Swift.Void) -> Swift.Bool
+}
+final public class UniqueAssetAPIClient<ResponseType> where ResponseType : AdyenNetworking.Response {
+  public typealias CompletionHandler = (Swift.Result<ResponseType, any Swift.Error>) -> Swift.Void
+  public init(apiClient: any AdyenNetworking.APIClientProtocol)
+  final public func perform<R>(_ request: R, completionHandler: @escaping AdyenNetworking.UniqueAssetAPIClient<ResponseType>.CompletionHandler) where ResponseType == R.ResponseType, R : AdyenNetworking.Request
+  @objc deinit
+}
+extension AdyenNetworking.APIClientError : Swift.Equatable {}
+extension AdyenNetworking.APIClientError : Swift.Hashable {}
+extension AdyenNetworking.HTTPMethod : Swift.Equatable {}
+extension AdyenNetworking.HTTPMethod : Swift.Hashable {}
+extension AdyenNetworking.HTTPMethod : Swift.RawRepresentable {}

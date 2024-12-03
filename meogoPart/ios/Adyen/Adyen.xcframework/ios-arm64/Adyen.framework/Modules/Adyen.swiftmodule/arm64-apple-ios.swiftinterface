@@ -1,0 +1,2893 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.13 clang-1500.3.9.4)
+// swift-module-flags: -target arm64-apple-ios13.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name Adyen
+@_exported import Adyen
+import Adyen3DS2
+import AdyenNetworking
+import CloudKit
+import CommonCrypto
+import Contacts
+import CoreGraphics
+import Darwin/*.fputs*/
+import Foundation
+import LocalAuthentication
+import PassKit
+import QuartzCore
+import SafariServices
+import Swift
+import SwiftUI
+import UIKit
+import WebKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+open class AbstractPersonalInformationComponent : Adyen.PaymentComponent, Adyen.PresentableComponent, Adyen.PaymentAware {
+  public typealias Configuration = Adyen.PersonalInformationConfiguration
+  final public let paymentMethod: any Adyen.PaymentMethod
+  weak public var delegate: (any Adyen.PaymentComponentDelegate)?
+  public var viewController: UIKit.UIViewController {
+    get
+    set
+  }
+  final public let requiresModalPresentation: Swift.Bool
+  @objc deinit
+}
+extension Adyen.AbstractPersonalInformationComponent : Adyen.LoadingComponent {
+  public func stopLoading()
+}
+@_hasMissingDesignatedInitializers final public class ACHDirectDebitComponent : Adyen.PaymentComponent, Adyen.PaymentAware, Adyen.PresentableComponent, Adyen.LoadingComponent {
+  final public var paymentMethod: any Adyen.PaymentMethod {
+    get
+  }
+  weak final public var delegate: (any Adyen.PaymentComponentDelegate)? {
+    get
+    set
+  }
+  final public var configuration: Adyen.ACHDirectDebitComponent.Configuration
+  final public var viewController: UIKit.UIViewController {
+    get
+    set
+  }
+  final public let requiresModalPresentation: Swift.Bool
+  convenience public init(paymentMethod: Adyen.ACHDirectDebitPaymentMethod, context: Adyen.AdyenContext, configuration: Adyen.ACHDirectDebitComponent.Configuration = .init())
+  final public func stopLoading()
+  @objc deinit
+}
+public protocol AnyACHDirectDebitConfiguration {
+  var showsStorePaymentMethodField: Swift.Bool { get }
+  var showsBillingAddress: Swift.Bool { get }
+  var billingAddressCountryCodes: [Swift.String] { get }
+}
+extension Adyen.ACHDirectDebitComponent {
+  public struct Configuration : Adyen.AnyACHDirectDebitConfiguration, Adyen.AnyPersonalInformationConfiguration {
+    public var style: Adyen.FormComponentStyle
+    public var shopperInformation: Adyen.PrefilledShopperInformation?
+    public var localizationParameters: Adyen.LocalizationParameters?
+    public var showsStorePaymentMethodField: Swift.Bool
+    public var showsBillingAddress: Swift.Bool
+    public var billingAddressCountryCodes: [Swift.String]
+    public init(style: Adyen.FormComponentStyle = FormComponentStyle(), shopperInformation: Adyen.PrefilledShopperInformation? = nil, localizationParameters: Adyen.LocalizationParameters? = nil, showsStorePaymentMethodField: Swift.Bool = true, showsBillingAddress: Swift.Bool = true, billingAddressCountryCodes: [Swift.String] = ["US", "PR"])
+  }
+}
+public struct ACHDirectDebitDetails : Adyen.PaymentMethodDetails, Adyen.ShopperInformation {
+  public let type: Adyen.PaymentMethodType
+  public let holderName: Swift.String
+  public let encryptedBankAccountNumber: Swift.String
+  public let encryptedBankRoutingNumber: Swift.String?
+  public let billingAddress: Adyen.PostalAddress?
+  public init(paymentMethod: Adyen.ACHDirectDebitPaymentMethod, holderName: Swift.String, encryptedBankAccountNumber: Swift.String, encryptedBankRoutingNumber: Swift.String?, billingAddress: Adyen.PostalAddress?)
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct ACHDirectDebitPaymentMethod : Adyen.PaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public let name: Swift.String
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct StoredACHDirectDebitPaymentMethod : Adyen.StoredPaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public let name: Swift.String
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public let identifier: Swift.String
+  public let supportedShopperInteractions: [Adyen.ShopperInteraction]
+  public let bankAccountNumber: Swift.String
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public enum Action : Swift.Decodable {
+  case redirect(Adyen.RedirectAction)
+  case sdk(Adyen.SDKAction)
+  case threeDS2Fingerprint(Adyen.ThreeDS2FingerprintAction)
+  case threeDS2Challenge(Adyen.ThreeDS2ChallengeAction)
+  case threeDS2(Adyen.ThreeDS2Action)
+  case await(Adyen.AwaitAction)
+  case redirectableAwait(Adyen.RedirectableAwaitAction)
+  case voucher(Adyen.VoucherAction)
+  case qrCode(Adyen.QRCodeAction)
+  case document(Adyen.DocumentAction)
+  public init(from decoder: any Swift.Decoder) throws
+}
+public protocol ActionComponent : Adyen.Component {
+  var delegate: (any Adyen.ActionComponentDelegate)? { get set }
+}
+public protocol ActionComponentDelegate : AnyObject {
+  func didOpenExternalApplication(component: any Adyen.ActionComponent)
+  func didProvide(_ data: Adyen.ActionComponentData, from component: any Adyen.ActionComponent)
+  func didComplete(from component: any Adyen.ActionComponent)
+  func didFail(with error: any Swift.Error, from component: any Adyen.ActionComponent)
+}
+extension Adyen.ActionComponentDelegate {
+  public func didOpenExternalApplication(component: any Adyen.ActionComponent)
+}
+public struct ActionComponentData {
+  public let details: any Adyen.AdditionalDetails
+  public let paymentData: Swift.String?
+  public init(details: any Adyen.AdditionalDetails, paymentData: Swift.String?)
+}
+public struct ActionComponentStyle {
+  public var redirectComponentStyle: Adyen.RedirectComponentStyle
+  public var awaitComponentStyle: Adyen.AwaitComponentStyle
+  public var voucherComponentStyle: Adyen.VoucherComponentStyle
+  public var qrCodeComponentStyle: Adyen.QRCodeComponentStyle
+  public var documentActionComponentStyle: Adyen.DocumentComponentStyle
+  public init(redirectComponentStyle: Adyen.RedirectComponentStyle = RedirectComponentStyle(), awaitComponentStyle: Adyen.AwaitComponentStyle = AwaitComponentStyle(), voucherComponentStyle: Adyen.VoucherComponentStyle = VoucherComponentStyle(), qrCodeComponentStyle: Adyen.QRCodeComponentStyle = QRCodeComponentStyle(), documentActionComponentStyle: Adyen.DocumentComponentStyle = DocumentComponentStyle())
+}
+public protocol ActionHandlingComponent : Adyen.Component {
+  func handle(_ action: Adyen.Action)
+}
+public struct LookupAddressModel {
+  public let identifier: Swift.String
+  public let postalAddress: Adyen.PostalAddress
+  public init(identifier: Swift.String, postalAddress: Adyen.PostalAddress)
+}
+public protocol AddressLookupProvider : AnyObject {
+  func lookUp(searchTerm: Swift.String, resultHandler: @escaping (_ result: [Adyen.LookupAddressModel]) -> Swift.Void)
+  func complete(incompleteAddress: Adyen.LookupAddressModel, resultHandler: @escaping (_ result: Swift.Result<Adyen.PostalAddress, any Swift.Error>) -> Swift.Void)
+}
+extension Adyen.AddressLookupProvider {
+  public func complete(incompleteAddress: Adyen.LookupAddressModel, resultHandler: @escaping (_ result: Swift.Result<Adyen.PostalAddress, any Swift.Error>) -> Swift.Void)
+}
+public struct AddressLookupSearchStyle : Adyen.ViewStyle {
+  public var backgroundColor: UIKit.UIColor
+  public var manualEntryListItem: Adyen.ListItemStyle
+  public var emptyView: Adyen.EmptyStateViewStyle
+  public init()
+}
+public struct AddressLookupStyle : Adyen.ViewStyle {
+  public var backgroundColor: UIKit.UIColor
+  public var search: Adyen.AddressLookupSearchStyle
+  public var form: Adyen.FormComponentStyle
+  public init(search: Adyen.AddressLookupSearchStyle = .init(), form: Adyen.FormComponentStyle = .init())
+}
+public struct AddressStyle : Adyen.FormValueItemStyle {
+  public var title: Adyen.TextStyle
+  public var textField: Adyen.FormTextItemStyle
+  public var tintColor: UIKit.UIColor? {
+    get
+    set
+  }
+  public var backgroundColor: UIKit.UIColor
+  public var separatorColor: UIKit.UIColor? {
+    get
+  }
+  public init(title: Adyen.TextStyle, textField: Adyen.FormTextItemStyle, tintColor: UIKit.UIColor? = nil, backgroundColor: UIKit.UIColor = .clear)
+  public init()
+}
+final public class AdyenActionComponent : Adyen.ActionComponent, Adyen.ActionHandlingComponent {
+  final public let context: Adyen.AdyenContext
+  weak final public var delegate: (any Adyen.ActionComponentDelegate)?
+  weak final public var presentationDelegate: (any Adyen.PresentationDelegate)?
+  final public var configuration: Adyen.AdyenActionComponent.Configuration
+  public struct Configuration : Adyen.Localizable {
+    public var localizationParameters: Adyen.LocalizationParameters?
+    public var style: Adyen.ActionComponentStyle
+    public var threeDS: Adyen.AdyenActionComponent.Configuration.ThreeDS
+    public struct ThreeDS {
+      public var requestorAppURL: Foundation.URL?
+      public var delegateAuthentication: Adyen.ThreeDS2Component.Configuration.DelegatedAuthentication?
+      public var appearanceConfiguration: Adyen3DS2.ADYAppearanceConfiguration
+      public init(requestorAppURL: Foundation.URL? = nil, delegateAuthentication: Adyen.ThreeDS2Component.Configuration.DelegatedAuthentication? = nil, appearanceConfiguration: Adyen3DS2.ADYAppearanceConfiguration = .init())
+    }
+    public var twint: Adyen.AdyenActionComponent.Configuration.Twint?
+    public struct Twint {
+      public var callbackAppScheme: Swift.String
+      public init(callbackAppScheme: Swift.String)
+    }
+    public init(localizationParameters: Adyen.LocalizationParameters? = nil, style: Adyen.ActionComponentStyle = .init(), threeDS: Adyen.AdyenActionComponent.Configuration.ThreeDS = .init(), twint: Adyen.AdyenActionComponent.Configuration.Twint? = nil)
+  }
+  public init(context: Adyen.AdyenContext, configuration: Adyen.AdyenActionComponent.Configuration = Configuration())
+  final public func handle(_ action: Adyen.Action)
+  @objc deinit
+}
+public struct AnalyticsConfiguration {
+  public var isEnabled: Swift.Bool
+  public init()
+}
+@_hasMissingDesignatedInitializers final public class AdyenContext : Adyen.PaymentAware {
+  final public let apiContext: Adyen.APIContext
+  final public var payment: Adyen.Payment? {
+    get
+  }
+  convenience public init(apiContext: Adyen.APIContext, payment: Adyen.Payment?, analyticsConfiguration: Adyen.AnalyticsConfiguration = .init())
+  @objc deinit
+}
+@propertyWrapper final public class AdyenObservable<ValueType> : Adyen.EventPublisher where ValueType : Swift.Equatable {
+  public init(_ value: ValueType)
+  final public var wrappedValue: ValueType {
+    get
+    set
+  }
+  public typealias Event = ValueType
+  final public var eventHandlers: [Adyen.EventHandlerToken : Adyen.EventHandler<Adyen.AdyenObservable<ValueType>.Event>]
+  final public var projectedValue: Adyen.AdyenObservable<ValueType> {
+    get
+  }
+  @objc deinit
+}
+public protocol AdyenObserver : AnyObject {
+}
+public let adyenSdkVersion: Swift.String
+@_hasMissingDesignatedInitializers final public class AdyenSession {
+  public struct Configuration {
+    public init(sessionIdentifier: Swift.String, initialSessionData: Swift.String, context: Adyen.AdyenContext, actionComponent: Adyen.AdyenActionComponent.Configuration = .init())
+  }
+  public struct Context {
+    public var data: Swift.String {
+      get
+    }
+    public let identifier: Swift.String
+    public let countryCode: Swift.String?
+    public let shopperLocale: Swift.String?
+    public let amount: Adyen.Amount
+    public let paymentMethods: Adyen.PaymentMethods
+  }
+  final public var sessionContext: Adyen.AdyenSession.Context {
+    get
+  }
+  weak final public var presentationDelegate: (any Adyen.PresentationDelegate)? {
+    get
+  }
+  weak final public var delegate: (any Adyen.AdyenSessionDelegate)? {
+    get
+  }
+  public static func initialize(with configuration: Adyen.AdyenSession.Configuration, delegate: any Adyen.AdyenSessionDelegate, presentationDelegate: any Adyen.PresentationDelegate, completion: @escaping ((Swift.Result<Adyen.AdyenSession, any Swift.Error>) -> Swift.Void))
+  @objc deinit
+}
+public protocol AdyenSessionDelegate : AnyObject {
+  func didComplete(with result: Adyen.AdyenSessionResult, component: any Adyen.Component, session: Adyen.AdyenSession)
+  func didFail(with error: any Swift.Error, from component: any Adyen.Component, session: Adyen.AdyenSession)
+  func didOpenExternalApplication(component: any Adyen.ActionComponent, session: Adyen.AdyenSession)
+  func handlerForPayments(in component: any Adyen.PaymentComponent, session: Adyen.AdyenSession) -> (any Adyen.AdyenSessionPaymentsHandler)?
+  func handlerForAdditionalDetails(in component: any Adyen.ActionComponent, session: Adyen.AdyenSession) -> (any Adyen.AdyenSessionPaymentDetailsHandler)?
+}
+extension Adyen.AdyenSessionDelegate {
+  public func handlerForPayments(in component: any Adyen.PaymentComponent, session: Adyen.AdyenSession) -> (any Adyen.AdyenSessionPaymentsHandler)?
+  public func handlerForAdditionalDetails(in component: any Adyen.ActionComponent, session: Adyen.AdyenSession) -> (any Adyen.AdyenSessionPaymentDetailsHandler)?
+  public func didOpenExternalApplication(component: any Adyen.ActionComponent, session: Adyen.AdyenSession)
+}
+public protocol AdyenSessionPaymentsHandler {
+  func didSubmit(_ paymentComponentData: Adyen.PaymentComponentData, from component: any Adyen.Component, dropInComponent: (any Adyen.AnyDropInComponent)?, session: Adyen.AdyenSession)
+}
+public protocol AdyenSessionPaymentDetailsHandler {
+  func didProvide(_ actionComponentData: Adyen.ActionComponentData, from component: any Adyen.ActionComponent, session: Adyen.AdyenSession)
+}
+public enum SessionPaymentResultCode : Swift.String {
+  case authorised
+  case refused
+  case pending
+  case cancelled
+  case error
+  case received
+  case presentToShopper
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct AdyenSessionResult {
+  public let resultCode: Adyen.SessionPaymentResultCode
+  public let encodedResult: Swift.String?
+}
+final public class AffirmComponent : Adyen.AbstractPersonalInformationComponent {
+  public typealias Configuration = Adyen.PersonalInformationConfiguration
+  public init(paymentMethod: any Adyen.PaymentMethod, context: Adyen.AdyenContext, configuration: Adyen.AffirmComponent.Configuration = .init())
+  @objc deinit
+}
+public struct AffirmDetails : Adyen.PaymentMethodDetails, Adyen.ShopperInformation {
+  public let type: Adyen.PaymentMethodType
+  public let shopperName: Adyen.ShopperName?
+  public let telephoneNumber: Swift.String?
+  public let emailAddress: Swift.String?
+  public let billingAddress: Adyen.PostalAddress?
+  public let deliveryAddress: Adyen.PostalAddress?
+  public init(paymentMethod: any Adyen.PaymentMethod, shopperName: Adyen.ShopperName, telephoneNumber: Swift.String, emailAddress: Swift.String, billingAddress: Adyen.PostalAddress, deliveryAddress: Adyen.PostalAddress?)
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct AffirmPaymentMethod : Adyen.PaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public let name: Swift.String
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct Amount : Swift.Codable, Swift.Equatable {
+  public let value: Swift.Int
+  public let currencyCode: Swift.String
+  public var localeIdentifier: Swift.String?
+  public init(value: Swift.Int, currencyCode: Swift.String, localeIdentifier: Swift.String? = nil)
+  public init(value: Foundation.Decimal, currencyCode: Swift.String, localeIdentifier: Swift.String? = nil)
+  public static func == (a: Adyen.Amount, b: Adyen.Amount) -> Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+extension Adyen.Amount {
+  public var formatted: Swift.String {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers final public class AmountFormatter {
+  public static func formatted(amount: Swift.Int, currencyCode: Swift.String, localeIdentifier: Swift.String? = nil) -> Swift.String?
+  public static func minorUnitAmount(from majorUnitAmount: Swift.Double, currencyCode: Swift.String, localeIdentifier: Swift.String? = nil) -> Swift.Int
+  public static func minorUnitAmount(from majorUnitAmount: Foundation.Decimal, currencyCode: Swift.String, localeIdentifier: Swift.String? = nil) -> Swift.Int
+  public static func decimalAmount(_ amount: Swift.Int, currencyCode: Swift.String, localeIdentifier: Swift.String? = nil) -> Foundation.NSDecimalNumber
+  @objc deinit
+}
+public protocol AnyCardPaymentMethod : Adyen.PaymentMethod {
+  var brands: [Adyen.CardType] { get }
+  var fundingSource: Adyen.CardFundingSource? { get }
+}
+public enum CardFundingSource : Swift.String, Swift.Codable {
+  case debit
+  case credit
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public protocol AnyCashAppPayConfiguration {
+  var redirectURL: Foundation.URL { get }
+  var referenceId: Swift.String? { get }
+  var showsStorePaymentMethodField: Swift.Bool { get }
+  var storePaymentMethod: Swift.Bool { get }
+}
+public protocol AnyDropInComponent : Adyen.PresentableComponent {
+  var delegate: (any Adyen.DropInComponentDelegate)? { get set }
+  func reload(with order: Adyen.PartialPaymentOrder, _ paymentMethods: Adyen.PaymentMethods) throws
+}
+public protocol OpaqueEncodable : Swift.Encodable {
+  var encodable: Adyen.AnyEncodable { get }
+}
+extension Adyen.OpaqueEncodable {
+  public var encodable: Adyen.AnyEncodable {
+    get
+  }
+}
+public struct AnyEncodable : Swift.Encodable {
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public protocol AnyVoucherAction {
+  var paymentMethodType: Adyen.VoucherPaymentMethod { get }
+  var passCreationToken: Swift.String? { get }
+  var totalAmount: Adyen.Amount { get }
+  var reference: Swift.String { get }
+  var expiresAt: Foundation.Date { get }
+}
+public protocol APIContextInitializable {
+  init(context: Adyen.AdyenContext)
+}
+public protocol AnyWeChatPaySDKActionComponent : Adyen.APIContextInitializable, Adyen.ActionComponent, Adyen.DeviceDependent {
+  func handle(_ action: Adyen.WeChatPaySDKAction)
+}
+public protocol AdyenContextAware : AnyObject {
+  var context: Adyen.AdyenContext { get }
+}
+public struct APIContext : AdyenNetworking.AnyAPIContext {
+  public var queryParameters: [Foundation.URLQueryItem] {
+    get
+  }
+  public let headers: [Swift.String : Swift.String]
+  public let environment: any AdyenNetworking.AnyAPIEnvironment
+  public let clientKey: Swift.String
+  public init(environment: any AdyenNetworking.AnyAPIEnvironment, clientKey: Swift.String) throws
+}
+@objc public class ApplePayComponent : ObjectiveC.NSObject, Adyen.PresentableComponent, Adyen.PaymentComponent, Adyen.FinalizableComponent {
+  public var paymentMethod: any Adyen.PaymentMethod {
+    get
+  }
+  weak public var delegate: (any Adyen.PaymentComponentDelegate)?
+  weak public var applePayDelegate: (any Adyen.ApplePayComponentDelegate)?
+  public init(paymentMethod: Adyen.ApplePayPaymentMethod, context: Adyen.AdyenContext, configuration: Adyen.ApplePayComponent.Configuration) throws
+  public var viewController: UIKit.UIViewController {
+    get
+  }
+  public func didFinalize(with success: Swift.Bool, completion: (() -> Swift.Void)?)
+  @objc deinit
+}
+public protocol ApplePayComponentDelegate : AnyObject {
+  func didUpdate(contact: PassKit.PKContact, for payment: Adyen.ApplePayPayment, completion: @escaping (PassKit.PKPaymentRequestShippingContactUpdate) -> Swift.Void)
+  func didUpdate(shippingMethod: PassKit.PKShippingMethod, for payment: Adyen.ApplePayPayment, completion: @escaping (PassKit.PKPaymentRequestShippingMethodUpdate) -> Swift.Void)
+  @available(iOS 15.0, *)
+  func didUpdate(couponCode: Swift.String, for payment: Adyen.ApplePayPayment, completion: @escaping (PassKit.PKPaymentRequestCouponCodeUpdate) -> Swift.Void)
+}
+extension Adyen.ApplePayComponent {
+  public enum Error : Swift.Error, Foundation.LocalizedError {
+    case userCannotMakePayment
+    case deviceDoesNotSupportApplyPay
+    case emptySummaryItems
+    case emptyMerchantIdentifier
+    case negativeGrandTotal
+    case invalidSummaryItem
+    case invalidCountryCode
+    case invalidCurrencyCode
+    case invalidToken
+    public var errorDescription: Swift.String? {
+      get
+    }
+    public static func == (a: Adyen.ApplePayComponent.Error, b: Adyen.ApplePayComponent.Error) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+extension Adyen.ApplePayComponent {
+  public struct Configuration {
+    public var applePayPayment: Adyen.ApplePayPayment {
+      get
+    }
+    public let merchantIdentifier: Swift.String
+    public var requiredBillingContactFields: Swift.Set<PassKit.PKContactField>
+    public var requiredShippingContactFields: Swift.Set<PassKit.PKContactField>
+    public var billingContact: PassKit.PKContact?
+    public var allowOnboarding: Swift.Bool
+    public var shippingContact: PassKit.PKContact?
+    public var shippingType: PassKit.PKShippingType
+    public var allowShippingContactEditing: Swift.Bool
+    public var shippingMethods: [PassKit.PKShippingMethod]?
+    public var applicationData: Foundation.Data?
+    public var supportedCountries: Swift.Set<Swift.String>?
+    public var supportsCouponCode: Swift.Bool
+    public var couponCode: Swift.String?
+    public var merchantCapability: Adyen.CardFundingSource?
+    public init(payment: Adyen.ApplePayPayment, merchantIdentifier: Swift.String)
+    public init(paymentRequest: PassKit.PKPaymentRequest, allowOnboarding: Swift.Bool = false) throws
+  }
+}
+public struct ApplePayDetails : Adyen.PaymentMethodDetails {
+  public let type: Adyen.PaymentMethodType
+  public let token: Swift.String
+  public let network: Swift.String
+  public let billingContact: PassKit.PKContact?
+  public let shippingContact: PassKit.PKContact?
+  public let shippingMethod: PassKit.PKShippingMethod?
+  public init(paymentMethod: Adyen.ApplePayPaymentMethod, token: Swift.String, network: Swift.String, billingContact: PassKit.PKContact?, shippingContact: PassKit.PKContact?, shippingMethod: PassKit.PKShippingMethod?)
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct ApplePayPayment {
+  public var amountMinorUnits: Swift.Int {
+    get
+  }
+  public var summaryItems: [PassKit.PKPaymentSummaryItem] {
+    get
+  }
+  public var countryCode: Swift.String {
+    get
+  }
+  public var currencyCode: Swift.String {
+    get
+  }
+  public init(countryCode: Swift.String, currencyCode: Swift.String, summaryItems: [PassKit.PKPaymentSummaryItem], localizationParameters: Adyen.LocalizationParameters? = nil) throws
+  public init(payment: Adyen.Payment, brand: Swift.String, localizationParameters: Adyen.LocalizationParameters? = nil) throws
+}
+public struct ApplePayPaymentMethod : Adyen.PaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public let name: Swift.String
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public let brands: [Swift.String]?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ApplePayStyle {
+  public var paymentButtonStyle: PassKit.PKPaymentButtonStyle?
+  public var paymentButtonType: PassKit.PKPaymentButtonType
+  public var cornerRadius: CoreFoundation.CGFloat
+  public var backgroundColor: UIKit.UIColor
+  public var hintLabel: Adyen.TextStyle
+  public init(paymentButtonStyle: PassKit.PKPaymentButtonStyle? = nil, paymentButtonType: PassKit.PKPaymentButtonType = .inStore, cornerRadius: CoreFoundation.CGFloat = 4, backgroundColor: UIKit.UIColor = UIColor.Adyen.componentBackground, hintLabel: Adyen.TextStyle = TextStyle(
+            font: .preferredFont(forTextStyle: .footnote),
+            color: UIColor.Adyen.componentSecondaryLabel
+        ))
+}
+public enum AppleWalletError : Foundation.LocalizedError {
+  case failedToAddToAppleWallet
+  public static func == (a: Adyen.AppleWalletError, b: Adyen.AppleWalletError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+final public class AtomeComponent : Adyen.AbstractPersonalInformationComponent {
+  public typealias Configuration = Adyen.PersonalInformationConfiguration
+  public init(paymentMethod: any Adyen.PaymentMethod, context: Adyen.AdyenContext, configuration: Adyen.AtomeComponent.Configuration = .init())
+  @objc deinit
+}
+public struct AtomeDetails : Adyen.PaymentMethodDetails, Adyen.ShopperInformation {
+  public let type: Adyen.PaymentMethodType
+  public let shopperName: Adyen.ShopperName?
+  public let telephoneNumber: Swift.String?
+  public let billingAddress: Adyen.PostalAddress?
+  public init(paymentMethod: any Adyen.PaymentMethod, shopperName: Adyen.ShopperName, telephoneNumber: Swift.String, billingAddress: Adyen.PostalAddress)
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct AtomePaymentMethod : Adyen.PaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public let name: Swift.String
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public enum AwaitPaymentMethod : Swift.String, Swift.Decodable {
+  case mbway
+  case blik
+  case upicollect
+  case upiIntent
+  case twint
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct AwaitAction : Swift.Decodable {
+  public let paymentMethodType: Adyen.AwaitPaymentMethod
+  public let paymentData: Swift.String
+  public init(paymentData: Swift.String, paymentMethodType: Adyen.AwaitPaymentMethod)
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct AwaitActionDetails : Adyen.AdditionalDetails {
+  public let payload: Swift.String
+  public init(payload: Swift.String)
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+@_hasMissingDesignatedInitializers final public class AwaitComponent : Adyen.ActionComponent, Adyen.Cancellable {
+  weak final public var presentationDelegate: (any Adyen.PresentationDelegate)?
+  weak final public var delegate: (any Adyen.ActionComponentDelegate)?
+  final public let requiresModalPresentation: Swift.Bool
+  public struct Configuration {
+    public var style: Adyen.AwaitComponentStyle
+    public var localizationParameters: Adyen.LocalizationParameters?
+    public init(style: Adyen.AwaitComponentStyle = .init(), localizationParameters: Adyen.LocalizationParameters? = nil)
+  }
+  final public var configuration: Adyen.AwaitComponent.Configuration
+  convenience public init(context: Adyen.AdyenContext, configuration: Adyen.AwaitComponent.Configuration = .init())
+  final public func handle(_ action: Adyen.RedirectableAwaitAction)
+  final public func didCancel()
+  final public func handle(_ action: Adyen.AwaitAction)
+  @objc deinit
+}
+public struct AwaitComponentStyle : Adyen.ViewStyle {
+  public var image: Adyen.ImageStyle
+  public var message: Adyen.TextStyle
+  public var spinnerTitle: Adyen.TextStyle
+  public var backgroundColor: UIKit.UIColor
+  public init()
+}
+final public class BACSDirectDebitComponent : Adyen.PaymentComponent, Adyen.PaymentAware, Adyen.PresentableComponent {
+  public typealias Configuration = Adyen.BasicComponentConfiguration
+  final public let viewController: UIKit.UIViewController
+  final public var requiresModalPresentation: Swift.Bool
+  weak final public var delegate: (any Adyen.PaymentComponentDelegate)?
+  final public var paymentMethod: any Adyen.PaymentMethod {
+    get
+  }
+  weak final public var presentationDelegate: (any Adyen.PresentationDelegate)?
+  final public var configuration: Adyen.BACSDirectDebitComponent.Configuration
+  public init(paymentMethod: Adyen.BACSDirectDebitPaymentMethod, context: Adyen.AdyenContext, configuration: Adyen.BACSDirectDebitComponent.Configuration = .init())
+  @objc deinit
+}
+extension Adyen.BACSDirectDebitComponent : Adyen.LoadingComponent {
+  final public func stopLoading()
+}
+extension Adyen.BACSDirectDebitComponent : Adyen.Cancellable {
+  final public func didCancel()
+}
+public struct BACSDirectDebitDetails : Adyen.PaymentMethodDetails {
+  public let type: Adyen.PaymentMethodType
+  public let holderName: Swift.String
+  public let bankAccountNumber: Swift.String
+  public let bankLocationId: Swift.String
+  public init(paymentMethod: Adyen.BACSDirectDebitPaymentMethod, holderName: Swift.String, bankAccountNumber: Swift.String, bankLocationId: Swift.String)
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct BACSDirectDebitPaymentMethod : Adyen.PaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public let name: Swift.String
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct Balance {
+  public let availableAmount: Adyen.Amount
+  public let transactionLimit: Adyen.Amount?
+  public init(availableAmount: Adyen.Amount, transactionLimit: Adyen.Amount?)
+}
+public enum BankDetailsEncryptor {
+  public static func encrypt(accountNumber: Swift.String, with publicKey: Swift.String) throws -> Swift.String
+  public static func encrypt(routingNumber: Swift.String, with publicKey: Swift.String) throws -> Swift.String
+}
+extension Adyen.BankDetailsEncryptor {
+  public enum Error : Foundation.LocalizedError {
+    case invalidAccountNumber
+    case invalidRoutingNumber
+    public var errorDescription: Swift.String? {
+      get
+    }
+    public static func == (a: Adyen.BankDetailsEncryptor.Error, b: Adyen.BankDetailsEncryptor.Error) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+public protocol AnyBasicComponentConfiguration : Adyen.Localizable {
+}
+public protocol AnyPersonalInformationConfiguration : Adyen.AnyBasicComponentConfiguration {
+  var shopperInformation: Adyen.PrefilledShopperInformation? { get }
+}
+public struct BasicComponentConfiguration : Adyen.AnyBasicComponentConfiguration {
+  public var style: Adyen.FormComponentStyle
+  public var localizationParameters: Adyen.LocalizationParameters?
+  public init(style: Adyen.FormComponentStyle = FormComponentStyle(), localizationParameters: Adyen.LocalizationParameters? = nil)
+}
+public struct PersonalInformationConfiguration : Adyen.AnyPersonalInformationConfiguration {
+  public var style: Adyen.FormComponentStyle
+  public var shopperInformation: Adyen.PrefilledShopperInformation?
+  public var localizationParameters: Adyen.LocalizationParameters?
+  public init(style: Adyen.FormComponentStyle = FormComponentStyle(), shopperInformation: Adyen.PrefilledShopperInformation? = nil, localizationParameters: Adyen.LocalizationParameters? = nil)
+}
+final public class BasicPersonalInfoFormComponent : Adyen.AbstractPersonalInformationComponent {
+  public typealias Configuration = Adyen.PersonalInformationConfiguration
+  public init(paymentMethod: any Adyen.PaymentMethod, context: Adyen.AdyenContext, configuration: Adyen.BasicPersonalInfoFormComponent.Configuration = .init())
+  @objc deinit
+}
+public typealias EContextATMComponent = Adyen.BasicPersonalInfoFormComponent
+public typealias EContextStoreComponent = Adyen.BasicPersonalInfoFormComponent
+public typealias EContextOnlineComponent = Adyen.BasicPersonalInfoFormComponent
+public typealias SevenElevenComponent = Adyen.BasicPersonalInfoFormComponent
+public struct BasicPersonalInfoFormDetails : Adyen.PaymentMethodDetails, Adyen.ShopperInformation {
+  public let type: Adyen.PaymentMethodType
+  public var shopperName: Adyen.ShopperName? {
+    get
+  }
+  public let firstName: Swift.String?
+  public let lastName: Swift.String?
+  public let emailAddress: Swift.String?
+  public let telephoneNumber: Swift.String?
+  public init(paymentMethod: any Adyen.PaymentMethod, firstName: Swift.String, lastName: Swift.String, emailAddress: Swift.String, telephoneNumber: Swift.String)
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers final public class BCMCComponent : Adyen.CardComponent {
+  public init(paymentMethod: Adyen.BCMCPaymentMethod, context: Adyen.AdyenContext, configuration: Adyen.CardComponent.Configuration = .init())
+  @objc deinit
+}
+public struct BCMCPaymentMethod : Adyen.AnyCardPaymentMethod {
+  public var type: Adyen.PaymentMethodType {
+    get
+  }
+  public var name: Swift.String {
+    get
+  }
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation? {
+    get
+    set
+  }
+  public var brands: [Adyen.CardType] {
+    get
+  }
+  public var fundingSource: Adyen.CardFundingSource? {
+    get
+  }
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+final public class BLIKComponent : Adyen.PaymentComponent, Adyen.PresentableComponent, Adyen.PaymentAware, Adyen.LoadingComponent {
+  public typealias Configuration = Adyen.BasicComponentConfiguration
+  final public var paymentMethod: any Adyen.PaymentMethod {
+    get
+  }
+  weak final public var delegate: (any Adyen.PaymentComponentDelegate)?
+  final public var viewController: UIKit.UIViewController {
+    get
+    set
+  }
+  final public var configuration: Adyen.BLIKComponent.Configuration
+  final public let requiresModalPresentation: Swift.Bool
+  public init(paymentMethod: Adyen.BLIKPaymentMethod, context: Adyen.AdyenContext, configuration: Adyen.BLIKComponent.Configuration = .init())
+  final public func stopLoading()
+  @objc deinit
+}
+public struct BLIKDetails : Adyen.PaymentMethodDetails {
+  public let type: Adyen.PaymentMethodType
+  public let blikCode: Swift.String
+  public init(paymentMethod: any Adyen.PaymentMethod, blikCode: Swift.String)
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct BLIKPaymentMethod : Adyen.PaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public let name: Swift.String
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public func defaultDisplayInformation(using parameters: Adyen.LocalizationParameters?) -> Adyen.DisplayInformation
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+final public class BoletoComponent : Adyen.PaymentComponent, Adyen.PaymentAware, Adyen.LoadingComponent, Adyen.PresentableComponent, Adyen.AdyenObserver {
+  weak final public var delegate: (any Adyen.PaymentComponentDelegate)?
+  final public var paymentMethod: any Adyen.PaymentMethod {
+    get
+  }
+  final public let requiresModalPresentation: Swift.Bool
+  final public var configuration: Adyen.BoletoComponent.Configuration
+  public init(paymentMethod: Adyen.BoletoPaymentMethod, context: Adyen.AdyenContext, configuration: Adyen.BoletoComponent.Configuration)
+  final public var viewController: UIKit.UIViewController {
+    get
+    set
+  }
+  final public func stopLoading()
+  @objc deinit
+}
+extension Adyen.BoletoComponent {
+  public struct Configuration : Adyen.AnyPersonalInformationConfiguration {
+    public let style: Adyen.FormComponentStyle
+    public var localizationParameters: Adyen.LocalizationParameters?
+    public let shopperInformation: Adyen.PrefilledShopperInformation?
+    public init(style: Adyen.FormComponentStyle = FormComponentStyle(), localizationParameters: Adyen.LocalizationParameters? = nil, shopperInformation: Adyen.PrefilledShopperInformation?, showEmailAddress: Swift.Bool)
+  }
+}
+public struct BoletoDetails : Adyen.PaymentMethodDetails, Adyen.ShopperInformation {
+  public let type: Adyen.PaymentMethodType
+  public let shopperName: Adyen.ShopperName?
+  public let socialSecurityNumber: Swift.String?
+  public let emailAddress: Swift.String?
+  public let billingAddress: Adyen.PostalAddress?
+  public let telephoneNumber: Swift.String?
+  public init(type: Adyen.PaymentMethodType, shopperName: Adyen.ShopperName, socialSecurityNumber: Swift.String, emailAddress: Swift.String?, billingAddress: Adyen.PostalAddress)
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct BoletoPaymentMethod : Adyen.PaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public let name: Swift.String
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers final public class BoletoVoucherAction : Swift.Decodable, Adyen.AnyVoucherAction {
+  final public let paymentMethodType: Adyen.VoucherPaymentMethod
+  final public let totalAmount: Adyen.Amount
+  final public let reference: Swift.String
+  final public let expiresAt: Foundation.Date
+  final public let downloadUrl: Foundation.URL
+  required public init(from decoder: any Swift.Decoder) throws
+  @objc deinit
+}
+@_inheritsConvenienceInitializers final public class BrazilSocialSecurityNumberFormatter : Adyen.NumericFormatter {
+  override final public func formattedValue(for value: Swift.String) -> Swift.String
+  override public init()
+  @objc deinit
+}
+public struct BrowserInfo : Swift.Encodable {
+  public var userAgent: Swift.String?
+  public static func initialize(completion: @escaping ((_ info: Adyen.BrowserInfo?) -> Swift.Void))
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct ButtonStyle : Adyen.ViewStyle, Swift.Equatable {
+  public var title: Adyen.TextStyle
+  public var cornerRounding: Adyen.CornerRounding
+  public var borderColor: UIKit.UIColor?
+  public var borderWidth: CoreFoundation.CGFloat
+  public var backgroundColor: UIKit.UIColor
+  public init(title: Adyen.TextStyle)
+  public init(title: Adyen.TextStyle, cornerRadius: CoreFoundation.CGFloat)
+  public init(title: Adyen.TextStyle, cornerRounding: Adyen.CornerRounding)
+  public init(title: Adyen.TextStyle, cornerRadius: CoreFoundation.CGFloat, background: UIKit.UIColor)
+  public init(title: Adyen.TextStyle, cornerRounding: Adyen.CornerRounding, background: UIKit.UIColor)
+  public static func == (a: Adyen.ButtonStyle, b: Adyen.ButtonStyle) -> Swift.Bool
+}
+public struct Card {
+  public var number: Swift.String?
+  public var securityCode: Swift.String?
+  public var expiryMonth: Swift.String?
+  public var expiryYear: Swift.String?
+  public var holder: Swift.String?
+  public init(number: Swift.String? = nil, securityCode: Swift.String? = nil, expiryMonth: Swift.String? = nil, expiryYear: Swift.String? = nil, holder: Swift.String? = nil)
+}
+public struct CardBrand : Swift.Decodable {
+  public let type: Adyen.CardType
+  public let isSupported: Swift.Bool
+  public init(from decoder: any Swift.Decoder) throws
+}
+extension Adyen.CardBrand : Swift.Equatable {
+  public static func == (a: Adyen.CardBrand, b: Adyen.CardBrand) -> Swift.Bool
+}
+@_hasMissingDesignatedInitializers public class CardComponent : Adyen.PresentableComponent, Adyen.PaymentMethodAware, Adyen.PaymentAware, Adyen.LoadingComponent {
+  public var paymentMethod: any Adyen.PaymentMethod {
+    get
+  }
+  weak public var cardComponentDelegate: (any Adyen.CardComponentDelegate)?
+  final public let supportedCardTypes: [Adyen.CardType]
+  public var configuration: Adyen.CardComponent.Configuration {
+    get
+  }
+  weak public var delegate: (any Adyen.PaymentComponentDelegate)? {
+    get
+    set
+  }
+  public var order: Adyen.PartialPaymentOrder? {
+    get
+    set
+  }
+  convenience public init(paymentMethod: any Adyen.AnyCardPaymentMethod, context: Adyen.AdyenContext, configuration: Adyen.CardComponent.Configuration = .init())
+  public var viewController: UIKit.UIViewController {
+    get
+  }
+  public var requiresModalPresentation: Swift.Bool {
+    get
+  }
+  public func stopLoading()
+  public func update(storePaymentMethodFieldVisibility isVisible: Swift.Bool)
+  public func update(storePaymentMethodFieldValue isOn: Swift.Bool)
+  @objc deinit
+}
+public struct BillingAddressConfiguration {
+  public init()
+  public var mode: Adyen.CardComponent.AddressFormType
+  public var countryCodes: [Swift.String]?
+  public var requirementPolicy: Adyen.BillingAddressConfiguration.RequirementPolicy
+  public enum RequirementPolicy {
+    case required
+    case optional
+    case optionalForCardTypes(Swift.Set<Adyen.CardType>)
+  }
+}
+public protocol AnyCardComponentConfiguration {
+  var showsHolderNameField: Swift.Bool { get }
+  var showsStorePaymentMethodField: Swift.Bool { get }
+  var showsSecurityCodeField: Swift.Bool { get }
+  var showsSubmitButton: Swift.Bool { get }
+  var koreanAuthenticationMode: Adyen.CardComponent.FieldVisibility { get }
+  var socialSecurityNumberMode: Adyen.CardComponent.FieldVisibility { get }
+  var billingAddress: Adyen.BillingAddressConfiguration { get }
+  var stored: Adyen.StoredCardConfiguration { get }
+  var allowedCardTypes: [Adyen.CardType]? { get }
+  var installmentConfiguration: Adyen.InstallmentConfiguration? { get }
+}
+extension Adyen.CardComponent {
+  public enum AddressFormType {
+    case lookup(provider: any Adyen.AddressLookupProvider)
+    case full
+    case postalCode
+    case none
+  }
+  public enum FieldVisibility : Swift.String, Swift.Codable, Swift.CaseIterable {
+    case show
+    case hide
+    case auto
+    public init?(rawValue: Swift.String)
+    public typealias AllCases = [Adyen.CardComponent.FieldVisibility]
+    public typealias RawValue = Swift.String
+    public static var allCases: [Adyen.CardComponent.FieldVisibility] {
+      get
+    }
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public struct Configuration : Adyen.AnyCardComponentConfiguration, Adyen.AnyPersonalInformationConfiguration {
+    public var style: Adyen.FormComponentStyle
+    public var shopperInformation: Adyen.PrefilledShopperInformation?
+    public var localizationParameters: Adyen.LocalizationParameters?
+    public var showsHolderNameField: Swift.Bool
+    public var showsStorePaymentMethodField: Swift.Bool
+    public var showsSecurityCodeField: Swift.Bool
+    public var showsSubmitButton: Swift.Bool
+    public var koreanAuthenticationMode: Adyen.CardComponent.FieldVisibility
+    public var socialSecurityNumberMode: Adyen.CardComponent.FieldVisibility
+    public var stored: Adyen.StoredCardConfiguration
+    public var allowedCardTypes: [Adyen.CardType]?
+    public var showsSupportedCardLogos: Swift.Bool
+    public var installmentConfiguration: Adyen.InstallmentConfiguration?
+    public var billingAddress: Adyen.BillingAddressConfiguration
+    public init(style: Adyen.FormComponentStyle = FormComponentStyle(), shopperInformation: Adyen.PrefilledShopperInformation? = nil, localizationParameters: Adyen.LocalizationParameters? = nil, showsHolderNameField: Swift.Bool = false, showsStorePaymentMethodField: Swift.Bool = true, showsSecurityCodeField: Swift.Bool = true, showsSubmitButton: Swift.Bool = true, koreanAuthenticationMode: Adyen.CardComponent.FieldVisibility = .auto, socialSecurityNumberMode: Adyen.CardComponent.FieldVisibility = .auto, storedCardConfiguration: Adyen.StoredCardConfiguration = StoredCardConfiguration(), allowedCardTypes: [Adyen.CardType]? = nil, installmentConfiguration: Adyen.InstallmentConfiguration? = nil, billingAddress: Adyen.BillingAddressConfiguration = .init())
+  }
+}
+public protocol CardComponentDelegate : AnyObject {
+  func didChangeBIN(_ value: Swift.String, component: Adyen.CardComponent)
+  func didChangeCardBrand(_ value: [Adyen.CardBrand]?, component: Adyen.CardComponent)
+  func didSubmit(lastFour: Swift.String, finalBIN: Swift.String, component: Adyen.CardComponent)
+}
+extension Adyen.CardComponentDelegate {
+  public func didSubmit(lastFour value: Swift.String, component: Adyen.CardComponent)
+}
+public struct CardDetails : Adyen.PaymentMethodDetails, Adyen.ShopperInformation {
+  public let type: Adyen.PaymentMethodType
+  public let storedPaymentMethodIdentifier: Swift.String?
+  public let encryptedCardNumber: Swift.String?
+  public let encryptedExpiryMonth: Swift.String?
+  public let encryptedExpiryYear: Swift.String?
+  public let encryptedSecurityCode: Swift.String?
+  public let holderName: Swift.String?
+  public let fundingSource: Adyen.CardFundingSource?
+  public let billingAddress: Adyen.PostalAddress?
+  public let password: Swift.String?
+  public let taxNumber: Swift.String?
+  public let socialSecurityNumber: Swift.String?
+  public let threeDS2SDKVersion: Swift.String
+  public let selectedBrand: Swift.String?
+  public let delegatedAuthenticationData: Adyen.DelegatedAuthenticationData?
+  public init(paymentMethod: any Adyen.AnyCardPaymentMethod, encryptedCard: Adyen.EncryptedCard, holderName: Swift.String? = nil, selectedBrand: Swift.String? = nil, billingAddress: Adyen.PostalAddress? = nil, kcpDetails: Adyen.KCPDetails? = nil, socialSecurityNumber: Swift.String? = nil, delegatedAuthenticationData: Adyen.DelegatedAuthenticationData? = nil)
+  public init(paymentMethod: Adyen.StoredCardPaymentMethod, encryptedSecurityCode: Swift.String)
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public enum CardEncryptor {
+  public static func encrypt(card: Adyen.Card, with publicKey: Swift.String) throws -> Adyen.EncryptedCard
+  public static func encrypt(number: Swift.String, with publicKey: Swift.String) throws -> Swift.String
+  public static func encrypt(securityCode: Swift.String, with publicKey: Swift.String) throws -> Swift.String
+  public static func encrypt(expirationMonth: Swift.String, with publicKey: Swift.String) throws -> Swift.String
+  public static func encrypt(expirationYear: Swift.String, with publicKey: Swift.String) throws -> Swift.String
+  public static func encrypt(bin: Swift.String, with publicKey: Swift.String) throws -> Swift.String
+  public static func encrypt(password: Swift.String, with publicKey: Swift.String) throws -> Swift.String
+  public static func encryptToken(from card: Adyen.Card, with publicKey: Swift.String) throws -> Swift.String
+}
+extension Adyen.CardEncryptor {
+  public enum Error : Swift.Error, Foundation.LocalizedError {
+    case encryptionFailed
+    case invalidCard
+    case invalidBin
+    case invalidExpiryYear
+    case invalidExpiryMonth
+    case invalidSecureCode
+    case invalidNumber
+    case emptyValue
+    public var errorDescription: Swift.String? {
+      get
+    }
+    public static func == (a: Adyen.CardEncryptor.Error, b: Adyen.CardEncryptor.Error) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+@_inheritsConvenienceInitializers final public class CardExpiryDateFormatter : Adyen.NumericFormatter {
+  override final public func sanitizedValue(for value: Swift.String) -> Swift.String
+  override final public func formattedValue(for value: Swift.String) -> Swift.String
+  override public init()
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers final public class CardExpiryDateValidator : Adyen.Validator {
+  public init()
+  final public func isValid(_ string: Swift.String) -> Swift.Bool
+  final public func maximumLength(for value: Swift.String) -> Swift.Int
+  @objc deinit
+}
+@_inheritsConvenienceInitializers final public class CardNumberFormatter : Adyen.NumericFormatter {
+  final public var cardType: Adyen.CardType?
+  override final public func formattedValue(for value: Swift.String) -> Swift.String
+  override public init()
+  @objc deinit
+}
+final public class CardNumberValidator : Adyen.Validator {
+  public init(isLuhnCheckEnabled: Swift.Bool, isEnteredBrandSupported: Swift.Bool, panLength: Swift.Int? = nil)
+  final public func isValid(_ value: Swift.String) -> Swift.Bool
+  final public func maximumLength(for value: Swift.String) -> Swift.Int
+  @objc deinit
+}
+public struct CardPaymentMethod : Adyen.AnyCardPaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public let name: Swift.String
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public let fundingSource: Adyen.CardFundingSource?
+  public let brands: [Adyen.CardType]
+  public init(from decoder: any Swift.Decoder) throws
+  public func defaultDisplayInformation(using parameters: Adyen.LocalizationParameters?) -> Adyen.DisplayInformation
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct StoredCardPaymentMethod : Adyen.StoredPaymentMethod, Adyen.AnyCardPaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public let name: Swift.String
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public let identifier: Swift.String
+  public var brands: [Adyen.CardType] {
+    get
+  }
+  public var fundingSource: Adyen.CardFundingSource?
+  public func defaultDisplayInformation(using parameters: Adyen.LocalizationParameters?) -> Adyen.DisplayInformation
+  public let supportedShopperInteractions: [Adyen.ShopperInteraction]
+  public let brand: Adyen.CardType
+  public let lastFour: Swift.String
+  public let expiryMonth: Swift.String
+  public let expiryYear: Swift.String
+  public let holderName: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@_inheritsConvenienceInitializers final public class CardSecurityCodeFormatter : Adyen.NumericFormatter {
+  override public init()
+  public init(publisher: Adyen.AdyenObservable<Adyen.CardType?>)
+  public init(cardType: Adyen.CardType)
+  override final public func formattedValue(for value: Swift.String) -> Swift.String
+  @objc deinit
+}
+final public class CardSecurityCodeValidator : Adyen.NumericStringValidator, Adyen.AdyenObserver {
+  public init()
+  public init(publisher: Adyen.AdyenObservable<Adyen.CardType?>)
+  public init(cardType: Adyen.CardType)
+  override final public func isValid(_ value: Swift.String) -> Swift.Bool
+  @objc deinit
+}
+public enum CardType : Swift.RawRepresentable, Swift.Codable, Swift.Equatable, Swift.Hashable {
+  case accel
+  case alphaBankBonusMasterCard
+  case alphaBankBonusVISA
+  case argencard
+  case americanExpress
+  case bcmc
+  case bijenkorfCard
+  case cabal
+  case carteBancaire
+  case cencosud
+  case chequeDejeneur
+  case chinaUnionPay
+  case codensa
+  case creditUnion24
+  case dankort
+  case dankortVISA
+  case diners
+  case discover
+  case elo
+  case forbrugsforeningen
+  case hiper
+  case hipercard
+  case jcb
+  case karenMillen
+  case kcp
+  case koreanLocalCard
+  case laser
+  case maestro
+  case maestroUK
+  case masterCard
+  case mir
+  case naranja
+  case netplus
+  case nyce
+  case oasis
+  case pulse
+  case shopping
+  case solo
+  case star
+  case troy
+  case uatp
+  case visa
+  case warehouse
+  case other(named: Swift.String)
+  public init(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+  public typealias RawValue = Swift.String
+}
+public protocol CardViewControllerProtocol {
+  func update(storePaymentMethodFieldVisibility isVisible: Swift.Bool)
+  func update(storePaymentMethodFieldValue isOn: Swift.Bool)
+}
+public struct CashAppPayPaymentMethod : Adyen.PaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public let name: Swift.String
+  public let clientId: Swift.String
+  public let scopeId: Swift.String
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public enum ClientKeyError : Swift.Error, Foundation.LocalizedError {
+  case invalidClientKey
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public static func == (a: Adyen.ClientKeyError, b: Adyen.ClientKeyError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public typealias Completion<T> = (T) -> Swift.Void
+public protocol Component : Adyen.AdyenContextAware {
+}
+extension Adyen.Component {
+  public func finalizeIfNeeded(with success: Swift.Bool, completion: (() -> Swift.Void)?)
+  public func cancelIfNeeded()
+  public func stopLoadingIfNeeded()
+}
+public protocol FinalizableComponent : Adyen.Component {
+  func didFinalize(with success: Swift.Bool, completion: (() -> Swift.Void)?)
+}
+public enum ComponentError : Swift.Error {
+  case cancelled
+  case paymentMethodNotSupported
+  public static func == (a: Adyen.ComponentError, b: Adyen.ComponentError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) final public class ContainerView : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) public init(body: UIKit.UIView, padding: UIKit.UIEdgeInsets = .zero)
+  @_Concurrency.MainActor(unsafe) final public func setupConstraints()
+  @objc deinit
+}
+extension UIKit.UIColor {
+  public enum Adyen {
+    public static var dimmBackground: UIKit.UIColor {
+      get
+    }
+    public static var componentBackground: UIKit.UIColor {
+      get
+    }
+    public static var secondaryComponentBackground: UIKit.UIColor {
+      get
+    }
+    public static var componentLabel: UIKit.UIColor {
+      get
+    }
+    public static var componentSecondaryLabel: UIKit.UIColor {
+      get
+    }
+    public static var componentTertiaryLabel: UIKit.UIColor {
+      get
+    }
+    public static var componentQuaternaryLabel: UIKit.UIColor {
+      get
+    }
+    public static var componentPlaceholderText: UIKit.UIColor {
+      get
+    }
+    public static var componentSeparator: UIKit.UIColor {
+      get
+    }
+    public static var componentLoadingMessageColor: UIKit.UIColor {
+      get
+    }
+    public static var paidSectionFooterTitleColor: UIKit.UIColor {
+      get
+    }
+    public static var paidSectionFooterTitleBackgroundColor: UIKit.UIColor {
+      get
+    }
+    public static let defaultBlue: UIKit.UIColor
+    public static let defaultRed: UIKit.UIColor
+    public static let errorRed: UIKit.UIColor
+    public static let lightGray: UIKit.UIColor
+    public static let green40: UIKit.UIColor
+  }
+}
+public enum CornerRounding {
+  case none
+  case fixed(CoreFoundation.CGFloat)
+  case percent(CoreFoundation.CGFloat)
+}
+public struct DelegatedAuthenticationComponentStyle {
+  public var backgroundColor: UIKit.UIColor
+  public var imageStyle: Adyen.ImageStyle
+  public var headerTextStyle: Adyen.TextStyle
+  public var descriptionTextStyle: Adyen.TextStyle
+  public var amountTextStyle: Adyen.TextStyle
+  public var cardImageStyle: Adyen.ImageStyle
+  public var cardNumberTextStyle: Adyen.TextStyle
+  public var infoImageStyle: Adyen.ImageStyle
+  public var additionalInformationTextStyle: Adyen.TextStyle
+  public var errorBackgroundColor: UIKit.UIColor
+  public var errorImageStyle: Adyen.ImageStyle
+  public var errorTitleStyle: Adyen.TextStyle
+  public var errorDescription: Adyen.TextStyle
+  public var primaryButton: Adyen.ButtonStyle
+  public var secondaryButton: Adyen.ButtonStyle
+  public var errorButton: Adyen.ButtonStyle
+  public init()
+}
+public enum DelegatedAuthenticationData : Swift.Codable {
+  public enum DecodingError : Foundation.LocalizedError {
+    case invalidDelegatedAuthenticationData
+    public var errorDescription: Swift.String? {
+      get
+    }
+    public static func == (a: Adyen.DelegatedAuthenticationData.DecodingError, b: Adyen.DelegatedAuthenticationData.DecodingError) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  case sdkOutput(Swift.String)
+  case sdkInput(Swift.String)
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public protocol Details : Adyen.OpaqueEncodable {
+}
+public protocol PaymentMethodDetails : Adyen.Details {
+}
+public protocol AdditionalDetails : Adyen.Details {
+}
+public protocol DeviceDependent {
+  static func isDeviceSupported() -> Swift.Bool
+}
+public struct DisplayInformation : Swift.Equatable {
+  public let title: Swift.String
+  public let subtitle: Swift.String?
+  public init(title: Swift.String, subtitle: Swift.String?, logoName: Swift.String, disclosureText: Swift.String? = nil, footnoteText: Swift.String? = nil, accessibilityLabel: Swift.String? = nil)
+  public static func == (a: Adyen.DisplayInformation, b: Adyen.DisplayInformation) -> Swift.Bool
+}
+public struct MerchantCustomDisplayInformation {
+  public let title: Swift.String
+  public let subtitle: Swift.String?
+  public init(title: Swift.String, subtitle: Swift.String? = nil)
+}
+public enum DocumentPaymentMethod : Swift.String, Swift.Codable, Swift.CaseIterable {
+  case bacs
+  public init?(rawValue: Swift.String)
+  public typealias AllCases = [Adyen.DocumentPaymentMethod]
+  public typealias RawValue = Swift.String
+  public static var allCases: [Adyen.DocumentPaymentMethod] {
+    get
+  }
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct DocumentAction : Swift.Decodable {
+  public let downloadUrl: Foundation.URL
+  public let paymentMethodType: Adyen.DocumentPaymentMethod
+  public init(from decoder: any Swift.Decoder) throws
+}
+final public class DocumentComponent : Adyen.ActionComponent {
+  weak final public var delegate: (any Adyen.ActionComponentDelegate)?
+  weak final public var presentationDelegate: (any Adyen.PresentationDelegate)?
+  public struct Configuration {
+    public var style: Adyen.DocumentComponentStyle
+    public var localizationParameters: Adyen.LocalizationParameters?
+    public init(style: Adyen.DocumentComponentStyle = DocumentComponentStyle(), localizationParameters: Adyen.LocalizationParameters? = nil)
+  }
+  final public var configuration: Adyen.DocumentComponent.Configuration
+  public init(context: Adyen.AdyenContext, configuration: Adyen.DocumentComponent.Configuration = .init())
+  final public func handle(_ action: Adyen.DocumentAction)
+  @objc deinit
+}
+public struct DocumentComponentStyle {
+  public var image: Adyen.ImageStyle
+  public var doneButton: Adyen.ButtonStyle
+  public var mainButton: Adyen.ButtonStyle
+  public var messageLabel: Adyen.TextStyle
+  public var backgroundColor: UIKit.UIColor
+  public init()
+}
+final public class DokuComponent : Adyen.AbstractPersonalInformationComponent {
+  public typealias Configuration = Adyen.PersonalInformationConfiguration
+  public init(paymentMethod: Adyen.DokuPaymentMethod, context: Adyen.AdyenContext, configuration: Adyen.DokuComponent.Configuration = .init())
+  @objc deinit
+}
+public struct DokuDetails : Adyen.PaymentMethodDetails {
+  public let type: Adyen.PaymentMethodType
+  public let firstName: Swift.String
+  public let lastName: Swift.String
+  public let emailAddress: Swift.String
+  public init(paymentMethod: any Adyen.PaymentMethod, firstName: Swift.String, lastName: Swift.String, emailAddress: Swift.String)
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct DokuPaymentMethod : Adyen.PaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public let name: Swift.String
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public typealias DokuWalletPaymentMethod = Adyen.DokuPaymentMethod
+public typealias AlfamartPaymentMethod = Adyen.DokuPaymentMethod
+public typealias IndomaretPaymentMethod = Adyen.DokuPaymentMethod
+@_hasMissingDesignatedInitializers final public class DokuVoucherAction : Adyen.GenericVoucherAction {
+  final public let shopperName: Swift.String
+  final public let shopperEmail: Swift.String
+  final public let instructionsURL: Foundation.URL
+  required public init(from decoder: any Swift.Decoder) throws
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers final public class DropInComponent : ObjectiveC.NSObject, Adyen.AnyDropInComponent, Adyen.ActionHandlingComponent, Adyen.LoadingComponent {
+  final public var paymentMethods: Adyen.PaymentMethods {
+    get
+  }
+  final public let title: Swift.String
+  public init(paymentMethods: Adyen.PaymentMethods, context: Adyen.AdyenContext, configuration: Adyen.DropInComponent.Configuration = .init(), title: Swift.String? = nil)
+  weak final public var delegate: (any Adyen.DropInComponentDelegate)?
+  weak final public var partialPaymentDelegate: (any Adyen.PartialPaymentDelegate)?
+  weak final public var storedPaymentMethodsDelegate: (any Adyen.StoredPaymentMethodsDelegate)? {
+    get
+    set
+  }
+  weak final public var cardComponentDelegate: (any Adyen.CardComponentDelegate)?
+  final public var viewController: UIKit.UIViewController {
+    get
+  }
+  final public func handle(_ action: Adyen.Action)
+  final public func reload(with order: Adyen.PartialPaymentOrder, _ paymentMethods: Adyen.PaymentMethods) throws
+  final public func stopLoading()
+  @objc deinit
+}
+public protocol DropInComponentDelegate : AnyObject {
+  func didSubmit(_ data: Adyen.PaymentComponentData, from component: any Adyen.PaymentComponent, in dropInComponent: any Adyen.AnyDropInComponent)
+  func didFail(with error: any Swift.Error, from component: any Adyen.PaymentComponent, in dropInComponent: any Adyen.AnyDropInComponent)
+  func didProvide(_ data: Adyen.ActionComponentData, from component: any Adyen.ActionComponent, in dropInComponent: any Adyen.AnyDropInComponent)
+  func didComplete(from component: any Adyen.ActionComponent, in dropInComponent: any Adyen.AnyDropInComponent)
+  func didFail(with error: any Swift.Error, from component: any Adyen.ActionComponent, in dropInComponent: any Adyen.AnyDropInComponent)
+  func didOpenExternalApplication(component: any Adyen.ActionComponent, in dropInComponent: any Adyen.AnyDropInComponent)
+  func didFail(with error: any Swift.Error, from dropInComponent: any Adyen.AnyDropInComponent)
+  func didCancel(component: any Adyen.PaymentComponent, from dropInComponent: any Adyen.AnyDropInComponent)
+}
+extension Adyen.DropInComponentDelegate {
+  public func didCancel(component: any Adyen.PaymentComponent, from dropInComponent: any Adyen.AnyDropInComponent)
+  public func didOpenExternalApplication(component: any Adyen.ActionComponent, in dropInComponent: any Adyen.AnyDropInComponent)
+}
+extension Adyen.DropInComponent : Adyen.FinalizableComponent {
+  final public func didFinalize(with success: Swift.Bool, completion: (() -> Swift.Void)?)
+}
+extension Adyen.DropInComponent : Adyen.ReadyToSubmitPaymentComponentDelegate {
+}
+extension Adyen.DropInComponent {
+  public struct Style {
+    public var navigation: Adyen.NavigationStyle
+    public var listComponent: Adyen.ListComponentStyle
+    public var formComponent: Adyen.FormComponentStyle
+    public var actionComponent: Adyen.ActionComponentStyle
+    public var applePay: Adyen.ApplePayStyle
+    public var separatorColor: UIKit.UIColor? {
+      get
+      set
+    }
+    public init()
+    public init(tintColor: UIKit.UIColor)
+  }
+}
+extension Adyen.DropInComponent {
+  final public class Configuration : Adyen.AnyPersonalInformationConfiguration {
+    final public var card: Adyen.DropInComponent.Card
+    final public var applePay: Adyen.ApplePayComponent.Configuration?
+    final public var paymentMethodsList: Adyen.PaymentMethodListConfiguration
+    final public var actionComponent: Adyen.DropInComponent.ActionComponentConfiguration
+    final public var shopperInformation: Adyen.PrefilledShopperInformation?
+    final public var localizationParameters: Adyen.LocalizationParameters?
+    final public var allowsSkippingPaymentList: Swift.Bool
+    final public var allowPreselectedPaymentView: Swift.Bool
+    final public var style: Adyen.DropInComponent.Style
+    final public var boleto: Adyen.DropInComponent.Boleto
+    final public var cashAppPay: Adyen.DropInComponent.CashAppPay?
+    final public var ach: Adyen.DropInComponent.ACH
+    final public var giftCard: Adyen.DropInComponent.GiftCard
+    public init(style: Adyen.DropInComponent.Style = Style(), allowsSkippingPaymentList: Swift.Bool = false, allowPreselectedPaymentView: Swift.Bool = true)
+    @objc deinit
+  }
+  public struct ActionComponentConfiguration {
+    public init()
+    public var threeDS: Adyen.AdyenActionComponent.Configuration.ThreeDS
+    public var twint: Adyen.AdyenActionComponent.Configuration.Twint?
+  }
+  public struct Boleto {
+    public var showEmailAddress: Swift.Bool
+  }
+  public struct ACH : Adyen.AnyACHDirectDebitConfiguration {
+    public var showsStorePaymentMethodField: Swift.Bool
+    public var showsBillingAddress: Swift.Bool
+    public var billingAddressCountryCodes: [Swift.String]
+    public init(showsStorePaymentMethodField: Swift.Bool = true, showsBillingAddress: Swift.Bool = true, billingAddressCountryCodes: [Swift.String] = ["US", "PR"])
+  }
+  public struct GiftCard {
+    public var showsSecurityCodeField: Swift.Bool
+  }
+  public struct Card : Adyen.AnyCardComponentConfiguration {
+    public var showsHolderNameField: Swift.Bool
+    public var showsStorePaymentMethodField: Swift.Bool
+    public var showsSecurityCodeField: Swift.Bool
+    public var showsSubmitButton: Swift.Bool
+    public var koreanAuthenticationMode: Adyen.CardComponent.FieldVisibility
+    public var socialSecurityNumberMode: Adyen.CardComponent.FieldVisibility
+    public var stored: Adyen.StoredCardConfiguration
+    public var allowedCardTypes: [Adyen.CardType]?
+    public var installmentConfiguration: Adyen.InstallmentConfiguration?
+    public var billingAddress: Adyen.BillingAddressConfiguration
+    public init(showsHolderNameField: Swift.Bool = false, showsStorePaymentMethodField: Swift.Bool = true, showsSecurityCodeField: Swift.Bool = true, showsSubmitButton: Swift.Bool = true, koreanAuthenticationMode: Adyen.CardComponent.FieldVisibility = .auto, socialSecurityNumberMode: Adyen.CardComponent.FieldVisibility = .auto, storedCardConfiguration: Adyen.StoredCardConfiguration = StoredCardConfiguration(), allowedCardTypes: [Adyen.CardType]? = nil, installmentConfiguration: Adyen.InstallmentConfiguration? = nil, billingAddress: Adyen.BillingAddressConfiguration = .init())
+  }
+  public struct CashAppPay : Adyen.AnyCashAppPayConfiguration {
+    public let redirectURL: Foundation.URL
+    public let referenceId: Swift.String?
+    public var showsStorePaymentMethodField: Swift.Bool
+    public var storePaymentMethod: Swift.Bool
+    public init(redirectURL: Foundation.URL, referenceId: Swift.String? = nil, showsStorePaymentMethodField: Swift.Bool = true, storePaymentMethod: Swift.Bool = false)
+  }
+}
+@_inheritsConvenienceInitializers public class EContextATMVoucherAction : Adyen.EContextStoresVoucherAction {
+  final public let collectionInstitutionNumber: Swift.String
+  required public init(from decoder: any Swift.Decoder) throws
+  @objc deinit
+}
+public struct EContextPaymentMethod : Adyen.PaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public let name: Swift.String
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public typealias SevenElevenPaymentMethod = Adyen.EContextPaymentMethod
+@_hasMissingDesignatedInitializers public class EContextStoresVoucherAction : Adyen.GenericVoucherAction {
+  final public let maskedTelephoneNumber: Swift.String
+  final public let instructionsURL: Foundation.URL
+  required public init(from decoder: any Swift.Decoder) throws
+  @objc deinit
+}
+public struct EmptyStateViewStyle : Adyen.ViewStyle {
+  public var title: Adyen.TextStyle
+  public var subtitle: Adyen.TextStyle
+  public var backgroundColor: UIKit.UIColor
+}
+public struct EncryptedCard {
+  public let number: Swift.String?
+  public let securityCode: Swift.String?
+  public let expiryMonth: Swift.String?
+  public let expiryYear: Swift.String?
+}
+public struct Environment : AdyenNetworking.AnyAPIEnvironment {
+  public var baseURL: Foundation.URL
+  public static let test: Adyen.Environment
+  @available(*, deprecated, message: "Please explicitly select the environment matching your region.")
+  public static let live: Adyen.Environment
+  public static let liveEurope: Adyen.Environment
+  public static let liveAustralia: Adyen.Environment
+  public static let liveUnitedStates: Adyen.Environment
+  public static let liveApse: Adyen.Environment
+  public static let liveIndia: Adyen.Environment
+  public init(baseURL: Foundation.URL)
+}
+public protocol EventPublisher : AnyObject {
+  associatedtype Event
+  var eventHandlers: [Adyen.EventHandlerToken : Adyen.EventHandler<Self.Event>] { get set }
+}
+public typealias EventHandler<Event> = (Event) -> Swift.Void
+public struct EventHandlerToken : Swift.Hashable {
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: Adyen.EventHandlerToken, b: Adyen.EventHandlerToken) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public protocol Formatter : Adyen.Sanitizer {
+  func formattedValue(for value: Swift.String) -> Swift.String
+}
+public protocol Sanitizer {
+  func sanitizedValue(for value: Swift.String) -> Swift.String
+}
+public struct FormButtonItemStyle : Adyen.ViewStyle {
+  public var button: Adyen.ButtonStyle
+  public var backgroundColor: UIKit.UIColor
+  public init(button: Adyen.ButtonStyle)
+  public init(button: Adyen.ButtonStyle, background: UIKit.UIColor)
+  public static func main(font: UIKit.UIFont, textColor: UIKit.UIColor, mainColor: UIKit.UIColor, cornerRadius: CoreFoundation.CGFloat) -> Adyen.FormButtonItemStyle
+  public static func main(font: UIKit.UIFont, textColor: UIKit.UIColor, mainColor: UIKit.UIColor) -> Adyen.FormButtonItemStyle
+  public static func main(font: UIKit.UIFont, textColor: UIKit.UIColor, mainColor: UIKit.UIColor, cornerRounding: Adyen.CornerRounding) -> Adyen.FormButtonItemStyle
+  public static func secondary(font: UIKit.UIFont, textColor: UIKit.UIColor) -> Adyen.FormButtonItemStyle
+}
+public struct FormComponentStyle : Adyen.TintableStyle {
+  public var backgroundColor: UIKit.UIColor
+  public var sectionHeader: Adyen.TextStyle {
+    get
+    set
+  }
+  public var textField: Adyen.FormTextItemStyle {
+    get
+    set
+  }
+  public var toggle: Adyen.FormToggleItemStyle
+  public var hintLabel: Adyen.TextStyle
+  public var footnoteLabel: Adyen.TextStyle
+  public var linkTextLabel: Adyen.TextStyle
+  public var mainButtonItem: Adyen.FormButtonItemStyle
+  public var secondaryButtonItem: Adyen.FormButtonItemStyle
+  public var segmentedControlStyle: Adyen.SegmentedControlStyle
+  public var addressStyle: Adyen.AddressStyle
+  public var errorStyle: Adyen.FormErrorItemStyle
+  public var tintColor: UIKit.UIColor? {
+    get
+    set
+  }
+  public var separatorColor: UIKit.UIColor? {
+    get
+    set
+  }
+  public init(textField: Adyen.FormTextItemStyle, toggle: Adyen.FormToggleItemStyle, mainButton: Adyen.FormButtonItemStyle, secondaryButton: Adyen.FormButtonItemStyle, helper: Adyen.TextStyle, sectionHeader: Adyen.TextStyle)
+  public init(textField: Adyen.FormTextItemStyle, toggle: Adyen.FormToggleItemStyle, mainButton: Adyen.ButtonStyle, secondaryButton: Adyen.ButtonStyle)
+  public init(tintColor: UIKit.UIColor)
+  public init()
+}
+public struct FormErrorItemStyle : Adyen.ViewStyle {
+  public var message: Adyen.TextStyle
+  public var cornerRounding: Adyen.CornerRounding
+  public var backgroundColor: UIKit.UIColor
+  public init(message: Adyen.TextStyle)
+  public init()
+}
+public struct FormTextItemStyle : Adyen.FormValueItemStyle {
+  public var title: Adyen.TextStyle
+  public var text: Adyen.TextStyle
+  public var placeholderText: Adyen.TextStyle?
+  public var icon: Adyen.ImageStyle
+  public var tintColor: UIKit.UIColor? {
+    get
+    set
+  }
+  public var backgroundColor: UIKit.UIColor
+  public var errorColor: UIKit.UIColor
+  public var separatorColor: UIKit.UIColor?
+  public init(title: Adyen.TextStyle, text: Adyen.TextStyle, placeholderText: Adyen.TextStyle? = nil, icon: Adyen.ImageStyle)
+  public init(tintColor: UIKit.UIColor)
+  public init()
+}
+public struct FormToggleItemStyle : Adyen.FormValueItemStyle {
+  public var title: Adyen.TextStyle
+  public var tintColor: UIKit.UIColor?
+  public var separatorColor: UIKit.UIColor?
+  public var backgroundColor: UIKit.UIColor
+  public init(title: Adyen.TextStyle)
+  public init()
+}
+public protocol FormValueItemStyle : Adyen.TintableStyle {
+  var separatorColor: UIKit.UIColor? { get }
+  var title: Adyen.TextStyle { get }
+}
+@objc @_Concurrency.MainActor(unsafe) final public class FormView : UIKit.UIScrollView {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public init()
+  @available(*, unavailable)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override final public var intrinsicContentSize: CoreFoundation.CGSize {
+    @objc get
+  }
+  @_Concurrency.MainActor(unsafe) final public var stackView: UIKit.UIStackView {
+    get
+    set
+  }
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers final public class GiftCardComponent : Adyen.PresentableComponent, Adyen.Localizable, Adyen.LoadingComponent, Adyen.AdyenObserver {
+  final public var paymentMethod: any Adyen.PaymentMethod {
+    get
+  }
+  final public let style: Adyen.FormComponentStyle
+  weak final public var delegate: (any Adyen.PaymentComponentDelegate)?
+  weak final public var partialPaymentDelegate: (any Adyen.PartialPaymentDelegate)?
+  weak final public var readyToSubmitComponentDelegate: (any Adyen.ReadyToSubmitPaymentComponentDelegate)?
+  final public var localizationParameters: Adyen.LocalizationParameters?
+  convenience public init(paymentMethod: Adyen.GiftCardPaymentMethod, context: Adyen.AdyenContext, amount: Adyen.Amount, style: Adyen.FormComponentStyle = FormComponentStyle(), showsSecurityCodeField: Swift.Bool = true)
+  convenience public init(paymentMethod: Adyen.MealVoucherPaymentMethod, context: Adyen.AdyenContext, amount: Adyen.Amount, style: Adyen.FormComponentStyle = FormComponentStyle(), showsSecurityCodeField: Swift.Bool = true)
+  final public var viewController: UIKit.UIViewController {
+    get
+    set
+  }
+  final public var requiresModalPresentation: Swift.Bool {
+    get
+  }
+  final public func stopLoading()
+  @objc deinit
+}
+extension Adyen.GiftCardComponent {
+  public enum Error : Foundation.LocalizedError {
+    case balanceCheckFailure
+    case invalidPayment
+    case missingPartialPaymentDelegate
+    case cardEncryptionFailed
+    case otherError(any Swift.Error)
+    public var errorDescription: Swift.String? {
+      get
+    }
+  }
+}
+public struct GiftCardDetails : Adyen.PartialPaymentMethodDetails {
+  public let type: Adyen.PaymentMethodType
+  public let encryptedCardNumber: Swift.String
+  public let encryptedSecurityCode: Swift.String
+  public let brand: Swift.String
+  public init(paymentMethod: Adyen.GiftCardPaymentMethod, encryptedCardNumber: Swift.String, encryptedSecurityCode: Swift.String)
+  public init(paymentMethod: Adyen.GiftCardPaymentMethod, encryptedCard: Adyen.EncryptedCard) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct GiftCardPaymentMethod : Adyen.PartialPaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public let name: Swift.String
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public let brand: Swift.String
+  public func defaultDisplayInformation(using parameters: Adyen.LocalizationParameters?) -> Adyen.DisplayInformation
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+final public class IBANFormatter : Adyen.Formatter {
+  public init()
+  final public func formattedValue(for value: Swift.String) -> Swift.String
+  final public func sanitizedValue(for value: Swift.String) -> Swift.String
+  @objc deinit
+}
+public struct ImageStyle : Adyen.TintableStyle {
+  public var borderColor: UIKit.UIColor?
+  public var borderWidth: CoreFoundation.CGFloat
+  public var cornerRounding: Adyen.CornerRounding
+  public var clipsToBounds: Swift.Bool
+  public var contentMode: UIKit.UIView.ContentMode
+  public var backgroundColor: UIKit.UIColor
+  public var tintColor: UIKit.UIColor?
+  public init(borderColor: UIKit.UIColor?, borderWidth: CoreFoundation.CGFloat, cornerRadius: CoreFoundation.CGFloat, clipsToBounds: Swift.Bool, contentMode: UIKit.UIView.ContentMode)
+  public init(borderColor: UIKit.UIColor?, borderWidth: CoreFoundation.CGFloat, cornerRounding: Adyen.CornerRounding, clipsToBounds: Swift.Bool, contentMode: UIKit.UIView.ContentMode)
+}
+extension Adyen.ImageStyle : Swift.Equatable {
+  public static func == (lhs: Adyen.ImageStyle, rhs: Adyen.ImageStyle) -> Swift.Bool
+}
+public struct InstallmentOptions : Swift.Equatable, Swift.Codable {
+  public init(monthValues: [Swift.UInt], includesRevolving: Swift.Bool)
+  public init(maxInstallmentMonth: Swift.UInt, includesRevolving: Swift.Bool)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public static func == (a: Adyen.InstallmentOptions, b: Adyen.InstallmentOptions) -> Swift.Bool
+}
+public struct InstallmentConfiguration : Swift.Decodable {
+  public init(cardBasedOptions: [Adyen.CardType : Adyen.InstallmentOptions], defaultOptions: Adyen.InstallmentOptions, showInstallmentAmount: Swift.Bool = false)
+  public init(cardBasedOptions: [Adyen.CardType : Adyen.InstallmentOptions], showInstallmentAmount: Swift.Bool = false)
+  public init(defaultOptions: Adyen.InstallmentOptions, showInstallmentAmount: Swift.Bool = false)
+}
+public struct Installments : Swift.Encodable, Swift.Equatable {
+  public enum Plan : Swift.String {
+    case regular
+    case revolving
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public let totalMonths: Swift.Int
+  public let plan: Adyen.Installments.Plan
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(totalMonths: Swift.Int, plan: Adyen.Installments.Plan)
+  public static func == (a: Adyen.Installments, b: Adyen.Installments) -> Swift.Bool
+}
+public typealias OXXOPaymentMethod = Adyen.InstantPaymentMethod
+public typealias OXXOComponent = Adyen.InstantPaymentComponent
+public typealias MultibancoPaymentMethod = Adyen.InstantPaymentMethod
+public typealias MultibancoComponent = Adyen.InstantPaymentComponent
+final public class InstantPaymentComponent : Adyen.PaymentComponent {
+  final public let paymentData: Adyen.PaymentComponentData
+  final public let paymentMethod: any Adyen.PaymentMethod
+  weak final public var delegate: (any Adyen.PaymentComponentDelegate)?
+  public init(paymentMethod: any Adyen.PaymentMethod, context: Adyen.AdyenContext, paymentData: Adyen.PaymentComponentData)
+  public init(paymentMethod: any Adyen.PaymentMethod, context: Adyen.AdyenContext, order: Adyen.PartialPaymentOrder?)
+  final public func initiatePayment()
+  @objc deinit
+}
+public struct InstantPaymentDetails : Adyen.PaymentMethodDetails {
+  public let type: Adyen.PaymentMethodType
+  public init(type: Adyen.PaymentMethodType)
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct InstantPaymentMethod : Adyen.PaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public let name: Swift.String
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+final public class IssuerListComponent : Adyen.PaymentComponent, Adyen.PaymentAware, Adyen.PresentableComponent, Adyen.LoadingComponent {
+  final public var paymentMethod: any Adyen.PaymentMethod {
+    get
+  }
+  weak final public var delegate: (any Adyen.PaymentComponentDelegate)?
+  final public var configuration: Adyen.IssuerListComponent.Configuration
+  public init(paymentMethod: Adyen.IssuerListPaymentMethod, context: Adyen.AdyenContext, configuration: Adyen.IssuerListComponent.Configuration = .init())
+  final public var viewController: UIKit.UIViewController {
+    get
+  }
+  final public func stopLoading()
+  final public var requiresModalPresentation: Swift.Bool
+  @objc deinit
+}
+extension Adyen.IssuerListComponent {
+  public struct Configuration : Adyen.AnyBasicComponentConfiguration {
+    public var style: Adyen.ListComponentStyle
+    public var localizationParameters: Adyen.LocalizationParameters?
+    public init(style: Adyen.ListComponentStyle = .init(), localizationParameters: Adyen.LocalizationParameters? = nil)
+  }
+}
+public typealias MOLPayComponent = Adyen.IssuerListComponent
+public typealias DotpayComponent = Adyen.IssuerListComponent
+public typealias EPSComponent = Adyen.IssuerListComponent
+public typealias EntercashComponent = Adyen.IssuerListComponent
+public typealias OpenBankingComponent = Adyen.IssuerListComponent
+public typealias OnlineBankingPolandComponent = Adyen.IssuerListComponent
+public struct IssuerListDetails : Adyen.PaymentMethodDetails {
+  public let type: Adyen.PaymentMethodType
+  public let issuer: Swift.String
+  public init(paymentMethod: Adyen.IssuerListPaymentMethod, issuer: Swift.String)
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public typealias MOLPayDetails = Adyen.IssuerListDetails
+public typealias DotpayDetails = Adyen.IssuerListDetails
+public typealias EPSDetails = Adyen.IssuerListDetails
+public typealias EntercashDetails = Adyen.IssuerListDetails
+public typealias OpenBankingDetails = Adyen.IssuerListDetails
+public typealias OnlineBankingPolandDetails = Adyen.IssuerListDetails
+public struct IssuerListPaymentMethod : Adyen.PaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public let name: Swift.String
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public let issuers: [Adyen.Issuer]
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public enum EncryptionError : Foundation.LocalizedError {
+  case invalidKey
+  case invalidInitializationVector
+  case encryptionFailed
+  case unknownError
+  case failedToGenerateRandomData
+  case invalidBase64
+  case other(any Swift.Error)
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+public struct KCPDetails : Adyen.AdditionalDetails {
+  public let taxNumber: Swift.String
+  public let password: Swift.String
+  public init(taxNumber: Swift.String, password: Swift.String)
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+open class LengthValidator : Adyen.Validator {
+  open var minimumLength: Swift.Int?
+  open var maximumLength: Swift.Int?
+  public init(minimumLength: Swift.Int? = nil, maximumLength: Swift.Int? = nil)
+  public init(exactLength: Swift.Int)
+  open func isValid(_ value: Swift.String) -> Swift.Bool
+  public func maximumLength(for value: Swift.String) -> Swift.Int
+  @objc deinit
+}
+public struct ListComponentStyle : Adyen.ViewStyle {
+  public var listItem: Adyen.ListItemStyle
+  public var sectionHeader: Adyen.ListSectionHeaderStyle
+  public var partialPaymentSectionFooter: Adyen.ListSectionFooterStyle
+  public var backgroundColor: UIKit.UIColor
+  public init(listItem: Adyen.ListItemStyle, sectionHeader: Adyen.ListSectionHeaderStyle)
+  public init()
+}
+public struct ListItemStyle : Adyen.ViewStyle {
+  public var title: Adyen.TextStyle
+  public var subtitle: Adyen.TextStyle
+  public var trailingText: Adyen.TextStyle
+  public var image: Adyen.ImageStyle
+  public var backgroundColor: UIKit.UIColor
+  public init(title: Adyen.TextStyle, subtitle: Adyen.TextStyle, image: Adyen.ImageStyle)
+  public init()
+}
+extension Adyen.ListItemStyle : Swift.Equatable {
+  public static func == (lhs: Adyen.ListItemStyle, rhs: Adyen.ListItemStyle) -> Swift.Bool
+}
+public struct ListSectionFooter : Swift.Hashable {
+  public var title: Swift.String
+  public var style: Adyen.ListSectionFooterStyle
+  public init(title: Swift.String, style: Adyen.ListSectionFooterStyle)
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (lhs: Adyen.ListSectionFooter, rhs: Adyen.ListSectionFooter) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public struct ListSectionFooterStyle : Adyen.ViewStyle {
+  public var title: Adyen.TextStyle
+  public var separatorColor: UIKit.UIColor
+  public var backgroundColor: UIKit.UIColor
+  public init(title: Adyen.TextStyle)
+  public init()
+}
+public struct ListSectionHeaderStyle : Adyen.ViewStyle {
+  public var title: Adyen.TextStyle
+  public var trailingButton: Adyen.ButtonStyle
+  public var backgroundColor: UIKit.UIColor
+  public init(title: Adyen.TextStyle)
+  public init()
+}
+public protocol ComponentLoader : Adyen.LoadingComponent {
+  func startLoading(for component: any Adyen.PaymentComponent)
+}
+public protocol LoadingComponent {
+  func stopLoading()
+}
+public struct LocalizationParameters : Swift.Equatable {
+  public static func == (lhs: Adyen.LocalizationParameters, rhs: Adyen.LocalizationParameters) -> Swift.Bool
+  public var locale: Swift.String? {
+    get
+  }
+  public var tableName: Swift.String? {
+    get
+  }
+  public var keySeparator: Swift.String? {
+    get
+  }
+  public var bundle: Foundation.Bundle? {
+    get
+  }
+  public init(bundle: Foundation.Bundle? = nil, tableName: Swift.String? = nil, keySeparator: Swift.String? = nil, locale: Swift.String? = nil)
+  public init(enforcedLocale: Swift.String)
+}
+public enum AdyenLogging {
+  public static var isEnabled: Swift.Bool {
+    get
+    set
+  }
+}
+final public class LogoURLProvider {
+  public init(environment: any AdyenNetworking.AnyAPIEnvironment)
+  final public func logoURL(withName name: Swift.String, size: Adyen.LogoURLProvider.Size = .small) -> Foundation.URL
+  public static func logoURL(for issuer: Adyen.Issuer, localizedParameters: Adyen.LocalizationParameters?, paymentMethod: Adyen.IssuerListPaymentMethod, environment: any AdyenNetworking.AnyAPIEnvironment) -> Foundation.URL
+  public static func logoURL(withName name: Swift.String, environment: any AdyenNetworking.AnyAPIEnvironment, size: Adyen.LogoURLProvider.Size = .small) -> Foundation.URL
+  @objc deinit
+}
+extension Adyen.LogoURLProvider {
+  public enum Size : Swift.String {
+    case small
+    case medium
+    case large
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+}
+final public class MBWayComponent : Adyen.AbstractPersonalInformationComponent {
+  public typealias Configuration = Adyen.PersonalInformationConfiguration
+  public init(paymentMethod: Adyen.MBWayPaymentMethod, context: Adyen.AdyenContext, configuration: Adyen.MBWayComponent.Configuration = .init())
+  @objc deinit
+}
+public struct MBWayDetails : Adyen.PaymentMethodDetails {
+  public let type: Adyen.PaymentMethodType
+  public let telephoneNumber: Swift.String
+  public init(paymentMethod: any Adyen.PaymentMethod, telephoneNumber: Swift.String)
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct MBWayPaymentMethod : Adyen.PaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public let name: Swift.String
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct MealVoucherDetails : Adyen.PartialPaymentMethodDetails {
+  public let type: Adyen.PaymentMethodType
+  public let encryptedCardNumber: Swift.String
+  public let encryptedSecurityCode: Swift.String
+  public let encryptedExpiryMonth: Swift.String?
+  public let encryptedExpiryYear: Swift.String?
+  public init(paymentMethod: Adyen.MealVoucherPaymentMethod, encryptedCard: Adyen.EncryptedCard) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct MealVoucherPaymentMethod : Adyen.PartialPaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public let name: Swift.String
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public func defaultDisplayInformation(using parameters: Adyen.LocalizationParameters?) -> Adyen.DisplayInformation
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers final public class MultibancoVoucherAction : Adyen.GenericVoucherAction {
+  final public let entity: Swift.String
+  final public let merchantReference: Swift.String
+  required public init(from decoder: any Swift.Decoder) throws
+  @objc deinit
+}
+extension Adyen.RedirectDetails : AdyenNetworking.Response {
+}
+public enum CancelButtonStyle {
+  case system
+  case legacy
+  case custom(UIKit.UIImage)
+}
+public enum ToolbarMode {
+  case leftCancel
+  case rightCancel
+  case natural
+  public static func == (a: Adyen.ToolbarMode, b: Adyen.ToolbarMode) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public struct NavigationStyle : Adyen.TintableStyle {
+  public var backgroundColor: UIKit.UIColor
+  public var separatorColor: UIKit.UIColor?
+  public var tintColor: UIKit.UIColor?
+  public var cornerRadius: CoreFoundation.CGFloat
+  public var barTitle: Adyen.TextStyle
+  public var cancelButton: Adyen.CancelButtonStyle
+  public var toolbarMode: Adyen.ToolbarMode
+  public init()
+}
+open class NumericFormatter : Adyen.Formatter {
+  public init()
+  open func formattedValue(for value: Swift.String) -> Swift.String
+  open func sanitizedValue(for value: Swift.String) -> Swift.String
+  @objc deinit
+}
+@_inheritsConvenienceInitializers open class NumericStringValidator : Adyen.LengthValidator {
+  override open func isValid(_ value: Swift.String) -> Swift.Bool
+  override public init(minimumLength: Swift.Int? = nil, maximumLength: Swift.Int? = nil)
+  override public init(exactLength: Swift.Int)
+  @objc deinit
+}
+final public class OnlineBankingComponent : Adyen.PaymentComponent, Adyen.PresentableComponent, Adyen.LoadingComponent, Adyen.PaymentAware {
+  public typealias Configuration = Adyen.BasicComponentConfiguration
+  final public var paymentMethod: any Adyen.PaymentMethod {
+    get
+  }
+  weak final public var delegate: (any Adyen.PaymentComponentDelegate)?
+  final public var viewController: UIKit.UIViewController {
+    get
+    set
+  }
+  final public var requiresModalPresentation: Swift.Bool
+  final public var configuration: Adyen.OnlineBankingComponent.Configuration
+  public init(paymentMethod: Adyen.OnlineBankingPaymentMethod, context: Adyen.AdyenContext, configuration: Adyen.OnlineBankingComponent.Configuration = .init())
+  final public func stopLoading()
+  @objc deinit
+}
+public struct OnlineBankingDetails : Adyen.PaymentMethodDetails {
+  public let type: Adyen.PaymentMethodType
+  public let issuer: Swift.String
+  public init(paymentMethod: any Adyen.PaymentMethod, issuer: Swift.String)
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct Issuer : Swift.Codable, Swift.CustomStringConvertible, Swift.Equatable {
+  public let identifier: Swift.String
+  public let name: Swift.String
+  public var description: Swift.String {
+    get
+  }
+  public static func == (a: Adyen.Issuer, b: Adyen.Issuer) -> Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct OnlineBankingPaymentMethod : Adyen.PaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public let name: Swift.String
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public let issuers: [Adyen.Issuer]
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class OXXOVoucherAction : Adyen.GenericVoucherAction {
+  final public let alternativeReference: Swift.String
+  final public let merchantReference: Swift.String
+  final public let downloadUrl: Foundation.URL
+  final public let instructionsURL: Foundation.URL
+  required public init(from decoder: any Swift.Decoder) throws
+  @objc deinit
+}
+public protocol PartialPaymentDelegate : AnyObject {
+  func checkBalance(with data: Adyen.PaymentComponentData, component: any Adyen.Component, completion: @escaping (Swift.Result<Adyen.Balance, any Swift.Error>) -> Swift.Void)
+  func requestOrder(for component: any Adyen.Component, completion: @escaping (Swift.Result<Adyen.PartialPaymentOrder, any Swift.Error>) -> Swift.Void)
+  func cancelOrder(_ order: Adyen.PartialPaymentOrder, component: any Adyen.Component)
+}
+public enum PartialPaymentError : Foundation.LocalizedError {
+  case zeroRemainingAmount
+  case missingOrderData
+  case notSupportedForComponent
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public static func == (a: Adyen.PartialPaymentError, b: Adyen.PartialPaymentError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public protocol PartialPaymentMethodDetails : Adyen.PaymentMethodDetails {
+  var type: Adyen.PaymentMethodType { get }
+  var encryptedCardNumber: Swift.String { get }
+  var encryptedSecurityCode: Swift.String { get }
+}
+public struct PartialPaymentOrder : Swift.Codable, Swift.Equatable {
+  public struct CompactOrder : Swift.Encodable, Swift.Equatable {
+    public let pspReference: Swift.String
+    public let orderData: Swift.String?
+    public static func == (a: Adyen.PartialPaymentOrder.CompactOrder, b: Adyen.PartialPaymentOrder.CompactOrder) -> Swift.Bool
+    public func encode(to encoder: any Swift.Encoder) throws
+  }
+  public let compactOrder: Adyen.PartialPaymentOrder.CompactOrder
+  public let pspReference: Swift.String
+  public let orderData: Swift.String?
+  public let reference: Swift.String?
+  public let amount: Adyen.Amount?
+  public let remainingAmount: Adyen.Amount?
+  public let expiresAt: Foundation.Date?
+  public init(pspReference: Swift.String, orderData: Swift.String?, reference: Swift.String? = nil, amount: Adyen.Amount? = nil, remainingAmount: Adyen.Amount? = nil, expiresAt: Foundation.Date? = nil)
+  public init(from decoder: any Swift.Decoder) throws
+  public static func == (a: Adyen.PartialPaymentOrder, b: Adyen.PartialPaymentOrder) -> Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct Payment : Swift.Codable {
+  public let amount: Adyen.Amount
+  public let countryCode: Swift.String
+  public init(amount: Adyen.Amount, countryCode: Swift.String)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public protocol PartialPaymentOrderAware {
+  var order: Adyen.PartialPaymentOrder? { get set }
+}
+public protocol PaymentAware {
+  var payment: Adyen.Payment? { get }
+}
+public protocol PaymentMethodAware {
+  var paymentMethod: any Adyen.PaymentMethod { get }
+}
+public protocol PaymentComponent : Adyen.Component, Adyen.PartialPaymentOrderAware, Adyen.PaymentMethodAware {
+  var delegate: (any Adyen.PaymentComponentDelegate)? { get set }
+}
+extension Adyen.AdyenContextAware where Self : Adyen.PaymentAware {
+  public var payment: Adyen.Payment? {
+    get
+  }
+}
+public protocol PaymentComponentDelegate : AnyObject {
+  func didSubmit(_ data: Adyen.PaymentComponentData, from component: any Adyen.PaymentComponent)
+  func didFail(with error: any Swift.Error, from component: any Adyen.PaymentComponent)
+}
+public struct PaymentComponentData {
+  public let amount: Adyen.Amount?
+  public let paymentMethod: any Adyen.PaymentMethodDetails
+  public let storePaymentMethod: Swift.Bool?
+  public let order: Adyen.PartialPaymentOrder?
+  @available(*, deprecated, message: "This property is deprecated. Use the amount property if needed.")
+  public var amountToPay: Adyen.Amount? {
+    get
+  }
+  public let installments: Adyen.Installments?
+  public let supportNativeRedirect: Swift.Bool
+  public var shopperName: Adyen.ShopperName? {
+    get
+  }
+  public var emailAddress: Swift.String? {
+    get
+  }
+  public var telephoneNumber: Swift.String? {
+    get
+  }
+  public let browserInfo: Adyen.BrowserInfo?
+  public var checkoutAttemptId: Swift.String? {
+    get
+  }
+  public var billingAddress: Adyen.PostalAddress? {
+    get
+  }
+  public var deliveryAddress: Adyen.PostalAddress? {
+    get
+  }
+  public var socialSecurityNumber: Swift.String? {
+    get
+  }
+  public var delegatedAuthenticationData: Adyen.DelegatedAuthenticationData? {
+    get
+  }
+}
+public protocol PaymentMethod : Swift.Decodable, Swift.Encodable {
+  var type: Adyen.PaymentMethodType { get }
+  var name: Swift.String { get }
+  var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation? { get set }
+}
+public protocol PartialPaymentMethod : Adyen.PaymentMethod {
+}
+public protocol StoredPaymentMethod : Adyen.PaymentMethod {
+  var identifier: Swift.String { get }
+  var supportedShopperInteractions: [Adyen.ShopperInteraction] { get }
+}
+public struct PaymentMethodListConfiguration {
+  public init()
+  public var allowDisablingStoredPaymentMethods: Swift.Bool
+}
+public struct PaymentMethods : Swift.Codable {
+  public var paid: [any Adyen.PaymentMethod]
+  public var regular: [any Adyen.PaymentMethod]
+  public var stored: [any Adyen.StoredPaymentMethod]
+  public init(regular: [any Adyen.PaymentMethod], stored: [any Adyen.StoredPaymentMethod])
+  public mutating func overrideDisplayInformation<T>(ofStoredPaymentMethod type: Adyen.PaymentMethodType, with displayInformation: Adyen.MerchantCustomDisplayInformation, where predicate: (T) -> Swift.Bool) where T : Adyen.PaymentMethod
+  public mutating func overrideDisplayInformation(ofStoredPaymentMethod type: Adyen.PaymentMethodType, with displayInformation: Adyen.MerchantCustomDisplayInformation)
+  public mutating func overrideDisplayInformation<T>(ofRegularPaymentMethod type: Adyen.PaymentMethodType, with displayInformation: Adyen.MerchantCustomDisplayInformation, where predicate: (T) -> Swift.Bool) where T : Adyen.PaymentMethod
+  public mutating func overrideDisplayInformation(ofRegularPaymentMethod type: Adyen.PaymentMethodType, with displayInformation: Adyen.MerchantCustomDisplayInformation)
+  public func paymentMethod<T>(ofType type: T.Type) -> T? where T : Adyen.PaymentMethod
+  public func paymentMethod<T>(ofType type: T.Type, where predicate: (T) -> Swift.Bool) -> T? where T : Adyen.PaymentMethod
+  public func paymentMethod(ofType type: Adyen.PaymentMethodType) -> (any Adyen.PaymentMethod)?
+  public func paymentMethod<T>(ofType type: Adyen.PaymentMethodType, where predicate: (T) -> Swift.Bool) -> T? where T : Adyen.PaymentMethod
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public enum PaymentMethodType : Swift.RawRepresentable, Swift.Hashable, Swift.Codable {
+  case card
+  case scheme
+  case ideal
+  case entercash
+  case eps
+  case dotpay
+  case onlineBankingPoland
+  case openBankingUK
+  case molPayEBankingFPXMY
+  case molPayEBankingTH
+  case molPayEBankingVN
+  case sepaDirectDebit
+  case applePay
+  case payPal
+  case bcmc
+  case bcmcMobile
+  case qiwiWallet
+  case weChatPaySDK
+  case mbWay
+  case blik
+  case dokuWallet
+  case dokuAlfamart
+  case dokuIndomaret
+  case giftcard
+  case doku
+  case econtextSevenEleven
+  case econtextStores
+  case econtextATM
+  case econtextOnline
+  case boleto
+  case affirm
+  case oxxo
+  case bacsDirectDebit
+  case achDirectDebit
+  case multibanco
+  case atome
+  case onlineBankingCZ
+  case onlineBankingSK
+  case mealVoucherNatixis
+  case mealVoucherGroupeUp
+  case mealVoucherSodexo
+  case upi
+  case cashAppPay
+  case twint
+  case other(Swift.String)
+  case bcmcMobileQR
+  case weChatMiniProgram
+  case weChatQR
+  case weChatPayWeb
+  case googlePay
+  case afterpay
+  case androidPay
+  case amazonPay
+  case upiCollect
+  case upiIntent
+  case upiQr
+  case bizum
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+  public typealias RawValue = Swift.String
+}
+public struct PostalAddress : Swift.Equatable, Swift.Encodable {
+  public init(city: Swift.String? = nil, country: Swift.String? = nil, houseNumberOrName: Swift.String? = nil, postalCode: Swift.String? = nil, stateOrProvince: Swift.String? = nil, street: Swift.String? = nil, apartment: Swift.String? = nil)
+  public var city: Swift.String?
+  public var country: Swift.String?
+  public var houseNumberOrName: Swift.String?
+  public var postalCode: Swift.String?
+  public var stateOrProvince: Swift.String?
+  public var street: Swift.String?
+  public var apartment: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public static func == (lhs: Adyen.PostalAddress, rhs: Adyen.PostalAddress) -> Swift.Bool
+  public var isEmpty: Swift.Bool {
+    get
+  }
+}
+public struct PhoneNumber {
+  public let value: Swift.String
+  public let callingCode: Swift.String?
+  public init(value: Swift.String, callingCode: Swift.String?)
+}
+public struct PrefilledShopperInformation : Adyen.ShopperInformation {
+  public var shopperName: Adyen.ShopperName?
+  public var emailAddress: Swift.String?
+  @available(*, deprecated, renamed: "phoneNumber")
+  public var telephoneNumber: Swift.String?
+  public var phoneNumber: Adyen.PhoneNumber?
+  public var billingAddress: Adyen.PostalAddress?
+  public var deliveryAddress: Adyen.PostalAddress?
+  public var socialSecurityNumber: Swift.String?
+  public var card: Adyen.PrefilledShopperInformation.CardInformation?
+  @available(*, deprecated, renamed: "init(shopperName:emailAddress:phoneNumber:billingAddress:deliveryAddress:socialSecurityNumber:card:)")
+  public init(shopperName: Adyen.ShopperName? = nil, emailAddress: Swift.String? = nil, telephoneNumber: Swift.String? = nil, billingAddress: Adyen.PostalAddress? = nil, deliveryAddress: Adyen.PostalAddress? = nil, socialSecurityNumber: Swift.String? = nil, card: Adyen.PrefilledShopperInformation.CardInformation? = nil)
+  public init(shopperName: Adyen.ShopperName? = nil, emailAddress: Swift.String? = nil, phoneNumber: Adyen.PhoneNumber? = nil, billingAddress: Adyen.PostalAddress? = nil, deliveryAddress: Adyen.PostalAddress? = nil, socialSecurityNumber: Swift.String? = nil, card: Adyen.PrefilledShopperInformation.CardInformation? = nil)
+}
+extension Adyen.PrefilledShopperInformation {
+  public struct CardInformation {
+    public let holderName: Swift.String
+    public init(holderName: Swift.String)
+  }
+}
+public protocol Localizable {
+  var localizationParameters: Adyen.LocalizationParameters? { get set }
+}
+public protocol Cancellable : AnyObject {
+  func didCancel()
+}
+public protocol PresentableComponent : Adyen.Component {
+  var requiresModalPresentation: Swift.Bool { get }
+  var viewController: UIKit.UIViewController { get }
+}
+public protocol PresentationDelegate : AnyObject {
+  func present(component: any Adyen.PresentableComponent)
+}
+public struct ProgressViewStyle : Adyen.ViewStyle {
+  public let progressTintColor: UIKit.UIColor
+  public let trackTintColor: UIKit.UIColor
+  public var backgroundColor: UIKit.UIColor
+  public init(progressTintColor: UIKit.UIColor, trackTintColor: UIKit.UIColor)
+}
+final public class QiwiWalletComponent : Adyen.AbstractPersonalInformationComponent {
+  public typealias Configuration = Adyen.PersonalInformationConfiguration
+  public init(paymentMethod: Adyen.QiwiWalletPaymentMethod, context: Adyen.AdyenContext, configuration: Adyen.QiwiWalletComponent.Configuration = .init())
+  @objc deinit
+}
+public struct QiwiWalletDetails : Adyen.PaymentMethodDetails {
+  public let type: Adyen.PaymentMethodType
+  public let phonePrefix: Swift.String
+  public let phoneNumber: Swift.String
+  public init(paymentMethod: any Adyen.PaymentMethod, phonePrefix: Swift.String, phoneNumber: Swift.String)
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct QiwiWalletPaymentMethod : Adyen.PaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public let name: Swift.String
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public let phoneExtensions: [Adyen.PhoneExtension]
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct PhoneExtension : Swift.Codable, Swift.Equatable {
+  public let value: Swift.String
+  public let countryCode: Swift.String
+  public var countryDisplayName: Swift.String {
+    get
+  }
+  public init(value: Swift.String, countryCode: Swift.String)
+  public static func == (a: Adyen.PhoneExtension, b: Adyen.PhoneExtension) -> Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public enum QRCodePaymentMethod : Swift.String, Swift.Codable, Swift.CaseIterable {
+  case pix
+  case promptPay
+  case duitNow
+  case payNow
+  case upiQRCode
+  public init?(rawValue: Swift.String)
+  public typealias AllCases = [Adyen.QRCodePaymentMethod]
+  public typealias RawValue = Swift.String
+  public static var allCases: [Adyen.QRCodePaymentMethod] {
+    get
+  }
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct QRCodeAction : Swift.Decodable {
+  public let paymentMethodType: Adyen.QRCodePaymentMethod
+  public let qrCodeData: Swift.String
+  public let paymentData: Swift.String
+  public init(from decoder: any Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers final public class QRCodeActionComponent : Adyen.ActionComponent, Adyen.Cancellable {
+  weak final public var presentationDelegate: (any Adyen.PresentationDelegate)?
+  weak final public var delegate: (any Adyen.ActionComponentDelegate)?
+  public struct Configuration {
+    public var style: Adyen.QRCodeComponentStyle
+    public var localizationParameters: Adyen.LocalizationParameters?
+    public init(style: Adyen.QRCodeComponentStyle = QRCodeComponentStyle(), localizationParameters: Adyen.LocalizationParameters? = nil)
+  }
+  final public var configuration: Adyen.QRCodeActionComponent.Configuration
+  convenience public init(context: Adyen.AdyenContext, configuration: Adyen.QRCodeActionComponent.Configuration = .init())
+  final public func handle(_ action: Adyen.QRCodeAction)
+  final public func didCancel()
+  @objc deinit
+}
+public struct QRCodeComponentStyle : Adyen.ViewStyle {
+  public var copyCodeButton: Adyen.ButtonStyle
+  public var saveAsImageButton: Adyen.ButtonStyle
+  public var instructionLabel: Adyen.TextStyle
+  public var amountToPayLabel: Adyen.TextStyle
+  public var progressView: Adyen.ProgressViewStyle
+  public var expirationLabel: Adyen.TextStyle
+  public var logoCornerRounding: Adyen.CornerRounding
+  public var backgroundColor: UIKit.UIColor
+  public init()
+}
+public protocol ReadyToSubmitPaymentComponentDelegate : AnyObject {
+  func showConfirmation(for component: Adyen.InstantPaymentComponent, with order: Adyen.PartialPaymentOrder?)
+}
+public struct RedirectableAwaitAction : Swift.Decodable {
+  public let paymentMethodType: Adyen.AwaitPaymentMethod
+  public let paymentData: Swift.String
+  public let url: Foundation.URL
+  public init(paymentData: Swift.String, paymentMethodType: Adyen.AwaitPaymentMethod, url: Foundation.URL)
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct RedirectAction : Swift.Decodable {
+  public let url: Foundation.URL
+  public let paymentData: Swift.String?
+  public let nativeRedirectData: Swift.String?
+  public init(url: Foundation.URL, paymentData: Swift.String?, nativeRedirectData: Swift.String? = nil)
+  public init(from decoder: any Swift.Decoder) throws
+}
+final public class RedirectComponent : Adyen.ActionComponent {
+  public enum Error : Foundation.LocalizedError {
+    case appNotFound
+    case invalidRedirectParameters
+    public var errorDescription: Swift.String? {
+      get
+    }
+    public static func == (a: Adyen.RedirectComponent.Error, b: Adyen.RedirectComponent.Error) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public struct Configuration {
+    public var style: Adyen.RedirectComponentStyle?
+    public init(style: Adyen.RedirectComponentStyle? = nil)
+  }
+  weak final public var delegate: (any Adyen.ActionComponentDelegate)?
+  weak final public var presentationDelegate: (any Adyen.PresentationDelegate)?
+  final public var configuration: Adyen.RedirectComponent.Configuration
+  public init(context: Adyen.AdyenContext, configuration: Adyen.RedirectComponent.Configuration = Configuration())
+  final public func handle(_ action: Adyen.RedirectAction)
+  @discardableResult
+  public static func applicationDidOpen(from url: Foundation.URL) -> Swift.Bool
+  @objc deinit
+}
+public struct RedirectComponentStyle {
+  public let preferredBarTintColor: UIKit.UIColor?
+  public let preferredControlTintColor: UIKit.UIColor
+  public let modalPresentationStyle: UIKit.UIModalPresentationStyle
+  public init(preferredBarTintColor: UIKit.UIColor? = nil, preferredControlTintColor: UIKit.UIColor = .systemBlue, modalPresentationStyle: UIKit.UIModalPresentationStyle = .formSheet)
+}
+public struct RedirectDetails : Adyen.AdditionalDetails, Swift.Decodable {
+  public enum Error : Foundation.LocalizedError {
+    case invalidUrl
+    public var errorDescription: Swift.String? {
+      get
+    }
+    public static func == (a: Adyen.RedirectDetails.Error, b: Adyen.RedirectDetails.Error) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public var payload: Swift.String? {
+    get
+  }
+  public var redirectResult: Swift.String? {
+    get
+  }
+  public var paymentResponse: Swift.String? {
+    get
+  }
+  public var merchantData: Swift.String? {
+    get
+  }
+  public var queryString: Swift.String? {
+    get
+  }
+  public init(returnURL: Foundation.URL) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public enum SDKAction : Swift.Decodable {
+  case weChatPay(Adyen.WeChatPaySDKAction)
+  case twint(Adyen.TwintSDKAction)
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct SegmentedControlStyle : Adyen.TintableStyle {
+  public var textStyle: Adyen.TextStyle
+  public var backgroundColor: UIKit.UIColor
+  public var tintColor: UIKit.UIColor?
+  public init(textStyle: Adyen.TextStyle, backgroundColor: UIKit.UIColor = .clear, tintColor: UIKit.UIColor = .white)
+}
+final public class SEPADirectDebitComponent : Adyen.PaymentComponent, Adyen.PaymentAware, Adyen.PresentableComponent, Adyen.LoadingComponent {
+  public typealias Configuration = Adyen.BasicComponentConfiguration
+  final public var configuration: Adyen.SEPADirectDebitComponent.Configuration
+  final public var paymentMethod: any Adyen.PaymentMethod {
+    get
+  }
+  weak final public var delegate: (any Adyen.PaymentComponentDelegate)?
+  public init(paymentMethod: Adyen.SEPADirectDebitPaymentMethod, context: Adyen.AdyenContext, configuration: Adyen.SEPADirectDebitComponent.Configuration = .init())
+  final public var viewController: UIKit.UIViewController {
+    get
+    set
+  }
+  final public var requiresModalPresentation: Swift.Bool
+  final public func stopLoading()
+  @objc deinit
+}
+public struct SEPADirectDebitDetails : Adyen.PaymentMethodDetails {
+  public let type: Adyen.PaymentMethodType
+  public let iban: Swift.String
+  public let ownerName: Swift.String
+  public init(paymentMethod: Adyen.SEPADirectDebitPaymentMethod, iban: Swift.String, ownerName: Swift.String)
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct SEPADirectDebitPaymentMethod : Adyen.PaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public let name: Swift.String
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public protocol ShopperInformation {
+  var shopperName: Adyen.ShopperName? { get }
+  var emailAddress: Swift.String? { get }
+  var telephoneNumber: Swift.String? { get }
+  var billingAddress: Adyen.PostalAddress? { get }
+  var deliveryAddress: Adyen.PostalAddress? { get }
+  var socialSecurityNumber: Swift.String? { get }
+}
+public struct ShopperName : Swift.Codable, Swift.Equatable {
+  public let firstName: Swift.String
+  public let lastName: Swift.String
+  public init(firstName: Swift.String, lastName: Swift.String)
+  public static func == (a: Adyen.ShopperName, b: Adyen.ShopperName) -> Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public enum ShopperInteraction : Swift.String, Swift.Codable {
+  case shopperPresent
+  case shopperNotPresent
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct StoredBCMCPaymentMethod : Adyen.StoredPaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public var name: Swift.String {
+    get
+  }
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation? {
+    get
+    set
+  }
+  public var identifier: Swift.String {
+    get
+  }
+  public func defaultDisplayInformation(using parameters: Adyen.LocalizationParameters?) -> Adyen.DisplayInformation
+  public var supportedShopperInteractions: [Adyen.ShopperInteraction] {
+    get
+  }
+  public let brand: Swift.String
+  public var lastFour: Swift.String {
+    get
+  }
+  public var expiryMonth: Swift.String {
+    get
+  }
+  public var expiryYear: Swift.String {
+    get
+  }
+  public var holderName: Swift.String? {
+    get
+  }
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct StoredBLIKPaymentMethod : Adyen.StoredPaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public let name: Swift.String
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public let identifier: Swift.String
+  public let supportedShopperInteractions: [Adyen.ShopperInteraction]
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct StoredCardConfiguration {
+  public var showsSecurityCodeField: Swift.Bool
+  public init()
+}
+public struct StoredCashAppPayPaymentMethod : Adyen.StoredPaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public let name: Swift.String
+  public let cashtag: Swift.String
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public let identifier: Swift.String
+  public let supportedShopperInteractions: [Adyen.ShopperInteraction]
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct StoredInstantPaymentMethod : Adyen.StoredPaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public let name: Swift.String
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public let identifier: Swift.String
+  public let supportedShopperInteractions: [Adyen.ShopperInteraction]
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+final public class StoredPaymentMethodComponent : Adyen.PaymentComponent, Adyen.PresentableComponent, Adyen.PaymentAware {
+  final public var configuration: Adyen.StoredPaymentMethodComponent.Configuration
+  final public let context: Adyen.AdyenContext
+  final public var paymentMethod: any Adyen.PaymentMethod {
+    get
+  }
+  weak final public var delegate: (any Adyen.PaymentComponentDelegate)?
+  public init(paymentMethod: any Adyen.StoredPaymentMethod, context: Adyen.AdyenContext, configuration: Adyen.StoredPaymentMethodComponent.Configuration = .init())
+  final public var viewController: UIKit.UIViewController {
+    get
+    set
+  }
+  @objc deinit
+}
+extension Adyen.StoredPaymentMethodComponent {
+  public struct Configuration : Adyen.AnyBasicComponentConfiguration {
+    public var localizationParameters: Adyen.LocalizationParameters?
+    public init(localizationParameters: Adyen.LocalizationParameters? = nil)
+  }
+}
+public struct StoredPaymentDetails : Adyen.PaymentMethodDetails {
+  public init(paymentMethod: any Adyen.StoredPaymentMethod)
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public protocol StoredPaymentMethodsDelegate : AnyObject {
+  func disable(storedPaymentMethod: any Adyen.StoredPaymentMethod, completion: @escaping Adyen.Completion<Swift.Bool>)
+}
+public struct StoredPayPalPaymentMethod : Adyen.StoredPaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public let name: Swift.String
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public let identifier: Swift.String
+  public let supportedShopperInteractions: [Adyen.ShopperInteraction]
+  public func defaultDisplayInformation(using parameters: Adyen.LocalizationParameters?) -> Adyen.DisplayInformation
+  public let emailAddress: Swift.String
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct StoredTwintPaymentMethod : Adyen.StoredPaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public let name: Swift.String
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public let identifier: Swift.String
+  public let supportedShopperInteractions: [Adyen.ShopperInteraction]
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct TextStyle : Adyen.ViewStyle {
+  public var font: UIKit.UIFont
+  public var color: UIKit.UIColor
+  public var disabledColor: UIKit.UIColor
+  public var textAlignment: UIKit.NSTextAlignment
+  public var backgroundColor: UIKit.UIColor
+  public var cornerRounding: Adyen.CornerRounding
+  public init(font: UIKit.UIFont, color: UIKit.UIColor, disabledColor: UIKit.UIColor = UIColor.Adyen.componentSecondaryLabel, textAlignment: UIKit.NSTextAlignment, cornerRounding: Adyen.CornerRounding = .none, backgroundColor: UIKit.UIColor = .clear)
+  public init(font: UIKit.UIFont, color: UIKit.UIColor)
+}
+extension Adyen.TextStyle : Swift.Equatable {
+  public static func == (lhs: Adyen.TextStyle, rhs: Adyen.TextStyle) -> Swift.Bool
+  public var stringAttributes: [Foundation.NSAttributedString.Key : Any] {
+    get
+  }
+}
+public enum ThreeDS2Action : Swift.Decodable {
+  case fingerprint(Adyen.ThreeDS2FingerprintAction)
+  case challenge(Adyen.ThreeDS2ChallengeAction)
+  public init(from decoder: any Swift.Decoder) throws
+  public enum ActionType : Swift.String, Swift.Decodable {
+    case fingerprint
+    case challenge
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+}
+public struct ThreeDS2ChallengeAction : Swift.Decodable {
+  public let challengeToken: Swift.String
+  public let authorisationToken: Swift.String?
+  public let paymentData: Swift.String?
+  public init(challengeToken: Swift.String, authorisationToken: Swift.String? = nil, paymentData: Swift.String?)
+  public init(from decoder: any Swift.Decoder) throws
+}
+final public class ThreeDS2Component : Adyen.ActionComponent {
+  weak final public var delegate: (any Adyen.ActionComponentDelegate)?
+  weak final public var presentationDelegate: (any Adyen.PresentationDelegate)? {
+    get
+    set
+  }
+  final public var configuration: Adyen.ThreeDS2Component.Configuration {
+    get
+    set
+  }
+  public struct Configuration {
+    public var redirectComponentStyle: Adyen.RedirectComponentStyle?
+    public var appearanceConfiguration: Adyen3DS2.ADYAppearanceConfiguration
+    public var requestorAppURL: Foundation.URL?
+    public let delegateAuthentication: Adyen.ThreeDS2Component.Configuration.DelegatedAuthentication?
+    public struct DelegatedAuthentication {
+      public let relyingPartyIdentifier: Swift.String
+      public let delegatedAuthenticationComponentStyle: Adyen.DelegatedAuthenticationComponentStyle
+      public let localizationParameters: Adyen.LocalizationParameters?
+      public init(relyingPartyIdentifier: Swift.String, delegatedAuthenticationComponentStyle: Adyen.DelegatedAuthenticationComponentStyle = .init(), localizationParameters: Adyen.LocalizationParameters? = nil)
+    }
+    public init(redirectComponentStyle: Adyen.RedirectComponentStyle? = nil, appearanceConfiguration: Adyen3DS2.ADYAppearanceConfiguration = ADYAppearanceConfiguration(), requestorAppURL: Foundation.URL? = nil, delegateAuthentication: Adyen.ThreeDS2Component.Configuration.DelegatedAuthentication? = nil)
+  }
+  public init(context: Adyen.AdyenContext, configuration: Adyen.ThreeDS2Component.Configuration = Configuration())
+  final public func handle(_ threeDS2Action: Adyen.ThreeDS2Action)
+  final public func handle(_ fingerprintAction: Adyen.ThreeDS2FingerprintAction)
+  final public func handle(_ challengeAction: Adyen.ThreeDS2ChallengeAction)
+  @objc deinit
+}
+extension Adyen.ThreeDS2Component : Adyen.ActionComponentDelegate {
+  final public func didOpenExternalApplication(component: any Adyen.ActionComponent)
+  final public func didProvide(_ data: Adyen.ActionComponentData, from component: any Adyen.ActionComponent)
+  final public func didComplete(from component: any Adyen.ActionComponent)
+  final public func didFail(with error: any Swift.Error, from component: any Adyen.ActionComponent)
+}
+extension Adyen.ThreeDS2Component {
+  public enum Error : Swift.Error {
+    case missingTransaction
+    case unexpectedAction
+    public static func == (a: Adyen.ThreeDS2Component.Error, b: Adyen.ThreeDS2Component.Error) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+public enum ThreeDS2Details : Adyen.AdditionalDetails {
+  case fingerprint(Swift.String)
+  case challengeResult(Adyen.ThreeDSResult)
+  case completed(Adyen.ThreeDSResult)
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct ThreeDS2FingerprintAction : Swift.Decodable {
+  public let fingerprintToken: Swift.String
+  public let authorisationToken: Swift.String?
+  public let paymentData: Swift.String?
+  public init(fingerprintToken: Swift.String, authorisationToken: Swift.String? = nil, paymentData: Swift.String?)
+  public init(from decoder: any Swift.Decoder) throws
+}
+public let threeDS2SdkVersion: Swift.String
+public struct ThreeDSResult : Swift.Decodable {
+  public let payload: Swift.String
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct TwintPaymentMethod : Adyen.PaymentMethod {
+  public var type: Adyen.PaymentMethodType
+  public var name: Swift.String
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers final public class TwintSDKAction : Swift.Decodable {
+  final public let sdkData: Adyen.TwintSDKData
+  final public let paymentData: Swift.String
+  final public let paymentMethodType: Swift.String
+  final public let type: Swift.String
+  public init(from decoder: any Swift.Decoder) throws
+  @objc deinit
+}
+public struct TwintSDKData : Swift.Decodable {
+  public let token: Swift.String
+  public let isStored: Swift.Bool
+  public init(from decoder: any Swift.Decoder) throws
+}
+final public class UPIComponent : Adyen.PaymentComponent, Adyen.PresentableComponent, Adyen.PaymentAware, Adyen.LoadingComponent {
+  public typealias Configuration = Adyen.BasicComponentConfiguration
+  final public var paymentMethod: any Adyen.PaymentMethod {
+    get
+  }
+  weak final public var delegate: (any Adyen.PaymentComponentDelegate)?
+  final public var viewController: UIKit.UIViewController {
+    get
+    set
+  }
+  final public var requiresModalPresentation: Swift.Bool
+  final public var configuration: Adyen.UPIComponent.Configuration
+  public init(paymentMethod: Adyen.UPIPaymentMethod, context: Adyen.AdyenContext, configuration: Adyen.UPIComponent.Configuration = .init())
+  final public func stopLoading()
+  @objc deinit
+}
+public struct UPIComponentDetails : Adyen.PaymentMethodDetails {
+  public let type: Swift.String
+  public let virtualPaymentAddress: Swift.String?
+  public let appId: Swift.String?
+  public init(type: Swift.String, virtualPaymentAddress: Swift.String? = nil, appId: Swift.String? = nil)
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct UPIPaymentMethod : Adyen.PaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public let name: Swift.String
+  public let apps: [Adyen.Issuer]?
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public protocol Validator {
+  func isValid(_ value: Swift.String) -> Swift.Bool
+  func maximumLength(for value: Swift.String) -> Swift.Int
+}
+public protocol CombinedValidator : Adyen.Validator {
+  var firstValidator: any Adyen.Validator { get }
+  var secondValidator: any Adyen.Validator { get }
+}
+extension Adyen.CombinedValidator {
+  public func maximumLength(for value: Swift.String) -> Swift.Int
+}
+public protocol ViewStyle {
+  var backgroundColor: UIKit.UIColor { get set }
+}
+public protocol TintableStyle : Adyen.ViewStyle {
+  var tintColor: UIKit.UIColor? { get set }
+}
+public enum VoucherPaymentMethod : Swift.String, Swift.Codable, Swift.CaseIterable {
+  case dokuIndomaret
+  case dokuAlfamart
+  case econtextStores
+  case econtextATM
+  case boletoBancairoSantander
+  case oxxo
+  case multibanco
+  public init?(rawValue: Swift.String)
+  public typealias AllCases = [Adyen.VoucherPaymentMethod]
+  public typealias RawValue = Swift.String
+  public static var allCases: [Adyen.VoucherPaymentMethod] {
+    get
+  }
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum VoucherAction : Swift.Decodable {
+  case dokuIndomaret(Adyen.DokuVoucherAction)
+  case dokuAlfamart(Adyen.DokuVoucherAction)
+  case econtextStores(Adyen.EContextStoresVoucherAction)
+  case econtextATM(Adyen.EContextATMVoucherAction)
+  case boletoBancairoSantander(Adyen.BoletoVoucherAction)
+  case oxxo(Adyen.OXXOVoucherAction)
+  case multibanco(Adyen.MultibancoVoucherAction)
+  public init(from decoder: any Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class GenericVoucherAction : Swift.Decodable, Adyen.AnyVoucherAction {
+  final public let paymentMethodType: Adyen.VoucherPaymentMethod
+  final public let initialAmount: Adyen.Amount
+  final public let totalAmount: Adyen.Amount
+  final public let reference: Swift.String
+  final public let expiresAt: Foundation.Date
+  final public let merchantName: Swift.String
+  required public init(from decoder: any Swift.Decoder) throws
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers final public class VoucherComponent {
+  weak final public var presentationDelegate: (any Adyen.PresentationDelegate)?
+  weak final public var delegate: (any Adyen.ActionComponentDelegate)?
+  final public let requiresModalPresentation: Swift.Bool
+  public struct Configuration {
+    public var style: Adyen.VoucherComponentStyle
+    public var localizationParameters: Adyen.LocalizationParameters?
+    public init(style: Adyen.VoucherComponentStyle = VoucherComponentStyle(), localizationParameters: Adyen.LocalizationParameters? = nil)
+  }
+  final public var configuration: Adyen.VoucherComponent.Configuration
+  convenience public init(context: Adyen.AdyenContext, configuration: Adyen.VoucherComponent.Configuration = Configuration())
+  final public func didCancel()
+  final public func handle(_ action: Adyen.VoucherAction)
+  @objc deinit
+}
+public struct VoucherComponentStyle : Adyen.ViewStyle {
+  public var amountLabel: Adyen.TextStyle
+  public var currencyLabel: Adyen.TextStyle
+  public var editButton: Adyen.ButtonStyle
+  public var doneButton: Adyen.ButtonStyle
+  public var mainButton: Adyen.ButtonStyle
+  public var secondaryButton: Adyen.ButtonStyle
+  public var codeConfirmationColor: UIKit.UIColor
+  public var backgroundColor: UIKit.UIColor
+  public init()
+}
+public struct WeChatPayPaymentMethod : Adyen.PaymentMethod {
+  public let type: Adyen.PaymentMethodType
+  public let name: Swift.String
+  public var merchantProvidedDisplayInformation: Adyen.MerchantCustomDisplayInformation?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+final public class WeChatPaySDKAction : Swift.Decodable {
+  final public let sdkData: Adyen.WeChatPaySDKData
+  final public let paymentData: Swift.String
+  @objc deinit
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct WeChatPaySDKData : Swift.Decodable {
+  public let appIdentifier: Swift.String
+  public let partnerIdentifier: Swift.String
+  public let prepayIdentifier: Swift.String
+  public let timestamp: Swift.String
+  public let package: Swift.String
+  public let nonce: Swift.String
+  public let signature: Swift.String
+  public init(from decoder: any Swift.Decoder) throws
+}
+extension Adyen.SessionPaymentResultCode : Swift.Equatable {}
+extension Adyen.SessionPaymentResultCode : Swift.Hashable {}
+extension Adyen.SessionPaymentResultCode : Swift.RawRepresentable {}
+extension Adyen.CardFundingSource : Swift.Equatable {}
+extension Adyen.CardFundingSource : Swift.Hashable {}
+extension Adyen.CardFundingSource : Swift.RawRepresentable {}
+extension Adyen.ApplePayComponent.Error : Swift.Equatable {}
+extension Adyen.ApplePayComponent.Error : Swift.Hashable {}
+extension Adyen.AppleWalletError : Swift.Equatable {}
+extension Adyen.AppleWalletError : Swift.Hashable {}
+extension Adyen.AwaitPaymentMethod : Swift.Equatable {}
+extension Adyen.AwaitPaymentMethod : Swift.Hashable {}
+extension Adyen.AwaitPaymentMethod : Swift.RawRepresentable {}
+extension Adyen.BankDetailsEncryptor.Error : Swift.Equatable {}
+extension Adyen.BankDetailsEncryptor.Error : Swift.Hashable {}
+extension Adyen.CardComponent.FieldVisibility : Swift.Equatable {}
+extension Adyen.CardComponent.FieldVisibility : Swift.Hashable {}
+extension Adyen.CardComponent.FieldVisibility : Swift.RawRepresentable {}
+extension Adyen.CardEncryptor.Error : Swift.Equatable {}
+extension Adyen.CardEncryptor.Error : Swift.Hashable {}
+extension Adyen.ClientKeyError : Swift.Equatable {}
+extension Adyen.ClientKeyError : Swift.Hashable {}
+extension Adyen.ComponentError : Swift.Equatable {}
+extension Adyen.ComponentError : Swift.Hashable {}
+extension Adyen.DelegatedAuthenticationData.DecodingError : Swift.Equatable {}
+extension Adyen.DelegatedAuthenticationData.DecodingError : Swift.Hashable {}
+extension Adyen.DocumentPaymentMethod : Swift.Equatable {}
+extension Adyen.DocumentPaymentMethod : Swift.Hashable {}
+extension Adyen.DocumentPaymentMethod : Swift.RawRepresentable {}
+extension Adyen.DropInComponent : Adyen.PresentationDelegate {}
+extension Adyen.Installments.Plan : Swift.Equatable {}
+extension Adyen.Installments.Plan : Swift.Hashable {}
+extension Adyen.Installments.Plan : Swift.RawRepresentable {}
+extension Adyen.LogoURLProvider.Size : Swift.Equatable {}
+extension Adyen.LogoURLProvider.Size : Swift.Hashable {}
+extension Adyen.LogoURLProvider.Size : Swift.RawRepresentable {}
+extension Adyen.ToolbarMode : Swift.Equatable {}
+extension Adyen.ToolbarMode : Swift.Hashable {}
+extension Adyen.PartialPaymentError : Swift.Equatable {}
+extension Adyen.PartialPaymentError : Swift.Hashable {}
+extension Adyen.QRCodePaymentMethod : Swift.Equatable {}
+extension Adyen.QRCodePaymentMethod : Swift.Hashable {}
+extension Adyen.QRCodePaymentMethod : Swift.RawRepresentable {}
+extension Adyen.RedirectComponent.Error : Swift.Equatable {}
+extension Adyen.RedirectComponent.Error : Swift.Hashable {}
+extension Adyen.RedirectDetails.Error : Swift.Equatable {}
+extension Adyen.RedirectDetails.Error : Swift.Hashable {}
+extension Adyen.ShopperInteraction : Swift.Equatable {}
+extension Adyen.ShopperInteraction : Swift.Hashable {}
+extension Adyen.ShopperInteraction : Swift.RawRepresentable {}
+extension Adyen.ThreeDS2Action.ActionType : Swift.Equatable {}
+extension Adyen.ThreeDS2Action.ActionType : Swift.Hashable {}
+extension Adyen.ThreeDS2Action.ActionType : Swift.RawRepresentable {}
+extension Adyen.ThreeDS2Component.Error : Swift.Equatable {}
+extension Adyen.ThreeDS2Component.Error : Swift.Hashable {}
+extension Adyen.VoucherPaymentMethod : Swift.Equatable {}
+extension Adyen.VoucherPaymentMethod : Swift.Hashable {}
+extension Adyen.VoucherPaymentMethod : Swift.RawRepresentable {}
+extension Adyen.VoucherComponent : Adyen.Cancellable {}
+extension Adyen.VoucherComponent : Adyen.ActionComponent {}
