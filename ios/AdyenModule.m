@@ -117,7 +117,7 @@ RCT_EXTERN_METHOD(disconnect)
 
 RCT_EXTERN_METHOD(startFirmwareUpdate)
 
-RCT_EXTERN_METHOD(payWithType:(NSNumber *)type
+RCT_EXTERN_METHOD(pay:(NSNumber *)type
                   requestData:(NSString *)requestData)
 
 RCT_EXTERN_METHOD(setSdkData:(NSString *)callbackId value:(NSString *)value)

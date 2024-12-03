@@ -23,7 +23,7 @@ enum PaymentEvent: String, CaseIterable {
     case firmwareDownloadProgress = "onFirmwareDownloadProgress"
     case firmwareUpdateComplete = "onFirmwareUpdateComplete"
     case firmwareUpdateFailure = "onFirmwareUpdateFailure"
-    case payPaymentFinished = "onPayPaymentFinished"
+    case payFinished = "onPayFinished"
 }
 
 class Errors {
@@ -185,7 +185,7 @@ extension AdyenTerminalManager {
         }
     }
     
-    @objc(payWithType:requestData:)
+    @objc(pay:requestData:)
     func pay(type: NSNumber, requestData: NSString) {
         // TODO: 验证是否在main线程，如果是，需要用Task{}包一下
         guard let presenter = BaseModule.currentPresenter ?? UIViewController.topPresenter else {
@@ -206,10 +206,10 @@ extension AdyenTerminalManager {
                     presentationMode: presentationMode
                 )
                 
-                sendEvent(withName: PaymentEvent.payPaymentFinished.rawValue,
+                sendEvent(withName: PaymentEvent.payFinished.rawValue,
                           body: response.jsonObject)
             } else {
-                sendEvent(withName: PaymentEvent.payPaymentFinished.rawValue,
+                sendEvent(withName: PaymentEvent.payFinished.rawValue,
                           body: Errors.createError(code: -1, message: "Failed to convert String to Data."))
             }
         }
