@@ -18,12 +18,11 @@ end
 target 'AdyenExample' do
   config = use_native_modules!
 
-  # pod "Adyen", :path => '/Users/wangcheng/Documents/GitHub/adyen-ios'
-  # pod "adyen-react-native", :path => '../../'
+  # pod "AdyenReactNativeDebug", :path => '../../'
+  # pod "AdyenReactNativeRelease", :path => '../../'
 
- 
-  pod 'adyen-react-native-debug', :path => '../node_modules/@adyen/react-native', :configurations => ['Debug']
-  pod 'adyen-react-native', :path => '../node_modules/@adyen/react-native', :configurations => ['Release']
+  pod 'AdyenReactNativeDebug', :path => '../node_modules/@adyen/react-native'
+
 
   use_react_native!(
     :path => config[:reactNativePath],

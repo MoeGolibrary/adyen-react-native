@@ -5,7 +5,7 @@
 //
 
 import Adyen
-import adyen_react_native
+import AdyenReactNative
 import PassKit
 import XCTest
 

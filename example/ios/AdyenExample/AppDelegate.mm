@@ -1,7 +1,7 @@
 #import "AppDelegate.h"
 
 #import <React/RCTBundleURLProvider.h>
-#import <adyen-react-native/ADYRedirectComponent.h>
+#import <AdyenReactNative/ADYRedirectComponent.h>
 
 @implementation AppDelegate
 

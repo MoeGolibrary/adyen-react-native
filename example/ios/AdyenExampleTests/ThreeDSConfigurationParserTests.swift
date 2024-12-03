@@ -5,7 +5,7 @@
 //
 
 import Adyen
-@testable import adyen_react_native
+@testable import AdyenReactNative
 import XCTest
 
 final class ThreeDSConfigurationParserTests: XCTestCase {

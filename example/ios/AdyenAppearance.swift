@@ -5,7 +5,7 @@
 //
 
 import Adyen
-import adyen_react_native
+import AdyenReactNative
 import Foundation
 
 /// Please make sure that the name of the class exactly matches.

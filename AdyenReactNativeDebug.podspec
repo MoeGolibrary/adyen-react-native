@@ -1,7 +1,9 @@
 
+
 Pod::Spec.new do |s|
-  s.name         = "adyen-react-native"
-  s.version      = '2.0.0'
+  s.name         = "AdyenReactNativeDebug"
+  s.module_name  = "AdyenReactNative"
+  s.version      = "2.0.0"
   s.summary      = '"Wraps Adyen Checkout Drop-In and Components for iOS and Android for convenient use with React Native",'
   s.homepage     = "https://adyen.com"
   s.license      = "MIT"
@@ -18,13 +20,13 @@ Pod::Spec.new do |s|
   # s.dependency "Adyen"
   
   s.vendored_frameworks = [
-    'meogoPart/ios/Adyen/Adyen.xcframework',
-    'meogoPart/ios/Adyen/AdyenNetworking.xcframework',
-    'meogoPart/ios/Release/AdyenPOS.xcframework',
+    "meogoPart/ios/Adyen/Adyen.xcframework",
+    "meogoPart/ios/Adyen/AdyenNetworking.xcframework",
+    "meogoPart/ios/Debug/AdyenPOS.xcframework",
   ]
   
   s.resource = [
-    "meogoPart/ios/Adyen/Adyen.bundle",
+    "imeogoPart/os/Adyen/Adyen.bundle",
     "meogoPart/ios/Adyen/AdyenActions.bundle",
     "meogoPart/ios/Adyen/AdyenCard.bundle"
   ]
