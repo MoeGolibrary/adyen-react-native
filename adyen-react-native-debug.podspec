@@ -1,6 +1,10 @@
+require "json"
+
+package = JSON.parse(File.read(File.join(__dir__, "package.json")))
 
 Pod::Spec.new do |s|
-  s.name         = "adyen-react-native"
+  s.name         = "adyen-react-native-debug"
+  s.module_name  = 'adyen_react_native'
   s.version      = '2.0.0'
   s.summary      = '"Wraps Adyen Checkout Drop-In and Components for iOS and Android for convenient use with React Native",'
   s.homepage     = "https://adyen.com"
@@ -20,7 +24,7 @@ Pod::Spec.new do |s|
   s.vendored_frameworks = [
     'meogoPart/ios/Adyen/Adyen.xcframework',
     'meogoPart/ios/Adyen/AdyenNetworking.xcframework',
-    'meogoPart/ios/Release/AdyenPOS.xcframework',
+    'meogoPart/ios/Debug/AdyenPOS.xcframework',
   ]
   
   s.resource = [

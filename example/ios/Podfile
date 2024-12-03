@@ -18,11 +18,12 @@ end
 target 'AdyenExample' do
   config = use_native_modules!
 
-
-  pod "Adyen", :git => 'https://github.com/MoeGolibrary/adyen-ios.git', :branch => 'moego-5.13.0'
-
   # pod "Adyen", :path => '/Users/wangcheng/Documents/GitHub/adyen-ios'
   # pod "adyen-react-native", :path => '../../'
+
+ 
+  pod 'adyen-react-native-debug', :path => '../node_modules/@adyen/react-native', :configurations => ['Debug']
+  pod 'adyen-react-native', :path => '../node_modules/@adyen/react-native', :configurations => ['Release']
 
   use_react_native!(
     :path => config[:reactNativePath],
@@ -43,5 +44,6 @@ target 'AdyenExample' do
       :mac_catalyst_enabled => false,
       # :ccache_enabled => true
     )
+
   end
 end
